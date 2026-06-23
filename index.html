@@ -522,103 +522,147 @@ html,body{height:100%;width:100%;overflow:hidden;background:#0d0d0d}
 /* ───────────────────────────
    PAGE 5: CALIBRATION (step form)
 ──────────────────────────── */
-#page-calibration{background:var(--bg)}
+#page-calibration{background:#0d0d0d}
 #page-calibration .page-bg{
-  position:absolute;inset:0;overflow:hidden;
-}
-#page-calibration .page-bg img{
-  position:absolute;
-  width:280px;right:-20px;top:80px;
-  opacity:.82;object-fit:contain;
+  position:absolute;inset:0;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.6;
 }
 
-.step-header{
-  padding:16px 14px 0;
+/* 结果卡片外层 */
+.result-card{
+  margin:12px 16px 0;
+  background:var(--cream2);
+  border:1.5px solid #5a3a1a;
   position:relative;
 }
-.step-bar{
-  display:flex;align-items:center;gap:8px;margin-bottom:6px;
-}
-.step-dot{
-  height:3px;border-radius:10px;
-}
-.step-dot.active{background:var(--sage);width:32px}
-.step-dot.inactive{background:rgba(119,131,102,.25);width:14px}
-.step-label{
-  font-family:var(--ff-sans);font-size:12px;
-  color:rgba(119,131,102,.5);letter-spacing:1.2px;
-  margin-left:auto;
+.result-card-inner{
+  border:.8px solid rgba(122,90,42,.35);
+  margin:2px;
+  padding:24px 20px 28px;
 }
 
-.calib-title{
-  font-family:var(--ff-serif);font-size:46px;
-  line-height:1.15;color:var(--sage);
-  letter-spacing:-.5px;margin-top:24px;
+/* 标题 */
+.result-title{
+  font-family:'Bellefair',serif;font-size:26px;
+  color:#5a3a1a;text-align:center;
+  font-style:italic;letter-spacing:.5px;
+  margin-bottom:10px;
 }
-.calib-divider{
-  width:40px;height:1.5px;
-  background:rgba(119,131,102,.35);
-  margin:14px 0;
-}
-.calib-question{
-  font-family:var(--ff-serif);font-size:18px;
-  line-height:1.7;color:var(--brown);
+.result-title-rule{
+  display:flex;align-items:center;justify-content:center;gap:8px;
   margin-bottom:20px;
 }
+.result-title-rule .line{width:60px;height:1px;background:rgba(122,90,42,.3)}
+.result-title-rule .dot{width:5px;height:5px;border-radius:50%;background:rgba(122,90,42,.5)}
 
-.year-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+/* Section标题 */
+.rs-label{
+  font-family:var(--ff-serif);font-size:14px;
+  color:#3a2a1a;letter-spacing:.3px;
+  margin-bottom:12px;
 }
-.year-btn{
-  background:rgba(187,196,169,.06);
-  border:2px solid rgba(119,131,102,.38);
-  padding:14px 16px;
-  cursor:pointer;position:relative;
-  transition:background .2s,border-color .2s;
-  box-shadow:3px 3px 2px rgba(0,0,0,.15);
-  text-align:left;
+.rs-divider{height:1px;background:rgba(122,90,42,.2);margin:18px 0}
+
+/* 四柱矩阵 */
+.pillar-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
+  margin-bottom:6px;
 }
-.year-btn.selected{
-  background:rgba(119,131,102,.15);
-  border-color:var(--sage);
+.pillar-cell{
+  border:1px solid rgba(122,90,42,.4);
+  padding:8px 4px 10px;
+  text-align:center;background:rgba(255,251,242,.6);
 }
-.year-btn .yr{
-  font-family:var(--ff-sans);font-weight:500;
-  font-size:17px;color:var(--sage);
-  display:block;margin-bottom:4px;
+.pillar-pos{
+  font-family:var(--ff-jp);font-size:9px;
+  color:rgba(90,58,26,.55);letter-spacing:1px;
+  margin-bottom:6px;
 }
-.year-btn .element{
-  font-family:var(--ff-sans);font-size:10px;
-  color:rgba(119,131,102,.5);letter-spacing:1.2px;
-  text-transform:uppercase;
+.pillar-char{
+  font-family:'Noto Serif SC',serif;font-size:32px;
+  color:#2a1a0a;line-height:1;margin-bottom:6px;
 }
-.year-btn .dot{
-  position:absolute;top:8px;right:8px;
-  width:7px;height:7px;border-radius:3px;
-  background:rgba(119,131,102,.2);
-  border:1px solid rgba(119,131,102,.3);
+.pillar-role{
+  font-family:var(--ff-serif);font-size:9px;
+  color:rgba(90,58,26,.6);letter-spacing:.3px;line-height:1.4;
+}
+
+/* 五行条 */
+.element-bars{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.element-row{display:flex;align-items:center;gap:8px}
+.element-name{
+  font-family:var(--ff-serif);font-size:12px;
+  color:#3a2a1a;width:38px;flex-shrink:0;
+}
+.element-track{flex:1;height:8px;background:rgba(180,160,130,.2);border-radius:0}
+.element-fill{height:100%;border-radius:0;background:#aa7a7a}
+
+/* Inner Persona 双栏 */
+.persona-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  border:1px solid rgba(122,90,42,.35);
+  margin-bottom:12px;
+}
+.persona-col{padding:14px 12px}
+.persona-col:first-child{border-right:1px solid rgba(122,90,42,.35)}
+.persona-col-title{
+  font-family:'Bellefair',serif;font-size:16px;
+  color:#2a1a0a;margin-bottom:4px;
+}
+.persona-col-sub{
+  font-family:var(--ff-serif);font-size:10px;
+  color:rgba(60,40,20,.5);letter-spacing:.3px;
+  margin-bottom:10px;
+}
+.persona-col-divider{height:1px;background:rgba(122,90,42,.25);margin-bottom:10px}
+.persona-col-traits{
+  font-family:var(--ff-serif);font-size:10px;
+  color:rgba(60,40,20,.7);letter-spacing:1px;
+}
+
+/* 文字段落 */
+.rs-body{
+  font-family:var(--ff-serif);font-size:13px;
+  color:#3a2a1a;line-height:1.8;
+  margin-bottom:4px;
+}
+
+/* 推荐策略框 */
+.strategy-box{
+  border:1px solid rgba(122,90,42,.35);
+  padding:16px;text-align:center;
+  margin-bottom:20px;
+}
+.strategy-title{
+  font-family:'Bellefair',serif;font-size:15px;
+  color:#aa7a5a;letter-spacing:1px;font-style:italic;
+  margin-bottom:12px;
+}
+.strategy-item{
+  font-family:var(--ff-jp);font-size:12px;
+  color:#3a2a1a;line-height:2.2;letter-spacing:.3px;
+}
+
+/* 底部按钮 */
+.result-cta{
+  display:block;width:100%;
+  padding:15px;margin-top:4px;
+  background:none;border:1px solid rgba(122,90,42,.5);
+  font-family:var(--ff-serif);font-size:10px;
+  letter-spacing:2px;text-transform:uppercase;
+  color:rgba(60,40,20,.65);cursor:pointer;
   transition:background .2s;
 }
-.year-btn.selected .dot{background:var(--sage)}
+.result-cta:active{background:rgba(122,90,42,.1)}
 
-.calib-submit{
-  display:block;width:100%;margin-top:16px;
-  padding:18px 0;
-  background:rgba(170,135,135,.3);
-  border:none;cursor:pointer;
-  font-family:var(--ff-serif);font-size:13px;
-  letter-spacing:3.3px;text-transform:uppercase;
-  color:rgba(246,244,241,.45);text-align:center;
-  transition:background .2s,color .2s;
-}
-.calib-submit.ready{
-  background:var(--rose);
-  color:rgba(246,244,241,.9);
-}
-.calib-hint{
-  text-align:center;margin-top:8px;
-  font-family:var(--ff-sans);font-size:11px;
-  color:rgba(119,131,102,.38);letter-spacing:.7px;
+/* 底部引言 */
+.result-quote{
+  text-align:center;padding:20px 24px 28px;
+  font-family:'Bellefair',serif;font-size:14px;
+  color:rgba(255,251,242,.35);font-style:italic;
+  line-height:1.7;letter-spacing:.3px;
 }
 
 /* ───────────────────────────
@@ -801,6 +845,16 @@ html,body{height:100%;width:100%;overflow:hidden;background:#0d0d0d}
   transition:opacity .2s;
 }
 .oracle-btn:active{opacity:.85}
+
+.back-btn{
+  background:none;border:none;cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+  color:rgba(255,251,242,.7);padding:0;
+  font-family:var(--ff-serif);font-size:12px;
+  letter-spacing:1px;
+}
+.back-btn svg{stroke:rgba(255,251,242,.7);flex-shrink:0}
+.back-btn:active{opacity:.6}
 
 /* ───────────────────────────
    PAGE: SHOP
@@ -1395,64 +1449,125 @@ html,body{height:100%;width:100%;overflow:hidden;background:#0d0d0d}
      PAGE 5: CALIBRATION
 ══════════════════════════ -->
 <div class="page" id="page-calibration">
-  <div class="page-bg">
-    <img src="https://www.figma.com/api/mcp/asset/b356ed7a-f332-47d8-9982-197b1d842bf0" alt="">
-  </div>
+  <div class="page-bg"></div>
   <div class="header">
     <div class="logo">✦ Auracle</div>
     <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
   <div class="page-body" style="padding-bottom:80px">
-    <div class="step-header">
-      <div class="step-bar">
-        <div class="step-dot active"></div>
-        <div class="step-dot inactive"></div>
-        <div class="step-dot inactive"></div>
-        <span class="step-label">STEP 1 / 3</span>
+    <div class="result-card">
+      <div class="result-card-inner">
+
+        <!-- 标题 -->
+        <div class="result-title">Your Initial Alignment</div>
+        <div class="result-title-rule">
+          <div class="line"></div><div class="dot"></div><div class="line"></div>
+        </div>
+
+        <!-- 四柱 -->
+        <div class="rs-label">Pillar Matrix &amp; DM (10 Gods)</div>
+        <div class="pillar-grid">
+          <div class="pillar-cell">
+            <div class="pillar-pos">HOUR</div>
+            <div class="pillar-char">壬</div>
+            <div class="pillar-role">Water</div>
+          </div>
+          <div class="pillar-cell">
+            <div class="pillar-pos">DAY</div>
+            <div class="pillar-char">庚</div>
+            <div class="pillar-role">DM Self</div>
+          </div>
+          <div class="pillar-cell">
+            <div class="pillar-pos">MONTH</div>
+            <div class="pillar-char">癸</div>
+            <div class="pillar-role">Eating God</div>
+          </div>
+          <div class="pillar-cell">
+            <div class="pillar-pos">YEAR</div>
+            <div class="pillar-char">癸</div>
+            <div class="pillar-role">Water</div>
+          </div>
+        </div>
+        <div class="rs-divider"></div>
+
+        <!-- 五行 -->
+        <div class="rs-label">Archetype &amp; Elemental Balance</div>
+        <div class="rs-body" style="margin-bottom:12px">Outer Persona / Yang Metal (Geng)</div>
+        <div class="element-bars">
+          <div class="element-row">
+            <div class="element-name">Metal</div>
+            <div class="element-track"><div class="element-fill" style="width:72%"></div></div>
+          </div>
+          <div class="element-row">
+            <div class="element-name">Water</div>
+            <div class="element-track"><div class="element-fill" style="width:48%;background:#8a9aaa"></div></div>
+          </div>
+          <div class="element-row">
+            <div class="element-name">Wood</div>
+            <div class="element-track"><div class="element-fill" style="width:38%;background:#7a9a7a"></div></div>
+          </div>
+          <div class="element-row">
+            <div class="element-name">Fire</div>
+            <div class="element-track"><div class="element-fill" style="width:18%;background:#aa6a5a"></div></div>
+          </div>
+          <div class="element-row">
+            <div class="element-name">Earth</div>
+            <div class="element-track"><div class="element-fill" style="width:28%;background:#aa9a6a"></div></div>
+          </div>
+        </div>
+        <div class="rs-body">AI Analysis: Your dominant Metal energy gives decisive strength.</div>
+        <div class="rs-divider"></div>
+
+        <!-- Inner Persona -->
+        <div class="rs-label">Inner Persona (Persona vs. Personality)</div>
+        <div class="persona-grid">
+          <div class="persona-col">
+            <div class="persona-col-title">Persona</div>
+            <div class="persona-col-sub">(Ten Stems)</div>
+            <div class="persona-col-divider"></div>
+            <div class="persona-col-traits">DECISIVE · CLEAR · RELIABLE</div>
+          </div>
+          <div class="persona-col">
+            <div class="persona-col-title">Personality</div>
+            <div class="persona-col-sub">(Earthly Branches)</div>
+            <div class="persona-col-divider"></div>
+            <div class="persona-col-traits">CREATIVE · INTUITIVE · STOIC</div>
+          </div>
+        </div>
+        <div class="rs-body">Our Synthesis: You project strength externally, hiding a deep creative drive.</div>
+        <div class="rs-divider"></div>
+
+        <!-- 推荐策略 -->
+        <div class="strategy-box">
+          <div class="strategy-title">Recommended Strategy / 破局之法</div>
+          <div class="strategy-item">職業：Consultancy, Finance</div>
+          <div class="strategy-item">获财的方式：Strategic Investments</div>
+          <div class="strategy-item">转运建议：Carry Jade, Avoid Conflicts.</div>
+        </div>
+
+        <!-- CTA -->
+        <button class="result-cta" onclick="goTo('test')">Read More &amp; Calibrate Accuracy</button>
+
       </div>
-      <div class="calib-title">Energy<br>Calibration</div>
-      <div class="calib-divider"></div>
-      <div class="calib-question">1. Which recent year brought the most significant career shift?</div>
-      <div class="year-grid" id="yearGrid">
-        <button class="year-btn" onclick="selectYear(this)">
-          <span class="yr">2023</span>
-          <span class="element">Water Year</span>
-          <span class="dot"></span>
-        </button>
-        <button class="year-btn" onclick="selectYear(this)">
-          <span class="yr">2024</span>
-          <span class="element">Wood Year</span>
-          <span class="dot"></span>
-        </button>
-        <button class="year-btn" onclick="selectYear(this)">
-          <span class="yr">2022</span>
-          <span class="element">Metal Year</span>
-          <span class="dot"></span>
-        </button>
-        <button class="year-btn" onclick="selectYear(this)">
-          <span class="yr">2021</span>
-          <span class="element">Earth Year</span>
-          <span class="dot"></span>
-        </button>
-      </div>
-      <button class="calib-submit" id="calibSubmit" onclick="goTo('home')">Complete Calibration</button>
-      <div class="calib-hint">Choose a year to proceed</div>
     </div>
+
+    <!-- 底部引言 -->
+    <div class="result-quote">"Metal commands the autumn sky —<br>clarity through discipline."</div>
   </div>
   <nav class="nav-bar">
-    <button class="nav-btn active" onclick="navTo('home',this)" data-page="home">
+    <button class="nav-btn" onclick="navTo('home',this)" data-page="home">
       <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="7" rx="1"/><rect x="14" y="15" width="7" height="7" rx="1"/></svg>
       <span>Daily Check-in</span>
     </button>
-    <button class="nav-btn" data-page="test">
+    <button class="nav-btn active" onclick="navTo('test',this)" data-page="test">
       <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
       <span>Test</span>
     </button>
-    <button class="nav-btn" data-page="shop">
+    <button class="nav-btn" onclick="navTo('shop',this)" data-page="shop">
       <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       <span>Shop</span>
     </button>
-    <button class="nav-btn" data-page="mine">
+    <button class="nav-btn" onclick="navTo('mine',this)" data-page="mine">
       <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       <span>Mine</span>
     </button>
@@ -1464,7 +1579,10 @@ html,body{height:100%;width:100%;overflow:hidden;background:#0d0d0d}
 ══════════════════════════ -->
 <div class="page" id="page-relationship">
   <div class="header">
-    <div class="logo">✦ Auracle</div>
+    <button class="back-btn" onclick="goTo('test')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back
+    </button>
     <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
   <div class="page-body">
@@ -1559,7 +1677,10 @@ html,body{height:100%;width:100%;overflow:hidden;background:#0d0d0d}
 <div class="page" id="page-oracle">
   <div class="page-bg"></div>
   <div class="header">
-    <div class="logo">✦ Auracle</div>
+    <button class="back-btn" onclick="goTo('test')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back
+    </button>
     <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
   <div class="page-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
@@ -1681,13 +1802,13 @@ html,body{height:100%;width:100%;overflow:hidden;background:#0d0d0d}
     <!-- Featured -->
     <div class="shop-featured">
       <div class="shop-featured-inner">
-        <div class="shop-featured-glyph">☽</div>
+        <div class="shop-featured-glyph">晶</div>
         <div class="shop-featured-text">
           <div class="shop-featured-label">✦ FEATURED · 本月推荐</div>
-          <div class="shop-featured-name">Full Destiny<br>Blueprint</div>
-          <div class="shop-featured-desc">Complete life script · birth chart · 10-year cycles & soul purpose reading.</div>
+          <div class="shop-featured-name">紫水晶洞<br>Amethyst Cave</div>
+          <div class="shop-featured-desc">天然巴西紫水晶洞 · 净化空间能量 · 助眠安神 · 提升直觉与灵性感知。</div>
           <div class="shop-featured-footer">
-            <div class="shop-featured-price">$88</div>
+            <div class="shop-featured-price">$188</div>
             <div class="shop-featured-cta">EXPLORE →</div>
           </div>
         </div>
@@ -1705,64 +1826,64 @@ html,body{height:100%;width:100%;overflow:hidden;background:#0d0d0d}
     <div class="shop-grid">
       <div class="shop-card">
         <div class="shop-card-img">
-          <div class="shop-card-glyph">☯</div>
+          <div class="shop-card-glyph">黃</div>
         </div>
         <div class="shop-card-body">
-          <div class="shop-card-cat">READING</div>
-          <div class="shop-card-name">Daily Oracle Session</div>
-          <div class="shop-card-price">$28 <s>$45</s></div>
+          <div class="shop-card-cat">CRYSTAL</div>
+          <div class="shop-card-name">黄水晶手链</div>
+          <div class="shop-card-price">$48</div>
         </div>
       </div>
       <div class="shop-card">
         <div class="shop-card-img">
-          <div class="shop-card-glyph">璧</div>
-          <div class="shop-card-badge">NEW</div>
-        </div>
-        <div class="shop-card-body">
-          <div class="shop-card-cat">TALISMAN</div>
-          <div class="shop-card-name">Jade Protection Amulet</div>
-          <div class="shop-card-price">$66</div>
-        </div>
-      </div>
-      <div class="shop-card">
-        <div class="shop-card-img">
-          <div class="shop-card-glyph">焰</div>
-        </div>
-        <div class="shop-card-body">
-          <div class="shop-card-cat">RITUAL</div>
-          <div class="shop-card-name">Clarity Ritual Kit</div>
-          <div class="shop-card-price">$38</div>
-        </div>
-      </div>
-      <div class="shop-card">
-        <div class="shop-card-img">
-          <div class="shop-card-glyph">數</div>
-        </div>
-        <div class="shop-card-body">
-          <div class="shop-card-cat">TALISMAN</div>
-          <div class="shop-card-name">Obsidian Mala Beads</div>
-          <div class="shop-card-price">$48 <s>$72</s></div>
-        </div>
-      </div>
-      <div class="shop-card">
-        <div class="shop-card-img">
-          <div class="shop-card-glyph">緣</div>
+          <div class="shop-card-glyph">紫</div>
           <div class="shop-card-badge">HOT</div>
         </div>
         <div class="shop-card-body">
-          <div class="shop-card-cat">READING</div>
-          <div class="shop-card-name">Relationship Synastry Report</div>
+          <div class="shop-card-cat">CRYSTAL</div>
+          <div class="shop-card-name">紫水晶手链</div>
           <div class="shop-card-price">$58</div>
         </div>
       </div>
       <div class="shop-card">
         <div class="shop-card-img">
-          <div class="shop-card-glyph">月</div>
+          <div class="shop-card-glyph">檀</div>
+          <div class="shop-card-badge">NEW</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">BRACELET</div>
+          <div class="shop-card-name">檀木手串</div>
+          <div class="shop-card-price">$38</div>
+        </div>
+      </div>
+      <div class="shop-card">
+        <div class="shop-card-img">
+          <div class="shop-card-glyph">晶</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">CRYSTAL</div>
+          <div class="shop-card-name">白水晶球</div>
+          <div class="shop-card-price">$88 <s>$120</s></div>
+        </div>
+      </div>
+      <div class="shop-card">
+        <div class="shop-card-img">
+          <div class="shop-card-glyph">符</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">TALISMAN</div>
+          <div class="shop-card-name">开运转运符</div>
+          <div class="shop-card-price">$28</div>
+        </div>
+      </div>
+      <div class="shop-card">
+        <div class="shop-card-img">
+          <div class="shop-card-glyph">香</div>
         </div>
         <div class="shop-card-body">
           <div class="shop-card-cat">RITUAL</div>
-          <div class="shop-card-name">Moon Water Set</div>
-          <div class="shop-card-price">$22</div>
+          <div class="shop-card-name">沉香净化香束</div>
+          <div class="shop-card-price">$32</div>
         </div>
       </div>
     </div>
