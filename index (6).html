@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Auracle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Gabarito:wght@400;500&family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;width:100%;overflow:hidden;background:#0d0d0d}
+
+:root{
+  --bg:#1f1f1f;
+  --bg2:#141414;
+  --cream:#fffbf2;
+  --cream2:#fffaef;
+  --sage:#778366;
+  --sage2:#bbc4a9;
+  --sage3:#9ba48f;
+  --rose:#aa8787;
+  --rose2:#d1b6c6;
+  --warm:#f6f4f1;
+  --brown:#472c12;
+  --muted:rgba(208,194,194,0.65);
+  --muted2:rgba(255,255,255,0.3);
+  --border:#7a766d;
+  --nav-h:62px;
+  --header-h:56px;
+  --ff-serif:'Bellefair',serif;
+  --ff-sans:'Gabarito',sans-serif;
+  --ff-jp:'Noto Sans JP',sans-serif;
+}
+
+#app{
+  width:100%;
+  max-width:430px;
+  height:100vh;
+  margin:0 auto;
+  position:relative;
+  background:var(--bg);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── Pages ── */
+.page{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+  overflow:hidden;
+}
+.page.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ── Header ── */
+.header{
+  position:absolute;
+  top:0;left:0;right:0;
+  height:var(--header-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  z-index:10;
+  background:linear-gradient(to bottom,rgba(31,31,31,.95),transparent);
+}
+.logo{
+  font-family:var(--ff-serif);
+  font-size:20px;
+  color:#fff;
+  letter-spacing:2px;
+}
+.menu-btn{
+  background:none;border:none;cursor:pointer;
+  display:flex;flex-direction:column;gap:5px;
+  padding:8px;
+}
+.menu-btn span{
+  display:block;height:1px;background:rgba(255,255,255,.7);
+  transition:width .2s;
+}
+.menu-btn span:nth-child(1){width:22px}
+.menu-btn span:nth-child(2){width:22px}
+.menu-btn span:nth-child(3){width:14px}
+
+/* ── Bottom Nav ── */
+.nav-bar{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:var(--nav-h);
+  background:var(--bg2);
+  border-top:1px solid rgba(122,118,109,.25);
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  padding:10px 16px 0;
+  z-index:10;
+}
+.nav-btn{
+  background:none;border:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:4px 8px;
+  flex:1;
+  transition:opacity .2s;
+}
+.nav-btn svg{width:20px;height:20px;stroke-width:1.5}
+.nav-btn span{
+  font-family:var(--ff-serif);
+  font-size:9px;
+  letter-spacing:.4px;
+  color:var(--muted2);
+  white-space:nowrap;
+}
+.nav-btn.active svg{stroke:rgba(255,255,255,.92)}
+.nav-btn.active span{color:rgba(255,255,255,.92)}
+.nav-btn:not(.active) svg{stroke:rgba(255,255,255,.3)}
+
+/* ── Scrollable body area ── */
+.page-body{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  padding-top:var(--header-h);
+  padding-bottom:calc(var(--nav-h) + 8px);
+}
+.page-body::-webkit-scrollbar{display:none}
+
+/* ───────────────────────────
+   PAGE 1: SPLASH
+──────────────────────────── */
+#page-splash{background:var(--bg)}
+.splash-bg{
+  position:absolute;inset:0;
+  background-color:#1a1917;
+}
+.splash-grad{
+  position:absolute;bottom:0;left:0;right:0;height:45%;
+  background:linear-gradient(to bottom,transparent,rgba(20,19,17,.95));
+}
+.splash-content{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:space-between;
+  padding:52px 24px 80px;
+}
+.splash-top{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--ff-serif);
+  font-size:11px;letter-spacing:3px;
+  color:rgba(208,194,194,.75);
+  text-transform:uppercase;
+}
+.tick-marks{display:flex;align-items:center;gap:6px}
+.tick-marks span{width:2px;background:rgba(208,194,194,.4);display:block}
+.tick-marks span:nth-child(1){height:14px;opacity:.4}
+.tick-marks span:nth-child(2){height:14px;opacity:.55}
+.tick-marks span:nth-child(3){height:14px;opacity:.7}
+
+.splash-img-wrap{
+  position:relative;
+  width:272px;height:272px;
+  margin-top:20px;
+}
+.splash-img-outer{
+  position:absolute;inset:0;
+  border:1px dashed rgba(208,194,194,.25);
+}
+.splash-img-inner{
+  position:absolute;inset:6px;
+  border:1.5px solid rgba(208,194,194,.55);
+  overflow:hidden;
+}
+.splash-img-inner img{
+  width:100%;height:100%;object-fit:cover;
+}
+.corner{position:absolute;width:14px;height:14px}
+.corner.tl{top:0;left:0;border-top:1.5px solid rgba(208,194,194,.7);border-left:1.5px solid rgba(208,194,194,.7)}
+.corner.tr{top:0;right:0;border-top:1.5px solid rgba(208,194,194,.7);border-right:1.5px solid rgba(208,194,194,.7)}
+.corner.bl{bottom:0;left:0;border-bottom:1.5px solid rgba(208,194,194,.7);border-left:1.5px solid rgba(208,194,194,.7)}
+.corner.br{bottom:0;right:0;border-bottom:1.5px solid rgba(208,194,194,.7);border-right:1.5px solid rgba(208,194,194,.7)}
+
+.ornament-divider{
+  width:320px;
+  display:flex;align-items:center;gap:10px;
+  margin:12px 0;
+}
+.ornament-divider .line{
+  flex:1;height:1px;
+  background:linear-gradient(to right,transparent,rgba(208,194,194,.6));
+}
+.ornament-divider .line.rev{
+  background:linear-gradient(to left,transparent,rgba(208,194,194,.6));
+}
+.ornament-divider .diamond{
+  font-size:10px;color:rgba(208,194,194,.6);
+}
+
+.splash-text{text-align:center}
+.splash-title{
+  font-family:var(--ff-serif);
+  font-size:42px;line-height:1.15;
+  color:var(--warm);
+  letter-spacing:1px;
+}
+.splash-sub{
+  font-family:var(--ff-serif);
+  font-size:13px;line-height:1.8;
+  color:rgba(208,194,194,.65);
+  letter-spacing:1.6px;
+  margin-top:8px;
+}
+
+.splash-cta-wrap{text-align:center}
+.splash-cta{
+  position:relative;
+  display:inline-block;
+  padding:0 32px;
+  height:52px;line-height:52px;
+  font-family:var(--ff-serif);
+  font-size:16px;letter-spacing:3.5px;
+  text-transform:uppercase;
+  color:var(--warm);
+  background:rgba(246,244,241,.08);
+  border:1px solid rgba(208,194,194,.7);
+  cursor:pointer;
+  min-width:200px;
+  transition:background .2s;
+}
+.splash-cta::after{
+  content:'';
+  position:absolute;
+  bottom:-5px;right:-5px;
+  width:100%;height:100%;
+  border:1px solid rgba(208,194,194,.3);
+  pointer-events:none;
+}
+.splash-cta:active{background:rgba(246,244,241,.18)}
+.splash-journey{
+  font-family:var(--ff-serif);
+  font-size:10px;letter-spacing:3px;
+  color:rgba(208,194,194,.4);
+  text-transform:uppercase;
+  margin-top:10px;
+}
+
+/* ───────────────────────────
+   PAGE 2: HOME (Chapters)
+──────────────────────────── */
+#page-home .page-bg{
+  position:absolute;inset:0;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.35;
+}
+.home-banner{
+  position:absolute;
+  top:var(--header-h);left:0;right:0;
+  height:72px;overflow:hidden;
+}
+.home-banner img{width:100%;height:100%;object-fit:cover;opacity:.7}
+.home-banner::before,.home-banner::after{
+  content:'';position:absolute;left:0;right:0;height:28px;z-index:1;
+}
+.home-banner::before{top:0;background:linear-gradient(var(--bg),transparent)}
+.home-banner::after{bottom:0;background:linear-gradient(transparent,var(--bg))}
+
+.section-label{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;margin-bottom:12px;
+}
+.section-label span:first-child{
+  font-family:var(--ff-serif);font-size:10px;
+  letter-spacing:2.2px;text-transform:uppercase;
+  color:rgba(255,255,255,.4);
+}
+.section-label span:last-child{
+  font-family:var(--ff-serif);font-size:10px;
+  color:rgba(255,255,255,.2);letter-spacing:1px;
+}
+
+.chapter-list{
+  display:flex;flex-direction:column;gap:12px;
+  padding:0 20px;
+}
+
+.chapter-card{
+  position:relative;
+  border:2.5px solid var(--border);
+  padding:7px;
+  cursor:pointer;
+  transition:transform .15s;
+  overflow:hidden;
+}
+.chapter-card:active{transform:scale(.98)}
+
+.chapter-card-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:.9;
+}
+.chapter-card.c1 .chapter-card-bg{background-color:#bbc4a9}
+.chapter-card.c2 .chapter-card-bg{background-color:#fffbf2}
+.chapter-card.c3 .chapter-card-bg{background-color:#ebd5d5}
+
+.chapter-card-inner{
+  position:relative;
+  border:1px solid var(--border);
+  padding:14px;min-height:160px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.chapter-num{
+  position:absolute;right:12px;bottom:8px;
+  font-family:var(--ff-serif);font-size:60px;
+  color:rgba(26,26,26,.1);line-height:1;
+  pointer-events:none;
+}
+.chapter-label{
+  font-family:var(--ff-serif);font-size:10px;
+  letter-spacing:.3px;color:rgba(42,42,42,.65);
+}
+.chapter-title{
+  font-family:var(--ff-serif);font-size:18px;
+  line-height:1.35;color:#1a1a1a;
+  margin:20px 0 6px;
+}
+.chapter-sub{
+  font-family:var(--ff-serif);font-size:11px;
+  color:rgba(42,42,42,.6);
+}
+.chapter-link{
+  font-family:var(--ff-serif);font-size:12px;
+  color:#1a1a1a;text-decoration:underline;
+  margin-top:auto;padding-top:18px;
+  display:inline-block;
+}
+
+/* ───────────────────────────
+   PAGE 3: DAILY CHECK-IN
+──────────────────────────── */
+#page-checkin{background:#0d0d0d}
+#page-checkin .page-bg{
+  position:absolute;inset:0;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.72;
+}
+
+.daily-card-wrap{
+  padding:12px 20px 20px;
+  display:flex;justify-content:center;
+}
+.daily-card{
+  background:var(--cream2);
+  border:1.5px solid #5a3a1a;
+  width:100%;max-width:340px;
+  position:relative;
+}
+.daily-card-inner{
+  border:.8px solid #7a5a2a;
+  margin:3px;
+  padding:24px 28px 32px;
+  display:flex;flex-direction:column;align-items:center;gap:0;
+}
+.daily-divider{
+  width:88%;height:1px;
+  background:rgba(150,120,80,.35);
+  margin:18px 0;
+}
+.daily-date{
+  font-family:var(--ff-serif);font-size:22px;
+  color:#aa5a4a;letter-spacing:1.2px;
+  text-align:center;margin-bottom:6px;
+}
+.daily-ganzhi{
+  font-family:var(--ff-jp);font-weight:300;
+  font-size:14px;line-height:2;letter-spacing:.8px;
+  color:#3a2a1a;text-align:center;
+}
+.daily-headline{
+  font-family:var(--ff-serif);font-size:22px;
+  line-height:1.4;text-align:center;
+  color:#6a7a5a;letter-spacing:.5px;
+}
+.daily-body{
+  font-family:var(--ff-serif);font-size:15px;
+  line-height:1.8;text-align:center;
+  color:#aa6a6a;margin-top:10px;
+}
+.daily-stamp-wrap{
+  display:flex;justify-content:center;
+  margin:14px 0;
+}
+.daily-stamp{
+  border:1.5px solid #3a2008;
+  width:96px;height:96px;
+  display:flex;align-items:center;justify-content:center;
+}
+.daily-stamp span{
+  font-size:76px;color:#3a2008;
+  font-family:'Noto Serif SC',var(--ff-serif);
+  line-height:1;
+}
+.daily-yi-ji{
+  display:flex;flex-direction:column;gap:18px;
+  width:100%;
+}
+.yi-ji-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.yi-ji-label{
+  font-family:var(--ff-jp);font-size:13px;
+  color:#5a4a3a;letter-spacing:1.2px;
+}
+.yi-ji-label b{font-family:var(--ff-serif);font-weight:400;letter-spacing:.6px}
+.yi-ji-value{
+  font-family:var(--ff-serif);font-size:26px;
+  letter-spacing:.8px;color:#3a2a1a;
+}
+.yi-ji-item.yi .yi-ji-value{color:#aa5a5a}
+.yi-ji-item.ji .yi-ji-value{color:#6a7a5a}
+
+/* ───────────────────────────
+   PAGE 4: LIFE SCRIPT (Test)
+──────────────────────────── */
+#page-test .page-bg{
+  position:absolute;inset:0;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.2;
+}
+
+.form-card{
+  background:var(--cream);
+  border:1.5px solid rgba(246,244,241,.8);
+  box-shadow:5px 5px 5px rgba(120,114,114,.35);
+  margin:0 16px;
+  position:relative;
+}
+.form-card-inner{
+  border:.8px solid rgba(246,244,241,.5);
+  margin:3px;padding:24px 20px 28px;
+}
+.form-title{
+  font-family:var(--ff-serif);font-size:28px;
+  color:var(--sage);letter-spacing:.8px;
+  text-align:center;margin-bottom:20px;
+}
+.close-btn{
+  position:absolute;top:8px;right:16px;
+  font-family:'Gentium Book Basic',var(--ff-serif);
+  font-size:32px;color:var(--sage3);
+  background:none;border:none;cursor:pointer;line-height:1;
+}
+
+.gender-row{
+  display:flex;gap:10px;justify-content:center;
+  margin-bottom:18px;
+}
+.gender-btn{
+  background:var(--sage2);
+  border:none;
+  border-radius:8px;
+  padding:12px 20px;
+  font-family:var(--ff-serif);font-size:18px;
+  color:#fff;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  box-shadow:inset -3px -3px 4px rgba(0,0,0,.25);
+  transition:opacity .2s;
+}
+.gender-btn:not(.selected){opacity:.7}
+.gender-btn.selected{opacity:1}
+
+.form-field{
+  margin-bottom:16px;
+  border-bottom:1px solid var(--sage2);
+  padding-bottom:6px;
+}
+.form-field label{
+  font-family:var(--ff-serif);font-size:16px;
+  color:var(--sage2);display:block;
+}
+.form-field input{
+  width:100%;background:none;border:none;outline:none;
+  font-family:var(--ff-serif);font-size:16px;
+  color:var(--brown);padding-top:4px;
+}
+.form-field input::placeholder{color:var(--sage2)}
+
+.field-row{display:flex;gap:16px}
+.field-row .form-field{flex:1}
+
+.place-field{
+  position:relative;
+  border:1px solid var(--sage2);border-radius:2px;
+  padding:14px 16px;margin-bottom:18px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.place-field span{font-family:var(--ff-serif);font-size:18px;color:var(--sage2)}
+.place-field svg{stroke:var(--sage2);width:20px;height:20px}
+
+.submit-btn{
+  display:block;width:80%;margin:0 auto;
+  padding:20px 0;
+  background:var(--rose);
+  border:none;cursor:pointer;
+  font-family:var(--ff-serif);font-size:22px;
+  letter-spacing:1px;color:#fff;
+  text-align:center;
+  box-shadow:inset -3px -4px 4px rgba(0,0,0,.25);
+  transition:opacity .2s;
+}
+.submit-btn:active{opacity:.85}
+
+/* ───────────────────────────
+   PAGE 5: CALIBRATION (step form)
+──────────────────────────── */
+#page-calibration{background:var(--bg)}
+#page-calibration .page-bg{
+  position:absolute;inset:0;overflow:hidden;
+}
+#page-calibration .page-bg img{
+  position:absolute;
+  width:280px;right:-20px;top:80px;
+  opacity:.82;object-fit:contain;
+}
+
+.step-header{
+  padding:16px 14px 0;
+  position:relative;
+}
+.step-bar{
+  display:flex;align-items:center;gap:8px;margin-bottom:6px;
+}
+.step-dot{
+  height:3px;border-radius:10px;
+}
+.step-dot.active{background:var(--sage);width:32px}
+.step-dot.inactive{background:rgba(119,131,102,.25);width:14px}
+.step-label{
+  font-family:var(--ff-sans);font-size:12px;
+  color:rgba(119,131,102,.5);letter-spacing:1.2px;
+  margin-left:auto;
+}
+
+.calib-title{
+  font-family:var(--ff-serif);font-size:46px;
+  line-height:1.15;color:var(--sage);
+  letter-spacing:-.5px;margin-top:24px;
+}
+.calib-divider{
+  width:40px;height:1.5px;
+  background:rgba(119,131,102,.35);
+  margin:14px 0;
+}
+.calib-question{
+  font-family:var(--ff-serif);font-size:18px;
+  line-height:1.7;color:var(--brown);
+  margin-bottom:20px;
+}
+
+.year-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.year-btn{
+  background:rgba(187,196,169,.06);
+  border:2px solid rgba(119,131,102,.38);
+  padding:14px 16px;
+  cursor:pointer;position:relative;
+  transition:background .2s,border-color .2s;
+  box-shadow:3px 3px 2px rgba(0,0,0,.15);
+  text-align:left;
+}
+.year-btn.selected{
+  background:rgba(119,131,102,.15);
+  border-color:var(--sage);
+}
+.year-btn .yr{
+  font-family:var(--ff-sans);font-weight:500;
+  font-size:17px;color:var(--sage);
+  display:block;margin-bottom:4px;
+}
+.year-btn .element{
+  font-family:var(--ff-sans);font-size:10px;
+  color:rgba(119,131,102,.5);letter-spacing:1.2px;
+  text-transform:uppercase;
+}
+.year-btn .dot{
+  position:absolute;top:8px;right:8px;
+  width:7px;height:7px;border-radius:3px;
+  background:rgba(119,131,102,.2);
+  border:1px solid rgba(119,131,102,.3);
+  transition:background .2s;
+}
+.year-btn.selected .dot{background:var(--sage)}
+
+.calib-submit{
+  display:block;width:100%;margin-top:16px;
+  padding:18px 0;
+  background:rgba(170,135,135,.3);
+  border:none;cursor:pointer;
+  font-family:var(--ff-serif);font-size:13px;
+  letter-spacing:3.3px;text-transform:uppercase;
+  color:rgba(246,244,241,.45);text-align:center;
+  transition:background .2s,color .2s;
+}
+.calib-submit.ready{
+  background:var(--rose);
+  color:rgba(246,244,241,.9);
+}
+.calib-hint{
+  text-align:center;margin-top:8px;
+  font-family:var(--ff-sans);font-size:11px;
+  color:rgba(119,131,102,.38);letter-spacing:.7px;
+}
+
+/* ───────────────────────────
+   PAGE 6: RELATIONSHIP (合盘)
+──────────────────────────── */
+#page-relationship{background:#0d0d0d}
+.rel-title{
+  font-family:'Bellefair',serif;font-size:28px;
+  color:#fffbf2;letter-spacing:2px;
+  text-align:center;padding:16px 20px 20px;
+}
+.rel-sub-tabs{
+  display:flex;gap:6px;
+  padding:0 12px 20px;
+  overflow-x:auto;
+}
+.rel-sub-tabs::-webkit-scrollbar{display:none}
+.rel-tab{
+  flex-shrink:0;
+  display:flex;flex-direction:column;align-items:center;
+  padding:10px 12px 8px;
+  font-family:var(--ff-serif);
+  border:1px solid rgba(155,164,143,.35);
+  background:none;cursor:pointer;
+  transition:background .2s,border-color .2s;
+  min-width:72px;
+}
+.rel-tab-icon{
+  font-size:14px;color:rgba(255,251,242,.5);
+  margin-bottom:6px;line-height:1;
+}
+.rel-tab-name{
+  font-size:12px;letter-spacing:.5px;
+  color:rgba(255,251,242,.55);line-height:1.2;
+}
+.rel-tab-sub{
+  font-size:10px;letter-spacing:.3px;
+  color:rgba(255,251,242,.3);margin-top:2px;
+}
+.rel-tab.active{
+  background:rgba(209,182,198,.12);
+  border-color:#d1b6c6;
+}
+.rel-tab.active .rel-tab-name{color:#fffbf2}
+.rel-tab.active .rel-tab-icon{color:#d1b6c6}
+
+.person-card{
+  background:rgba(240,233,220,.93);
+  margin:0 16px 12px;
+  overflow:hidden;
+  position:relative;
+  min-height:140px;
+}
+.person-card-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:.55;
+}
+.person-card-content{
+  position:relative;
+  padding:18px 20px 18px;
+}
+.person-card-label{
+  font-family:'Bellefair',serif;
+  font-size:13px;color:#3a5a3a;letter-spacing:2px;
+  font-weight:700;margin-bottom:20px;
+}
+.person-field{
+  border-bottom:1px solid rgba(90,110,80,.35);
+  margin-bottom:14px;padding-bottom:8px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.person-field:last-child{margin-bottom:0}
+.person-field span{
+  font-family:var(--ff-serif);font-size:14px;
+  color:rgba(60,80,55,.6);letter-spacing:.4px;
+}
+.person-field svg{stroke:rgba(60,80,55,.5);flex-shrink:0}
+
+.rel-section-label{
+  display:flex;align-items:center;gap:10px;
+  padding:4px 16px 12px;
+}
+.rel-section-label .line{flex:1;height:1px;background:rgba(155,164,143,.25)}
+.rel-section-label span{
+  font-family:var(--ff-serif);font-size:14px;
+  color:rgba(255,251,242,.55);letter-spacing:1px;
+}
+
+.calc-btn{
+  display:block;width:calc(100% - 32px);margin:4px 16px 16px;
+  padding:17px 0;
+  background:#8fa882;border:none;cursor:pointer;
+  font-family:var(--ff-serif);font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;
+  color:#fffbf2;text-align:center;
+  transition:opacity .2s;
+}
+.calc-btn:active{opacity:.85}
+
+/* ───────────────────────────
+   PAGE 7: INSTANT ORACLE
+──────────────────────────── */
+#page-oracle{background:var(--bg)}
+#page-oracle .page-bg{
+  position:absolute;inset:0;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.35;
+}
+
+.oracle-center{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:20px 24px;
+  min-height:calc(100vh - var(--header-h) - var(--nav-h) - 80px);
+  gap:0;
+}
+
+.oracle-circle{
+  width:260px;height:260px;border-radius:50%;
+  background:rgba(255,250,239,.92);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  margin-bottom:32px;
+}
+.oracle-box{
+  border:1.5px solid var(--brown);
+  width:170px;height:170px;
+  background:rgba(31,31,31,.95);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.oracle-box::before{
+  content:'';
+  position:absolute;inset:-6px;
+  border:1px solid rgba(31,31,31,.6);
+  pointer-events:none;
+}
+.oracle-question{
+  font-family:var(--ff-serif);font-size:15px;
+  color:#fffbf2;line-height:1.6;text-align:center;
+  padding:0 12px;
+}
+
+.oracle-divider{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:28px;
+}
+.oracle-divider .line{
+  width:40px;height:1px;
+  background:rgba(255,251,242,.25);
+}
+.oracle-divider .diamond{
+  font-size:10px;color:rgba(255,251,242,.3);
+}
+
+.oracle-input-wrap{
+  width:100%;
+  background:rgba(31,31,31,.6);
+  border:1px solid rgba(208,194,194,.3);
+  padding:14px 16px;margin-bottom:20px;
+}
+.oracle-input{
+  width:100%;background:none;border:none;outline:none;
+  font-family:var(--ff-serif);font-size:14px;
+  color:#fffbf2;letter-spacing:.4px;
+  resize:none;min-height:60px;
+}
+.oracle-input::placeholder{color:rgba(255,251,242,.35)}
+
+.oracle-btn{
+  background:var(--rose);
+  border:none;cursor:pointer;
+  padding:14px 48px;
+  font-family:var(--ff-serif);font-size:10px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--warm);
+  box-shadow:inset -2px -3px 4px rgba(0,0,0,.25);
+  transition:opacity .2s;
+}
+.oracle-btn:active{opacity:.85}
+
+/* ───────────────────────────
+   PAGE: SHOP
+──────────────────────────── */
+#page-shop{background:#0d0d0d}
+#page-shop .page-bg{
+  position:absolute;inset:0;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.6;
+}
+.shop-header-wrap{
+  position:relative;padding:24px 20px 0;text-align:center;
+}
+.shop-header-rule{
+  display:flex;align-items:center;gap:10px;margin-bottom:10px;
+}
+.shop-header-rule .line{flex:1;height:1px;background:rgba(255,251,242,.15)}
+.shop-header-rule span{
+  font-family:var(--ff-jp);font-size:11px;
+  color:rgba(255,251,242,.3);letter-spacing:3px;white-space:nowrap;
+}
+.shop-title{
+  font-family:'Bellefair',serif;font-size:32px;
+  color:#fffbf2;letter-spacing:3px;margin-bottom:4px;
+}
+.shop-subtitle{
+  font-family:var(--ff-jp);font-size:11px;
+  color:rgba(255,251,242,.35);letter-spacing:3px;margin-bottom:20px;
+}
+.shop-tabs{
+  display:flex;gap:0;padding:0 20px;
+  margin-bottom:0;overflow-x:auto;
+}
+.shop-tabs::-webkit-scrollbar{display:none}
+.shop-tab{
+  flex:1;padding:10px 6px 9px;
+  font-family:var(--ff-serif);font-size:11px;
+  letter-spacing:1.2px;color:rgba(255,251,242,.35);
+  background:none;border:none;cursor:pointer;
+  border-bottom:1px solid rgba(255,251,242,.1);
+  transition:all .2s;white-space:nowrap;
+}
+.shop-tab.active{color:#fffbf2;border-bottom:1.5px solid #d1b6c6;}
+.shop-divider{height:1px;background:rgba(122,118,109,.2);margin:0 0 24px;}
+.shop-featured{
+  margin:0 16px 24px;
+  background:rgba(28,20,10,.92);
+  border:1px solid rgba(180,140,80,.35);
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:transform .15s;
+}
+.shop-featured:active{transform:scale(.99)}
+.shop-featured::after{
+  content:'';position:absolute;
+  top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;
+  background:rgba(209,182,198,.04);pointer-events:none;
+}
+.shop-featured-inner{
+  padding:22px;display:flex;gap:20px;align-items:center;
+}
+.shop-featured-glyph{
+  flex-shrink:0;width:76px;height:76px;
+  border:1px solid rgba(180,140,80,.4);
+  display:flex;align-items:center;justify-content:center;font-size:36px;
+}
+.shop-featured-text{flex:1}
+.shop-featured-label{
+  font-family:var(--ff-jp);font-size:9px;
+  color:#d1b6c6;letter-spacing:3px;margin-bottom:8px;
+}
+.shop-featured-name{
+  font-family:'Bellefair',serif;font-size:21px;
+  color:#fffbf2;line-height:1.2;margin-bottom:8px;letter-spacing:.5px;
+}
+.shop-featured-desc{
+  font-family:var(--ff-serif);font-size:11px;
+  color:rgba(255,251,242,.45);line-height:1.8;margin-bottom:14px;
+}
+.shop-featured-footer{display:flex;align-items:center;justify-content:space-between;}
+.shop-featured-price{font-family:'Bellefair',serif;font-size:24px;color:#c8a96e;}
+.shop-featured-cta{
+  font-family:var(--ff-serif);font-size:10px;
+  letter-spacing:1.5px;color:rgba(255,251,242,.35);
+}
+.shop-section-label{
+  display:flex;align-items:center;gap:10px;padding:0 16px 16px;
+}
+.shop-section-label .line{flex:1;height:1px;background:rgba(255,251,242,.1)}
+.shop-section-label span{
+  font-family:var(--ff-jp);font-size:10px;
+  color:rgba(255,251,242,.3);letter-spacing:2px;white-space:nowrap;
+}
+.shop-grid{
+  padding:0 16px 28px;
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.shop-card{
+  background:var(--cream2);
+  border:1px solid rgba(120,90,40,.45);
+  position:relative;cursor:pointer;
+  transition:transform .15s;
+  display:flex;flex-direction:column;
+}
+.shop-card:active{transform:scale(.97)}
+.shop-card-img{
+  width:100%;aspect-ratio:1;
+  background:rgba(195,180,150,.22);
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid rgba(120,90,40,.18);
+  position:relative;overflow:hidden;
+}
+.shop-card-glyph{
+  font-size:44px;line-height:1;opacity:.55;
+  font-family:'Noto Serif SC','Noto Sans JP',serif;color:#3a2a1a;
+}
+.shop-card-badge{
+  position:absolute;top:0;left:0;
+  background:var(--rose);
+  font-family:var(--ff-serif);font-size:8px;
+  letter-spacing:1.2px;color:#fffbf2;padding:4px 8px;
+}
+.shop-card-body{padding:10px 11px 13px;flex:1;display:flex;flex-direction:column}
+.shop-card-cat{
+  font-family:var(--ff-jp);font-size:9px;
+  color:var(--sage3);letter-spacing:1.2px;margin-bottom:5px;
+}
+.shop-card-name{
+  font-family:'Bellefair',serif;font-size:14px;
+  color:#2a1a0a;line-height:1.35;margin-bottom:8px;flex:1;
+}
+.shop-card-price{
+  font-family:'Bellefair',serif;font-size:15px;
+  color:#7a5020;margin-top:auto;
+}
+.shop-card-price s{
+  font-size:11px;color:rgba(122,80,32,.4);
+  margin-left:4px;font-family:var(--ff-serif);
+}
+
+
+/* ───────────────────────────
+   PAGE 8: MINE (profile placeholder)
+──────────────────────────── */
+#page-mine{background:var(--bg)}
+.mine-content{
+  padding:0 20px;
+  display:flex;flex-direction:column;align-items:center;
+  gap:16px;
+}
+.mine-avatar{
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(119,131,102,.2);
+  border:1px solid var(--sage);
+  display:flex;align-items:center;justify-content:center;
+  margin:16px auto 8px;
+}
+.mine-avatar svg{stroke:var(--sage);width:36px;height:36px}
+.mine-name{
+  font-family:var(--ff-serif);font-size:22px;
+  color:var(--warm);letter-spacing:.8px;
+  text-align:center;
+}
+.mine-sub{
+  font-family:var(--ff-serif);font-size:13px;
+  color:var(--muted);letter-spacing:.6px;
+  text-align:center;margin-top:-8px;
+}
+.mine-menu{
+  width:100%;display:flex;flex-direction:column;gap:2px;
+  margin-top:8px;
+}
+.mine-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 4px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  cursor:pointer;
+}
+.mine-item:active{opacity:.7}
+.mine-item span{
+  font-family:var(--ff-serif);font-size:16px;
+  color:rgba(255,255,255,.7);letter-spacing:.4px;
+}
+.mine-item svg{stroke:rgba(255,255,255,.3);width:16px;height:16px}
+
+.login-section{width:100%;margin-top:8px}
+.login-title{
+  font-family:var(--ff-serif);font-size:28px;
+  color:var(--sage);letter-spacing:3px;text-align:center;
+  margin-bottom:24px;
+}
+.login-card{
+  background:var(--cream);
+  border:1px solid rgba(246,244,241,.7);
+  padding:28px 24px;
+  box-shadow:5px 5px 5px rgba(120,114,114,.3);
+}
+.login-sub{
+  font-family:var(--ff-serif);font-size:24px;
+  color:var(--rose);letter-spacing:.5px;
+  text-align:center;margin-bottom:20px;
+}
+.login-field{
+  border-bottom:1px solid var(--sage2);
+  padding-bottom:6px;margin-bottom:18px;
+}
+.login-field span{
+  font-family:var(--ff-serif);font-size:16px;
+  color:var(--sage2);display:block;
+}
+.login-check{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;
+}
+.login-check input{width:16px;height:16px;accent-color:var(--sage)}
+.login-check span{
+  font-family:var(--ff-serif);font-size:18px;color:var(--sage3);
+}
+.login-forgot{
+  text-align:center;margin-bottom:20px;
+}
+.login-forgot span{
+  font-family:var(--ff-serif);font-size:18px;
+  color:var(--sage3);text-decoration:underline;cursor:pointer;
+}
+.login-btn{
+  width:100%;padding:22px 0;
+  background:var(--rose);
+  border:none;cursor:pointer;border-radius:40px;
+  font-family:var(--ff-serif);font-size:26px;
+  letter-spacing:.5px;color:#fff;
+  box-shadow:inset -4px -4px 4px rgba(0,0,0,.25);
+  transition:opacity .2s;
+  margin-bottom:12px;
+}
+.login-btn:active{opacity:.85}
+.login-create{
+  text-align:center;
+  font-family:var(--ff-serif);font-size:18px;
+  color:var(--sage3);text-decoration:underline;cursor:pointer;
+}
+
+/* ───────────────────────────
+   Transitions
+──────────────────────────── */
+.fade-scale{
+  transform:scale(.98);transition:opacity .3s,transform .3s;
+}
+.page.active.fade-scale{transform:scale(1)}
+
+/* overflow: auto for pages without body wrapper */
+#page-home .page-body{padding-top:calc(var(--header-h) + 72px + 16px)}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ══════════════════════════
+     PAGE 1: SPLASH
+══════════════════════════ -->
+<div class="page active" id="page-splash">
+  <div class="splash-bg"></div>
+  <!-- 水墨竹叶装饰 SVG -->
+  <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.22" viewBox="0 0 440 957" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#c8b8a0" fill="none" stroke-linecap="round">
+      <path d="M30,400 Q80,350 60,280 Q100,320 90,400" stroke-width="2.5" opacity=".7"/>
+      <path d="M50,440 Q-20,380 10,300" stroke-width="1.5" opacity=".5"/>
+      <path d="M20,500 Q90,460 110,380 Q140,420 120,500" stroke-width="2" opacity=".6"/>
+      <path d="M0,550 Q70,510 80,430" stroke-width="1.8" opacity=".45"/>
+      <path d="M60,600 Q130,550 150,470 Q170,510 155,600" stroke-width="2.2" opacity=".55"/>
+      <path d="M380,350 Q430,300 410,220 Q450,260 440,350" stroke-width="2.5" opacity=".6" transform="scaleX(-1) translate(-440,0)"/>
+      <path d="M400,450 Q460,400 450,320" stroke-width="1.5" opacity=".4" transform="scaleX(-1) translate(-440,0)"/>
+      <path d="M360,550 Q440,500 460,420 Q480,460 465,550" stroke-width="2" opacity=".5" transform="scaleX(-1) translate(-440,0)"/>
+      <!-- 枝干 -->
+      <path d="M-10,600 Q50,500 40,380 Q70,420 80,300 Q100,350 95,250" stroke-width="3" opacity=".35"/>
+      <path d="M450,650 Q400,540 420,420 Q390,460 380,340" stroke-width="3" opacity=".3"/>
+    </g>
+  </svg>
+  <div class="splash-grad"></div>
+  <div class="splash-content">
+    <div class="splash-top">
+      <div class="tick-marks"><span></span><span></span><span></span></div>
+      A World of Mystery
+      <div class="tick-marks"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="splash-img-wrap">
+      <div class="splash-img-outer"></div>
+      <div class="splash-img-inner">
+        <!-- 八卦 Logo SVG - 忠实还原设计稿 -->
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#1a1917;gap:16px;padding:20px">
+          <svg viewBox="0 0 200 200" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="oct">
+                <polygon points="60,10 140,10 190,60 190,140 140,190 60,190 10,140 10,60"/>
+              </clipPath>
+            </defs>
+            <!-- 八角形外框 -->
+            <polygon points="60,10 140,10 190,60 190,140 140,190 60,190 10,140 10,60"
+              fill="none" stroke="rgba(208,182,168,0.9)" stroke-width="1.5"/>
+            <polygon points="64,16 136,16 184,64 184,136 136,184 64,184 16,136 16,64"
+              fill="none" stroke="rgba(208,182,168,0.4)" stroke-width="0.8"/>
+            <!-- 八卦线条 - 上 -->
+            <line x1="72" y1="26" x2="90" y2="26" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="110" y1="26" x2="128" y2="26" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="72" y1="32" x2="128" y2="32" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="72" y1="38" x2="90" y2="38" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="110" y1="38" x2="128" y2="38" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <!-- 八卦线条 - 下 -->
+            <line x1="72" y1="162" x2="90" y2="162" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="110" y1="162" x2="128" y2="162" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="72" y1="168" x2="128" y2="168" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="72" y1="174" x2="90" y2="174" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="110" y1="174" x2="128" y2="174" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <!-- 八卦线条 - 左 -->
+            <line x1="26" y1="72" x2="26" y2="90" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="26" y1="110" x2="26" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="32" y1="72" x2="32" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="38" y1="72" x2="38" y2="90" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="38" y1="110" x2="38" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <!-- 八卦线条 - 右 -->
+            <line x1="162" y1="72" x2="162" y2="90" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="162" y1="110" x2="162" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="168" y1="72" x2="168" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="174" y1="72" x2="174" y2="90" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <line x1="174" y1="110" x2="174" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"/>
+            <!-- 中心圆 -->
+            <circle cx="100" cy="100" r="48" fill="none" stroke="rgba(208,182,168,0.7)" stroke-width="1.2"/>
+            <circle cx="100" cy="100" r="38" fill="none" stroke="rgba(208,182,168,0.4)" stroke-width="0.8"/>
+            <!-- 中心星形 -->
+            <polygon points="100,68 106,90 128,90 112,104 118,126 100,114 82,126 88,104 72,90 94,90"
+              fill="none" stroke="rgba(208,182,168,0.85)" stroke-width="1.2"/>
+            <circle cx="100" cy="100" r="8" fill="none" stroke="rgba(208,182,168,0.8)" stroke-width="1.5"/>
+            <circle cx="100" cy="100" r="3" fill="rgba(208,182,168,0.9)"/>
+          </svg>
+          <div style="font-family:'Bellefair',serif;font-size:28px;color:rgba(208,182,168,0.9);letter-spacing:3px">Auracle</div>
+        </div>
+      </div>
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+    </div>
+
+    <div class="splash-text">
+      <div class="ornament-divider">
+        <div class="line"></div>
+        <div class="diamond">◇</div>
+        <div class="line rev"></div>
+      </div>
+      <div class="splash-title">The Tapestry<br>of Fate.</div>
+      <div class="splash-sub">Where every thread of destiny<br>weaves a new legend.</div>
+      <div class="ornament-divider" style="margin-top:14px">
+        <div class="line"></div>
+        <div class="diamond">◇</div>
+        <div class="line rev"></div>
+      </div>
+    </div>
+
+    <div class="splash-cta-wrap">
+      <button class="splash-cta" onclick="goTo('home')">Click to Start</button>
+      <div class="splash-journey">✦ Begin your journey ✦</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 2: HOME
+══════════════════════════ -->
+<div class="page" id="page-home">
+  <div class="page-bg" style="background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');background-size:cover;background-position:center;opacity:.72;"></div>
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="page-body">
+    <div class="daily-card-wrap">
+      <div class="daily-card">
+        <div class="daily-card-inner">
+          <div class="daily-date" id="homeDailyDate">JUN 23, 2026</div>
+          <div class="daily-ganzhi" id="homeDailyGanzhi">丙午年<br>辛卯月<br>辛丑日</div>
+          <div class="daily-divider"></div>
+          <div class="daily-headline">I am the architect<br>of my own universe.</div>
+          <div class="daily-body" style="margin-top:10px">
+            I flow with the<br>stillness<br>charity
+          </div>
+          <div class="daily-stamp-wrap" style="margin:16px 0">
+            <div class="daily-stamp"><span>吉</span></div>
+          </div>
+          <div class="daily-divider"></div>
+          <div class="daily-yi-ji">
+            <div class="yi-ji-item yi">
+              <div class="yi-ji-label"><span style="font-family:var(--ff-jp)">宜 </span><b>Embrace</b></div>
+              <div class="yi-ji-value">Action</div>
+            </div>
+            <div class="yi-ji-item ji">
+              <div class="yi-ji-label"><span style="font-family:var(--ff-jp)">忌 </span><b>Release</b></div>
+              <div class="yi-ji-value">Overthinking</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn active" onclick="navTo('home',this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="7" rx="1"/><rect x="14" y="15" width="7" height="7" rx="1"/></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('test',this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('shop',this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('mine',this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 3: DAILY CHECK-IN
+══════════════════════════ -->
+<div class="page" id="page-checkin">
+  <div class="page-bg"></div>
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body">
+    <div class="daily-card-wrap">
+      <div class="daily-card">
+        <div class="daily-card-inner">
+          <div class="daily-date" id="dailyDate">MAR 28, 2026</div>
+          <div class="daily-ganzhi" id="dailyGanzhi">丙午年<br>辛卯月<br>辛丑日</div>
+          <div class="daily-divider"></div>
+          <div class="daily-headline">I am the architect<br>of my own universe.</div>
+          <div class="daily-body" style="margin-top:10px">
+            I flow with the<br>stillness<br>charity
+          </div>
+          <div class="daily-stamp-wrap" style="margin:16px 0">
+            <div class="daily-stamp"><span>吉</span></div>
+          </div>
+          <div class="daily-divider"></div>
+          <div class="daily-yi-ji">
+            <div class="yi-ji-item yi">
+              <div class="yi-ji-label"><span style="font-family:var(--ff-jp)">宜 </span><b>Embrace</b></div>
+              <div class="yi-ji-value">Action</div>
+            </div>
+            <div class="yi-ji-item ji">
+              <div class="yi-ji-label"><span style="font-family:var(--ff-jp)">忌 </span><b>Release</b></div>
+              <div class="yi-ji-value">Overthinking</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn active" onclick="navCheckinTo('home',this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="7" rx="1"/><rect x="14" y="15" width="7" height="7" rx="1"/></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navCheckinTo('test',this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navCheckinTo('shop',this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navCheckinTo('mine',this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 4: LIFE SCRIPT (Test)
+══════════════════════════ -->
+<div class="page" id="page-test">
+  <div class="page-bg"></div>
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body">
+    <div id="test-chapters">
+      <div class="section-label">
+        <span>Your Journey</span>
+        <span>3 Chapters</span>
+      </div>
+      <div class="chapter-list">
+        <div class="chapter-card c1" onclick="showTestForm()">
+          <div class="chapter-card-bg"></div>
+          <div class="chapter-card-inner">
+            <div class="chapter-label">Chapter I: Script</div>
+            <div class="chapter-title">Who am I?<br>Where am I heading?</div>
+            <div class="chapter-sub">"Life Script Analysis"</div>
+            <div class="chapter-link">Destiny Blueprint →</div>
+            <div class="chapter-num">1</div>
+          </div>
+        </div>
+        <div class="chapter-card c2" onclick="goTo('oracle')">
+          <div class="chapter-card-bg"></div>
+          <div class="chapter-card-inner">
+            <div class="chapter-label">Chapter II: Moment</div>
+            <div class="chapter-title">Moments are Eternal.<br>Decisions are Sacred.</div>
+            <div class="chapter-sub">"Instant Oracle"</div>
+            <div class="chapter-link">Ask the Now →</div>
+            <div class="chapter-num">2</div>
+          </div>
+        </div>
+        <div class="chapter-card c3" onclick="goTo('relationship')">
+          <div class="chapter-card-bg"></div>
+          <div class="chapter-card-inner">
+            <div class="chapter-label">Chapter III: Relations</div>
+            <div class="chapter-title">The Intersection of<br>Two Souls.</div>
+            <div class="chapter-sub">"Relationship Synastry"</div>
+            <div class="chapter-link">Match Resonance →</div>
+            <div class="chapter-num">3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="test-form" style="display:none">
+    <div class="form-card">
+      <button class="close-btn" onclick="hideTestForm()">×</button>
+      <div class="form-card-inner">
+        <div class="form-title">Life Script Analysis</div>
+        <div class="gender-row">
+          <button class="gender-btn selected" onclick="selectGender(this,'female')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="8" r="5"/><line x1="12" y1="13" x2="12" y2="21"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+            Female
+          </button>
+          <button class="gender-btn" onclick="selectGender(this,'male')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="10" cy="14" r="5"/><line x1="14.5" y1="9.5" x2="21" y2="3"/><polyline points="16 3 21 3 21 8"/></svg>
+            Male
+          </button>
+        </div>
+        <div class="form-field">
+          <label>Your Name</label>
+          <input type="text" placeholder="Enter your name">
+        </div>
+        <div class="field-row">
+          <div class="form-field">
+            <label>Date of Birth</label>
+            <input type="date" style="color:var(--sage2)">
+          </div>
+          <div class="form-field">
+            <label>Time of Birth</label>
+            <input type="time" style="color:var(--sage2)">
+          </div>
+        </div>
+        <div class="place-field">
+          <span>Place of Birth</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <button class="submit-btn" onclick="goTo('calibration')">ANALYZE MY ENERGY</button>
+      </div>
+    </div>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="navTo('home',this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="7" rx="1"/><rect x="14" y="15" width="7" height="7" rx="1"/></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn active" onclick="navTo('test',this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('shop',this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('mine',this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 5: CALIBRATION
+══════════════════════════ -->
+<div class="page" id="page-calibration">
+  <div class="page-bg">
+    <img src="https://www.figma.com/api/mcp/asset/b356ed7a-f332-47d8-9982-197b1d842bf0" alt="">
+  </div>
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body" style="padding-bottom:80px">
+    <div class="step-header">
+      <div class="step-bar">
+        <div class="step-dot active"></div>
+        <div class="step-dot inactive"></div>
+        <div class="step-dot inactive"></div>
+        <span class="step-label">STEP 1 / 3</span>
+      </div>
+      <div class="calib-title">Energy<br>Calibration</div>
+      <div class="calib-divider"></div>
+      <div class="calib-question">1. Which recent year brought the most significant career shift?</div>
+      <div class="year-grid" id="yearGrid">
+        <button class="year-btn" onclick="selectYear(this)">
+          <span class="yr">2023</span>
+          <span class="element">Water Year</span>
+          <span class="dot"></span>
+        </button>
+        <button class="year-btn" onclick="selectYear(this)">
+          <span class="yr">2024</span>
+          <span class="element">Wood Year</span>
+          <span class="dot"></span>
+        </button>
+        <button class="year-btn" onclick="selectYear(this)">
+          <span class="yr">2022</span>
+          <span class="element">Metal Year</span>
+          <span class="dot"></span>
+        </button>
+        <button class="year-btn" onclick="selectYear(this)">
+          <span class="yr">2021</span>
+          <span class="element">Earth Year</span>
+          <span class="dot"></span>
+        </button>
+      </div>
+      <button class="calib-submit" id="calibSubmit" onclick="goTo('home')">Complete Calibration</button>
+      <div class="calib-hint">Choose a year to proceed</div>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn active" onclick="navTo('home',this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="7" rx="1"/><rect x="14" y="15" width="7" height="7" rx="1"/></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 6: RELATIONSHIP
+══════════════════════════ -->
+<div class="page" id="page-relationship">
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body">
+    <div class="rel-title">Relationship</div>
+    <div class="rel-sub-tabs" id="relTabs">
+      <button class="rel-tab active" onclick="selectRelTab(this)">
+        <div class="rel-tab-icon">✦</div>
+        <div class="rel-tab-name">Family</div>
+        <div class="rel-tab-sub">Blood &amp; Kin</div>
+      </button>
+      <button class="rel-tab" onclick="selectRelTab(this)">
+        <div class="rel-tab-icon">✦</div>
+        <div class="rel-tab-name">Friendship</div>
+        <div class="rel-tab-sub">Trust &amp; Bond</div>
+      </button>
+      <button class="rel-tab" onclick="selectRelTab(this)">
+        <div class="rel-tab-icon">♡</div>
+        <div class="rel-tab-name">Romance</div>
+        <div class="rel-tab-sub">Love &amp; Soul</div>
+      </button>
+      <button class="rel-tab" onclick="selectRelTab(this)">
+        <div class="rel-tab-icon">◇</div>
+        <div class="rel-tab-name">Career</div>
+        <div class="rel-tab-sub">Work &amp; Path</div>
+      </button>
+      <button class="rel-tab" onclick="selectRelTab(this)">
+        <div class="rel-tab-icon">○</div>
+        <div class="rel-tab-name">Stranger</div>
+        <div class="rel-tab-sub">Fate &amp; Chance</div>
+      </button>
+    </div>
+
+    <div class="person-card">
+      <div class="person-card-bg" style="background-image:url('https://www.figma.com/api/mcp/asset/01199007-642b-4a14-b533-4502b4f1324f')"></div>
+      <div class="person-card-content">
+        <div class="person-card-label">SELF</div>
+        <div class="person-field">
+          <span>Your Name</span>
+        </div>
+        <div class="person-field">
+          <span>Date of Birth</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="rel-section-label">
+      <div class="line"></div>
+      <span id="relSectionLabel">Family</span>
+      <div class="line"></div>
+    </div>
+
+    <div class="person-card">
+      <div class="person-card-bg" style="background-image:url('https://www.figma.com/api/mcp/asset/01199007-642b-4a14-b533-4502b4f1324f');transform:scaleX(-1)"></div>
+      <div class="person-card-content">
+        <div class="person-card-label">THE OTHER</div>
+        <div class="person-field">
+          <span>Your Name</span>
+        </div>
+        <div class="person-field">
+          <span>Date of Birth</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <button class="calc-btn">Calculate Resonance</button>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn active" onclick="navTo('home',this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="7" rx="1"/><rect x="14" y="15" width="7" height="7" rx="1"/></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('test',this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('shop',this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('mine',this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 7: INSTANT ORACLE
+══════════════════════════ -->
+<div class="page" id="page-oracle">
+  <div class="page-bg"></div>
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
+    <div class="oracle-center">
+      <div class="oracle-circle">
+        <div class="oracle-box">
+          <div class="oracle-question" id="oracleQuestion">Is this<br>the right path<br>for me?</div>
+        </div>
+      </div>
+      <div class="oracle-divider">
+        <div class="line"></div>
+        <div class="diamond">✦</div>
+        <div class="line"></div>
+      </div>
+      <div class="oracle-input-wrap">
+        <textarea class="oracle-input" placeholder="Inscribe your question here…" oninput="updateOracleQuestion(this.value)"></textarea>
+      </div>
+      <button class="oracle-btn">Consult Algorithms</button>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn active" onclick="navTo('home',this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="7" rx="1"/><rect x="14" y="15" width="7" height="7" rx="1"/></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('test',this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('shop',this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('mine',this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 8: MINE
+══════════════════════════ -->
+<div class="page" id="page-mine">
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body">
+    <div class="mine-content">
+      <div class="login-section">
+        <div class="login-title">WELCOME</div>
+        <div class="login-card">
+          <div class="login-sub">User Login</div>
+          <div class="login-field">
+            <span>Your Email</span>
+          </div>
+          <div class="login-field">
+            <span>Password</span>
+          </div>
+          <div class="login-check">
+            <input type="checkbox" id="rememberMe">
+            <label for="rememberMe" class="login-check"><span>Remember Me</span></label>
+          </div>
+          <div class="login-forgot"><span>Forget Password?</span></div>
+          <button class="login-btn">LOG IN</button>
+          <div class="login-create">Create Account</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="navTo('home',this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="7" rx="1"/><rect x="14" y="15" width="7" height="7" rx="1"/></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('test',this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('shop',this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn active" onclick="navTo('mine',this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 9: SHOP (placeholder)
+══════════════════════════ -->
+<div class="page" id="page-shop">
+  <div class="page-bg"></div>
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body">
+    <div class="shop-header-wrap">
+      <div class="shop-header-rule">
+        <div class="line"></div>
+        <span>秘術の道具</span>
+        <div class="line"></div>
+      </div>
+      <div class="shop-title">Esoteric Store</div>
+      <div class="shop-subtitle">Sacred objects for your journey</div>
+    </div>
+    <div class="shop-tabs">
+      <button class="shop-tab active" onclick="selectShopTab(this)">All</button>
+      <button class="shop-tab" onclick="selectShopTab(this)">Readings</button>
+      <button class="shop-tab" onclick="selectShopTab(this)">Ritual</button>
+      <button class="shop-tab" onclick="selectShopTab(this)">Talisman</button>
+    </div>
+    <div class="shop-divider"></div>
+
+    <!-- Featured -->
+    <div class="shop-featured">
+      <div class="shop-featured-inner">
+        <div class="shop-featured-glyph">☽</div>
+        <div class="shop-featured-text">
+          <div class="shop-featured-label">✦ FEATURED · 本月推荐</div>
+          <div class="shop-featured-name">Full Destiny<br>Blueprint</div>
+          <div class="shop-featured-desc">Complete life script · birth chart · 10-year cycles & soul purpose reading.</div>
+          <div class="shop-featured-footer">
+            <div class="shop-featured-price">$88</div>
+            <div class="shop-featured-cta">EXPLORE →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section label -->
+    <div class="shop-section-label">
+      <div class="line"></div>
+      <span>ALL OFFERINGS</span>
+      <div class="line"></div>
+    </div>
+
+    <!-- Grid -->
+    <div class="shop-grid">
+      <div class="shop-card">
+        <div class="shop-card-img">
+          <div class="shop-card-glyph">☯</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">READING</div>
+          <div class="shop-card-name">Daily Oracle Session</div>
+          <div class="shop-card-price">$28 <s>$45</s></div>
+        </div>
+      </div>
+      <div class="shop-card">
+        <div class="shop-card-img">
+          <div class="shop-card-glyph">璧</div>
+          <div class="shop-card-badge">NEW</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">TALISMAN</div>
+          <div class="shop-card-name">Jade Protection Amulet</div>
+          <div class="shop-card-price">$66</div>
+        </div>
+      </div>
+      <div class="shop-card">
+        <div class="shop-card-img">
+          <div class="shop-card-glyph">焰</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">RITUAL</div>
+          <div class="shop-card-name">Clarity Ritual Kit</div>
+          <div class="shop-card-price">$38</div>
+        </div>
+      </div>
+      <div class="shop-card">
+        <div class="shop-card-img">
+          <div class="shop-card-glyph">數</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">TALISMAN</div>
+          <div class="shop-card-name">Obsidian Mala Beads</div>
+          <div class="shop-card-price">$48 <s>$72</s></div>
+        </div>
+      </div>
+      <div class="shop-card">
+        <div class="shop-card-img">
+          <div class="shop-card-glyph">緣</div>
+          <div class="shop-card-badge">HOT</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">READING</div>
+          <div class="shop-card-name">Relationship Synastry Report</div>
+          <div class="shop-card-price">$58</div>
+        </div>
+      </div>
+      <div class="shop-card">
+        <div class="shop-card-img">
+          <div class="shop-card-glyph">月</div>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">RITUAL</div>
+          <div class="shop-card-name">Moon Water Set</div>
+          <div class="shop-card-price">$22</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="navTo('home',this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="7" rx="1"/><rect x="14" y="15" width="7" height="7" rx="1"/></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('test',this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn active" onclick="navTo('shop',this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo('mine',this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+</div><!-- #app -->
+
+<script>
+const pageMap={
+  splash:'page-splash',
+  home:'page-home',
+  checkin:'page-checkin',
+  test:'page-test',
+  calibration:'page-calibration',
+  relationship:'page-relationship',
+  oracle:'page-oracle',
+  mine:'page-mine',
+  shop:'page-shop'
+};
+let history=[];
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>{
+    p.classList.remove('active');
+  });
+  const el=document.getElementById(id);
+  if(el){
+    el.classList.add('active');
+    const body=el.querySelector('.page-body');
+    if(body)body.scrollTop=0;
+  }
+  // Test 하위 페이지들은 nav에서 Test를 active로 유지
+  const testSubPages=['page-test','page-calibration','page-oracle','page-relationship'];
+  const activeNav=testSubPages.includes(id)?'test':
+    id==='page-home'||id==='page-checkin'?'home':
+    id==='page-shop'?'shop':
+    id==='page-mine'?'mine':null;
+  if(activeNav){
+    document.querySelectorAll('.nav-btn').forEach(b=>{
+      b.classList.toggle('active', b.dataset.page===activeNav);
+    });
+  }
+}
+
+function goTo(name){
+  const cur=document.querySelector('.page.active');
+  if(cur)history.push(cur.id);
+  showPage(pageMap[name]||name);
+}
+
+function showTestForm(){
+  document.getElementById('test-chapters').style.display='none';
+  document.getElementById('test-form').style.display='block';
+}
+function hideTestForm(){
+  document.getElementById('test-form').style.display='none';
+  document.getElementById('test-chapters').style.display='block';
+}
+function goBack(){
+  const prev=history.pop();
+  if(prev)showPage(prev);
+  else showPage('page-home');
+}
+
+function navTo(name,btn){
+  const pageId=pageMap[name];
+  const targetPage=document.getElementById(pageId);
+  if(!targetPage)return;
+  const allNavBtns=document.querySelectorAll('#'+targetPage.closest('.page')?.id+' .nav-btn, .page.active .nav-btn');
+  const activePage=document.querySelector('.page.active');
+  if(activePage){
+    activePage.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  }
+  history=[];
+  showPage(pageId);
+  if(name==='home')showPage('page-home');
+  else if(name==='test'){goTo('test');hideTestForm();}
+  else if(name==='shop')goTo('shop');
+  else if(name==='mine')goTo('mine');
+}
+
+function navCheckinTo(name,btn){
+  history=[];
+  const pageId=pageMap[name]||(name==='home'?'page-checkin':pageMap[name]);
+  if(name==='home'){showPage('page-checkin');return;}
+  showPage(pageMap[name]);
+}
+
+function selectGender(btn,g){
+  document.querySelectorAll('#page-test .gender-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function selectYear(btn){
+  document.querySelectorAll('#yearGrid .year-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const sub=document.getElementById('calibSubmit');
+  if(sub){sub.classList.add('ready')}
+}
+
+function selectRelTab(tab){
+  document.querySelectorAll('#relTabs .rel-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  const secLabel=document.getElementById('relSectionLabel');
+  if(secLabel){
+    const nameEl=tab.querySelector('.rel-tab-name');
+    secLabel.textContent=nameEl?nameEl.textContent:tab.textContent;
+  }
+}
+
+function selectShopTab(tab){
+  document.querySelectorAll('.shop-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+}
+
+function updateOracleQuestion(val){
+  const el=document.getElementById('oracleQuestion');
+  if(!el)return;
+  const text=val.trim();
+  if(text){
+    el.innerHTML=text.replace(/\n/g,'<br>');
+  } else {
+    el.innerHTML='Is this<br>the right path<br>for me?';
+  }
+}
+
+// Init: splash is already active via HTML class
+// ── Daily Check-in 动态日期 ──
+(function(){
+  const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const d=new Date();
+  const dateStr=months[d.getMonth()]+' '+String(d.getDate()).padStart(2,'0')+', '+d.getFullYear();
+  const el=document.getElementById('dailyDate');
+  if(el)el.textContent=dateStr;
+  const el2=document.getElementById('homeDailyDate');
+  if(el2)el2.textContent=dateStr;
+
+  // 干支计算
+  const tiangan=['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+  const dizhi=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+  const y=d.getFullYear();
+  const m=d.getMonth()+1;
+  const day=d.getDate();
+  // 年干支（以2024甲辰为基准）
+  const yBase=2024;
+  const yOff=(y-yBase+400)%10;
+  const ydOff=(y-yBase+400)%12;
+  const yearGz=tiangan[yOff]+dizhi[ydOff]+'年';
+  // 月干支（简化）
+  const mTian=['壬','癸','甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+  const mDi=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+  const mIdx=(m+1)%12;
+  const monthGz=mTian[(m-1+y*12)%10]+mDi[mIdx]+'月';
+  // 日干支（以2024-01-01甲子为基准）
+  const base=new Date(2024,0,1);
+  const diff=Math.floor((d-base)/86400000);
+  const dayGz=tiangan[((diff%10)+10)%10]+dizhi[((diff%12)+12)%12]+'日';
+  const gz=document.getElementById('dailyGanzhi');
+  if(gz)gz.innerHTML=yearGz+'<br>'+monthGz+'<br>'+dayGz;
+  const gz2=document.getElementById('homeDailyGanzhi');
+  if(gz2)gz2.innerHTML=yearGz+'<br>'+monthGz+'<br>'+dayGz;
+})();
+</script>
+</body>
+</html>
