@@ -1,0 +1,3777 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)file:///Users/zxj/Documents/Codex/2026-06-26/nin-ne/outputs/index-latest.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Auracle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./Auracle_files/css2" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;width:100%;overflow:hidden;background:#0d0d0d}
+
+:root{
+  --bg:#1f1f1f;
+  --bg2:#141414;
+  --cream:#fffbf2;
+  --cream2:#fffaef;
+  --sage:#778366;
+  --sage2:#bbc4a9;
+  --sage3:#9ba48f;
+  --rose:#aa8787;
+  --rose2:#d1b6c6;
+  --warm:#f6f4f1;
+  --brown:#472c12;
+  --muted:rgba(208,194,194,0.65);
+  --muted2:rgba(255,255,255,0.3);
+  --border:#7a766d;
+  --nav-h:62px;
+  --header-h:56px;
+  --ff-serif:'Bellefair',serif;
+  --ff-sans:'Gabarito',sans-serif;
+  --ff-jp:'Noto Sans JP',sans-serif;
+}
+
+#app{
+  width:100%;
+  max-width:430px;
+  height:100vh;
+  margin:0 auto;
+  position:relative;
+  background:var(--bg);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── Pages ── */
+.page{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+  overflow:hidden;
+}
+.page.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ── Header ── */
+.header{
+  position:absolute;
+  top:0;left:0;right:0;
+  height:var(--header-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  z-index:10;
+  background:linear-gradient(to bottom,rgba(31,31,31,.95),transparent);
+}
+.logo{
+  font-family:var(--ff-serif);
+  font-size:20px;
+  color:#fff;
+  letter-spacing:2px;
+}
+.menu-btn{
+  background:none;border:none;cursor:pointer;
+  display:flex;flex-direction:column;gap:5px;
+  padding:8px;
+}
+.menu-btn span{
+  display:block;height:1px;background:rgba(255,255,255,.7);
+  transition:width .2s;
+}
+.menu-btn span:nth-child(1){width:22px}
+.menu-btn span:nth-child(2){width:22px}
+.menu-btn span:nth-child(3){width:14px}
+
+/* ── Bottom Nav ── */
+.nav-bar{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:var(--nav-h);
+  background:var(--bg2);
+  border-top:1px solid rgba(122,118,109,.25);
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  padding:10px 16px 0;
+  z-index:10;
+}
+.nav-btn{
+  background:none;border:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:4px 8px;
+  flex:1;
+  transition:opacity .2s;
+}
+.nav-btn svg{width:20px;height:20px;stroke-width:1.5}
+.nav-btn span{
+  font-family:var(--ff-serif);
+  font-size:9px;
+  letter-spacing:.4px;
+  color:var(--muted2);
+  white-space:nowrap;
+}
+.nav-btn.active svg{stroke:rgba(255,255,255,.92)}
+.nav-btn.active span{color:rgba(255,255,255,.92)}
+.nav-btn:not(.active) svg{stroke:rgba(255,255,255,.3)}
+
+/* ── Scrollable body area ── */
+.page-body{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  padding-top:var(--header-h);
+  padding-bottom:calc(var(--nav-h) + 8px);
+}
+.page-body::-webkit-scrollbar{display:none}
+
+/* ───────────────────────────
+   PAGE 1: SPLASH
+──────────────────────────── */
+#page-splash{background:var(--bg)}
+.splash-bg{
+  position:absolute;inset:0;
+  background-color:#1a1917;
+}
+.splash-grad{
+  position:absolute;bottom:0;left:0;right:0;height:45%;
+  background:linear-gradient(to bottom,transparent,rgba(20,19,17,.95));
+}
+.splash-content{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:space-between;
+  padding:52px 24px 80px;
+}
+.splash-top{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--ff-serif);
+  font-size:11px;letter-spacing:3px;
+  color:rgba(208,194,194,.75);
+  text-transform:uppercase;
+}
+.tick-marks{display:flex;align-items:center;gap:6px}
+.tick-marks span{width:2px;background:rgba(208,194,194,.4);display:block}
+.tick-marks span:nth-child(1){height:14px;opacity:.4}
+.tick-marks span:nth-child(2){height:14px;opacity:.55}
+.tick-marks span:nth-child(3){height:14px;opacity:.7}
+
+.splash-img-wrap{
+  position:relative;
+  width:272px;height:272px;
+  margin-top:20px;
+}
+.splash-img-outer{
+  position:absolute;inset:0;
+  border:1px dashed rgba(208,194,194,.25);
+}
+.splash-img-inner{
+  position:absolute;inset:6px;
+  border:1.5px solid rgba(208,194,194,.55);
+  overflow:hidden;
+}
+.splash-img-inner img{
+  width:100%;height:100%;object-fit:cover;
+}
+.corner{position:absolute;width:14px;height:14px}
+.corner.tl{top:0;left:0;border-top:1.5px solid rgba(208,194,194,.7);border-left:1.5px solid rgba(208,194,194,.7)}
+.corner.tr{top:0;right:0;border-top:1.5px solid rgba(208,194,194,.7);border-right:1.5px solid rgba(208,194,194,.7)}
+.corner.bl{bottom:0;left:0;border-bottom:1.5px solid rgba(208,194,194,.7);border-left:1.5px solid rgba(208,194,194,.7)}
+.corner.br{bottom:0;right:0;border-bottom:1.5px solid rgba(208,194,194,.7);border-right:1.5px solid rgba(208,194,194,.7)}
+
+.ornament-divider{
+  width:320px;
+  display:flex;align-items:center;gap:10px;
+  margin:12px 0;
+}
+.ornament-divider .line{
+  flex:1;height:1px;
+  background:linear-gradient(to right,transparent,rgba(208,194,194,.6));
+}
+.ornament-divider .line.rev{
+  background:linear-gradient(to left,transparent,rgba(208,194,194,.6));
+}
+.ornament-divider .diamond{
+  font-size:10px;color:rgba(208,194,194,.6);
+}
+
+.splash-text{text-align:center}
+.splash-title{
+  font-family:var(--ff-serif);
+  font-size:42px;line-height:1.15;
+  color:var(--warm);
+  letter-spacing:1px;
+}
+.splash-sub{
+  font-family:var(--ff-serif);
+  font-size:13px;line-height:1.8;
+  color:rgba(208,194,194,.65);
+  letter-spacing:1.6px;
+  margin-top:8px;
+}
+
+.splash-cta-wrap{text-align:center}
+.splash-cta{
+  position:relative;
+  display:inline-block;
+  padding:0 32px;
+  height:52px;line-height:52px;
+  font-family:var(--ff-serif);
+  font-size:16px;letter-spacing:3.5px;
+  text-transform:uppercase;
+  color:var(--warm);
+  background:rgba(246,244,241,.08);
+  border:1px solid rgba(208,194,194,.7);
+  cursor:pointer;
+  min-width:200px;
+  transition:background .2s;
+}
+.splash-cta::after{
+  content:'';
+  position:absolute;
+  bottom:-5px;right:-5px;
+  width:100%;height:100%;
+  border:1px solid rgba(208,194,194,.3);
+  pointer-events:none;
+}
+.splash-cta:active{background:rgba(246,244,241,.18)}
+.splash-journey{
+  font-family:var(--ff-serif);
+  font-size:10px;letter-spacing:3px;
+  color:rgba(208,194,194,.4);
+  text-transform:uppercase;
+  margin-top:10px;
+}
+
+/* ───────────────────────────
+   PAGE 2: HOME (Chapters)
+──────────────────────────── */
+#page-home .page-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.35;
+}
+.home-banner{
+  position:absolute;
+  top:var(--header-h);left:0;right:0;
+  height:72px;overflow:hidden;
+}
+.home-banner img{width:100%;height:100%;object-fit:cover;opacity:.7}
+.home-banner::before,.home-banner::after{
+  content:'';position:absolute;left:0;right:0;height:28px;z-index:1;
+}
+.home-banner::before{top:0;background:linear-gradient(var(--bg),transparent)}
+.home-banner::after{bottom:0;background:linear-gradient(transparent,var(--bg))}
+
+.section-label{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;margin-bottom:12px;
+}
+.section-label span:first-child{
+  font-family:var(--ff-serif);font-size:10px;
+  letter-spacing:2.2px;text-transform:uppercase;
+  color:rgba(255,255,255,.4);
+}
+.section-label span:last-child{
+  font-family:var(--ff-serif);font-size:10px;
+  color:rgba(255,255,255,.2);letter-spacing:1px;
+}
+
+.chapter-list{
+  display:flex;flex-direction:column;gap:12px;
+  padding:0 20px;
+}
+
+.chapter-card{
+  position:relative;
+  border:2.5px solid var(--border);
+  padding:7px;
+  cursor:pointer;
+  transition:transform .15s;
+  overflow:hidden;
+}
+.chapter-card:active{transform:scale(.98)}
+
+.chapter-card-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:.9;
+}
+.chapter-card.c1 .chapter-card-bg{background-color:#bbc4a9}
+.chapter-card.c2 .chapter-card-bg{background-color:#fffbf2}
+.chapter-card.c3 .chapter-card-bg{background-color:#ebd5d5}
+
+.chapter-card-inner{
+  position:relative;
+  border:1px solid var(--border);
+  padding:14px;min-height:160px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.chapter-num{
+  position:absolute;right:12px;bottom:8px;
+  font-family:var(--ff-serif);font-size:60px;
+  color:rgba(26,26,26,.1);line-height:1;
+  pointer-events:none;
+}
+.chapter-label{
+  font-family:var(--ff-serif);font-size:10px;
+  letter-spacing:.3px;color:rgba(42,42,42,.65);
+}
+.chapter-title{
+  font-family:var(--ff-serif);font-size:18px;
+  line-height:1.35;color:#1a1a1a;
+  margin:20px 0 6px;
+}
+.chapter-sub{
+  font-family:var(--ff-serif);font-size:11px;
+  color:rgba(42,42,42,.6);
+}
+.chapter-link{
+  font-family:var(--ff-serif);font-size:12px;
+  color:#1a1a1a;text-decoration:underline;
+  margin-top:auto;padding-top:18px;
+  display:inline-block;
+}
+
+/* ───────────────────────────
+   PAGE 3: DAILY CHECK-IN
+──────────────────────────── */
+#page-checkin{background:#0d0d0d}
+#page-checkin .page-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.72;
+}
+
+.daily-card-wrap{
+  padding:12px 20px 20px;
+  display:flex;justify-content:center;
+}
+.daily-card{
+  background:var(--cream2);
+  border:1.5px solid #5a3a1a;
+  width:100%;max-width:340px;
+  position:relative;
+}
+.daily-card-inner{
+  border:.8px solid #7a5a2a;
+  margin:3px;
+  padding:24px 28px 32px;
+  display:flex;flex-direction:column;align-items:center;gap:0;
+}
+.daily-divider{
+  width:88%;height:1px;
+  background:rgba(150,120,80,.35);
+  margin:18px 0;
+}
+.daily-date{
+  font-family:var(--ff-serif);font-size:22px;
+  color:#aa5a4a;letter-spacing:1.2px;
+  text-align:center;margin-bottom:6px;
+}
+.daily-ganzhi{
+  font-family:var(--ff-jp);font-weight:300;
+  font-size:14px;line-height:2;letter-spacing:.8px;
+  color:#3a2a1a;text-align:center;
+}
+.daily-headline{
+  font-family:var(--ff-serif);font-size:22px;
+  line-height:1.4;text-align:center;
+  color:#6a7a5a;letter-spacing:.5px;
+}
+.daily-body{
+  font-family:var(--ff-serif);font-size:15px;
+  line-height:1.8;text-align:center;
+  color:#aa6a6a;margin-top:10px;
+}
+.daily-stamp-wrap{
+  display:flex;justify-content:center;
+  margin:14px 0;
+}
+.daily-stamp{
+  border:1.5px solid #3a2008;
+  width:96px;height:96px;
+  display:flex;align-items:center;justify-content:center;
+}
+.daily-stamp span{
+  font-size:76px;color:#3a2008;
+  font-family:'Noto Serif SC',var(--ff-serif);
+  line-height:1;
+}
+.daily-yi-ji{
+  display:flex;flex-direction:column;gap:18px;
+  width:100%;
+}
+.yi-ji-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.yi-ji-label{
+  font-family:var(--ff-jp);font-size:13px;
+  color:#5a4a3a;letter-spacing:1.2px;
+}
+.yi-ji-label b{font-family:var(--ff-serif);font-weight:400;letter-spacing:.6px}
+.yi-ji-value{
+  font-family:var(--ff-serif);font-size:26px;
+  letter-spacing:.8px;color:#3a2a1a;
+}
+.yi-ji-item.yi .yi-ji-value{color:#aa5a5a}
+.yi-ji-item.ji .yi-ji-value{color:#6a7a5a}
+
+/* ───────────────────────────
+   PAGE 4: LIFE SCRIPT (Test)
+──────────────────────────── */
+#page-test .page-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.2;
+}
+#page-test .page-body{
+  padding-top:var(--header-h);
+}
+#test-chapters{
+  padding-top:48px;
+}
+.test-ornament{
+  width:354px;
+  max-width:calc(100% - 48px);
+  height:62px;
+  margin:0 auto 25px;
+  background:url('auracle-test-ornament.webp') center/100% 100% no-repeat;
+}
+#page-test .section-label{
+  padding:0 20px;
+  margin-bottom:14px;
+}
+#page-test .chapter-list{
+  gap:12px;
+  padding:0 13px;
+}
+#page-test .chapter-card{
+  border:0;
+  padding:0;
+  aspect-ratio:404/218;
+  background-size:100% 100%;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+#page-test .chapter-card.c1{background-image:url('auracle-test-chapter-1.webp')}
+#page-test .chapter-card.c2{background-image:url('auracle-test-chapter-2.webp')}
+#page-test .chapter-card.c3{
+  aspect-ratio:404/215;
+  background-image:url('auracle-test-chapter-3.webp');
+}
+#page-test .chapter-card-bg,
+#page-test .chapter-card-inner{
+  display:none;
+}
+
+.form-card{
+  background:var(--cream);
+  border:1.5px solid rgba(246,244,241,.8);
+  box-shadow:5px 5px 5px rgba(120,114,114,.35);
+  margin:0 16px;
+  position:relative;
+}
+.form-card-inner{
+  border:.8px solid rgba(246,244,241,.5);
+  margin:3px;padding:24px 20px 28px;
+}
+.form-title{
+  font-family:var(--ff-serif);font-size:28px;
+  color:var(--sage);letter-spacing:.8px;
+  text-align:center;margin-bottom:20px;
+}
+.close-btn{
+  position:absolute;top:8px;right:16px;
+  font-family:'Gentium Book Basic',var(--ff-serif);
+  font-size:32px;color:var(--sage3);
+  background:none;border:none;cursor:pointer;line-height:1;
+}
+
+.gender-row{
+  display:flex;gap:10px;justify-content:center;
+  margin-bottom:18px;
+}
+.gender-btn{
+  background:var(--sage2);
+  border:none;
+  border-radius:8px;
+  padding:12px 20px;
+  font-family:var(--ff-serif);font-size:18px;
+  color:#fff;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  box-shadow:inset -3px -3px 4px rgba(0,0,0,.25);
+  transition:opacity .2s;
+}
+.gender-btn:not(.selected){opacity:.7}
+.gender-btn.selected{opacity:1}
+
+.form-field{
+  margin-bottom:16px;
+  border-bottom:1px solid var(--sage2);
+  padding-bottom:6px;
+}
+.form-field label{
+  font-family:var(--ff-serif);font-size:16px;
+  color:var(--sage2);display:block;
+}
+.form-field input{
+  width:100%;background:none;border:none;outline:none;
+  font-family:var(--ff-serif);font-size:16px;
+  color:var(--brown);padding-top:4px;
+}
+.form-field input::placeholder{color:var(--sage2)}
+
+.field-row{display:flex;gap:16px}
+.field-row .form-field{flex:1}
+
+.place-field{
+  position:relative;
+  border:1px solid var(--sage2);border-radius:2px;
+  padding:14px 16px;margin-bottom:18px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.place-field span{font-family:var(--ff-serif);font-size:18px;color:var(--sage2)}
+.place-field svg{stroke:var(--sage2);width:20px;height:20px}
+
+.submit-btn{
+  display:block;width:80%;margin:0 auto;
+  padding:20px 0;
+  background:var(--rose);
+  border:none;cursor:pointer;
+  font-family:var(--ff-serif);font-size:22px;
+  letter-spacing:1px;color:#fff;
+  text-align:center;
+  box-shadow:inset -3px -4px 4px rgba(0,0,0,.25);
+  transition:opacity .2s;
+}
+.submit-btn:active{opacity:.85}
+
+/* ───────────────────────────
+   PAGE 5: CALIBRATION (step form)
+──────────────────────────── */
+#page-calibration{background:#0d0d0d}
+#page-calibration .page-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.6;
+}
+
+/* 结果卡片外层 */
+.result-card{
+  margin:12px 16px 0;
+  background:var(--cream2);
+  border:1.5px solid #5a3a1a;
+  position:relative;
+  z-index:1;
+}
+.result-card-inner{
+  border:.8px solid rgba(122,90,42,.35);
+  margin:2px;
+  padding:24px 20px 28px;
+}
+.rel-result-locked{
+  overflow:hidden;
+}
+.rel-result-locked .result-card-inner{
+  filter:blur(.6px);
+}
+.rel-soon-mask{
+  position:absolute;
+  inset:2px;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(245,240,230,.72);
+  border:.8px solid rgba(122,90,42,.2);
+  backdrop-filter:blur(1.5px);
+  -webkit-backdrop-filter:blur(1.5px);
+  pointer-events:auto;
+}
+.rel-soon-mask span{
+  font-family:var(--ff-jp);
+  font-size:18px;
+  letter-spacing:5px;
+  color:#3a2a1a;
+}
+
+/* 标题 */
+.result-title{
+  font-family:'Bellefair',serif;font-size:26px;
+  color:#5a3a1a;text-align:center;
+  font-style:italic;letter-spacing:.5px;
+  margin-bottom:10px;
+}
+.result-title-rule{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-bottom:20px;
+}
+.result-title-rule .line{width:60px;height:1px;background:rgba(122,90,42,.3)}
+.result-title-rule .dot{width:5px;height:5px;border-radius:50%;background:rgba(122,90,42,.5)}
+
+/* Section标题 */
+.rs-label{
+  font-family:var(--ff-serif);font-size:14px;
+  color:#3a2a1a;letter-spacing:.3px;
+  margin-bottom:12px;
+}
+.rs-divider{height:1px;background:rgba(122,90,42,.2);margin:18px 0}
+
+/* 四柱矩阵 */
+.pillar-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
+  margin-bottom:6px;
+}
+.pillar-cell{
+  border:1px solid rgba(122,90,42,.4);
+  padding:8px 4px 10px;
+  text-align:center;background:rgba(255,251,242,.6);
+}
+.pillar-pos{
+  font-family:var(--ff-jp);font-size:9px;
+  color:rgba(90,58,26,.55);letter-spacing:1px;
+  margin-bottom:6px;
+}
+.pillar-char{
+  font-family:'Noto Serif SC',serif;font-size:32px;
+  color:#2a1a0a;line-height:1;margin-bottom:6px;
+}
+.pillar-role{
+  font-family:var(--ff-serif);font-size:9px;
+  color:rgba(90,58,26,.6);letter-spacing:.3px;line-height:1.4;
+}
+
+/* 五行条 */
+.element-bars{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.element-row{display:flex;align-items:center;gap:8px}
+.element-name{
+  font-family:var(--ff-serif);font-size:12px;
+  color:#3a2a1a;width:38px;flex-shrink:0;
+}
+.element-track{flex:1;height:8px;background:rgba(180,160,130,.2);border-radius:0}
+.element-fill{height:100%;border-radius:0;background:#aa7a7a}
+
+/* Inner Persona 双栏 */
+.persona-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  border:1px solid rgba(122,90,42,.35);
+  margin-bottom:12px;
+}
+.persona-col{padding:14px 12px}
+.persona-col:first-child{border-right:1px solid rgba(122,90,42,.35)}
+.persona-col-title{
+  font-family:'Bellefair',serif;font-size:16px;
+  color:#2a1a0a;margin-bottom:4px;
+}
+.persona-col-sub{
+  font-family:var(--ff-serif);font-size:10px;
+  color:rgba(60,40,20,.5);letter-spacing:.3px;
+  margin-bottom:10px;
+}
+.persona-col-divider{height:1px;background:rgba(122,90,42,.25);margin-bottom:10px}
+.persona-col-traits{
+  font-family:var(--ff-serif);font-size:10px;
+  color:rgba(60,40,20,.7);letter-spacing:1px;
+}
+
+/* 文字段落 */
+.rs-body{
+  font-family:var(--ff-serif);font-size:13px;
+  color:#3a2a1a;line-height:1.8;
+  margin-bottom:4px;
+}
+
+/* 推荐策略框 */
+.strategy-box{
+  border:1px solid rgba(122,90,42,.35);
+  padding:16px;text-align:center;
+  margin-bottom:20px;
+}
+.strategy-title{
+  font-family:'Bellefair',serif;font-size:15px;
+  color:#aa7a5a;letter-spacing:1px;font-style:italic;
+  margin-bottom:12px;
+}
+.strategy-item{
+  font-family:var(--ff-jp);font-size:12px;
+  color:#3a2a1a;line-height:2.2;letter-spacing:.3px;
+}
+
+/* 底部按钮 */
+.result-cta{
+  display:block;width:100%;
+  padding:15px;margin-top:4px;
+  background:none;border:1px solid rgba(122,90,42,.5);
+  font-family:var(--ff-serif);font-size:10px;
+  letter-spacing:2px;text-transform:uppercase;
+  color:rgba(60,40,20,.65);cursor:pointer;
+  transition:background .2s;
+}
+.result-cta:active{background:rgba(122,90,42,.1)}
+
+/* 底部引言 */
+.result-quote{
+  text-align:center;padding:20px 24px 28px;
+  font-family:'Bellefair',serif;font-size:14px;
+  color:rgba(255,251,242,.35);font-style:italic;
+  line-height:1.7;letter-spacing:.3px;
+}
+
+/* 八字表格 */
+.bazi-info{
+  font-family:var(--ff-serif);font-size:10px;
+  color:rgba(90,58,26,.6);text-align:center;
+  margin-bottom:10px;line-height:1.7;
+}
+.bazi-table{width:100%;border-collapse:collapse;margin-bottom:6px}
+.bazi-table th{
+  background:rgba(155,164,143,.25);
+  font-family:var(--ff-serif);font-size:9px;
+  letter-spacing:1px;color:#5a3a1a;
+  padding:6px 4px;text-align:center;
+  border:1px solid rgba(122,90,42,.25);
+}
+.bazi-table td{
+  border:1px solid rgba(122,90,42,.2);
+  padding:5px 3px;text-align:center;
+  background:rgba(255,251,242,.5);
+  font-family:var(--ff-serif);font-size:11px;
+  color:#3a2a1a;
+}
+.bazi-table td.tg{
+  font-family:'Noto Serif SC',serif;font-size:20px;
+  color:#2a1a0a;padding:6px 3px;
+}
+.bazi-table td.eb{
+  font-family:'Noto Serif SC',serif;font-size:16px;
+  color:#2a1a0a;
+}
+.bazi-table td.hid{
+  font-family:'Noto Serif SC',serif;font-size:10px;
+  color:rgba(60,40,20,.6);line-height:1.6;
+}
+.bazi-table td.role{
+  font-size:9px;color:rgba(90,58,26,.7);letter-spacing:.3px;
+}
+
+/* Core Element Profile */
+.cep-box{
+  background:rgba(245,242,235,.7);
+  border:1px solid rgba(122,90,42,.25);
+  padding:14px;margin-bottom:10px;
+}
+.cep-title{
+  font-family:'Bellefair',serif;font-size:14px;
+  color:#3a2a1a;text-align:center;margin-bottom:4px;
+}
+.cep-cn{
+  font-family:var(--ff-jp);font-size:10px;
+  color:#7a5a3a;text-align:center;letter-spacing:2px;margin-bottom:10px;
+}
+.cep-text{
+  font-family:var(--ff-serif);font-size:11px;
+  color:#3a2a1a;line-height:1.9;margin-bottom:10px;
+}
+.cep-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.cep-tag{
+  border:1px solid rgba(122,90,42,.35);
+  padding:4px 10px;
+  font-family:var(--ff-serif);font-size:9px;
+  color:#5a3a1a;letter-spacing:.5px;
+  display:flex;align-items:center;gap:4px;
+}
+.cep-celebs{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+}
+.cep-celeb{
+  text-align:center;padding:8px 4px;
+  background:rgba(255,251,242,.5);
+  border:1px solid rgba(122,90,42,.2);
+}
+.cep-celeb-icon{font-size:18px;margin-bottom:4px}
+.cep-celeb-name{font-family:'Bellefair',serif;font-size:10px;color:#2a1a0a}
+.cep-celeb-sub{font-family:var(--ff-serif);font-size:8px;color:rgba(60,40,20,.5);line-height:1.5;margin-top:2px}
+
+/* Core Magnetic Field */
+.cmf-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.cmf-card{
+  border:1px solid rgba(122,90,42,.25);
+  padding:10px;background:rgba(255,251,242,.4);
+}
+.cmf-card-title{
+  font-family:var(--ff-serif);font-size:10px;
+  color:#5a3a1a;font-weight:600;margin-bottom:6px;
+  display:flex;align-items:center;gap:4px;
+}
+.cmf-card-text{
+  font-family:var(--ff-serif);font-size:10px;
+  color:#3a2a1a;line-height:1.8;
+}
+
+/* 四柱人生 */
+.four-pillars-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.fp-card{
+  border:1px solid rgba(122,90,42,.25);
+  padding:10px;background:rgba(255,251,242,.4);
+  position:relative;
+}
+.fp-card-title{
+  font-family:var(--ff-serif);font-size:11px;
+  color:#3a2a1a;margin-bottom:8px;
+  display:flex;align-items:center;gap:4px;
+}
+.fp-lock{
+  background:rgba(122,90,42,.12);
+  padding:8px;text-align:center;margin-top:6px;
+}
+.fp-lock-btn{
+  font-family:var(--ff-serif);font-size:8px;
+  letter-spacing:1px;color:#7a5a3a;
+  background:rgba(122,90,42,.15);border:none;cursor:pointer;
+  padding:4px 10px;text-transform:uppercase;
+  display:block;width:100%;margin-top:4px;
+}
+
+/* 大运图表 */
+.luck-chart-wrap{
+  background:rgba(255,251,242,.4);
+  border:1px solid rgba(122,90,42,.2);
+  padding:12px;margin-bottom:8px;
+}
+.luck-chart-title{
+  font-family:var(--ff-serif);font-size:11px;
+  color:#3a2a1a;margin-bottom:10px;
+  display:flex;align-items:center;gap:4px;
+}
+.luck-pie{
+  display:flex;align-items:center;gap:12px;margin-bottom:8px;
+}
+.luck-pie-visual{
+  width:80px;height:80px;border-radius:50%;flex-shrink:0;
+  background:conic-gradient(#8a9a7a 0% 45%,#aa7a7a 45% 75%,#c8b89a 75% 100%);
+}
+.luck-pie-legend{flex:1}
+.luck-legend-item{
+  display:flex;align-items:center;gap:6px;margin-bottom:4px;
+}
+.luck-legend-dot{width:8px;height:8px;flex-shrink:0}
+.luck-legend-text{font-family:var(--ff-serif);font-size:9px;color:#3a2a1a;line-height:1.5}
+.luck-line-chart{
+  height:60px;width:100%;position:relative;
+  border-bottom:1px solid rgba(122,90,42,.2);
+  border-left:1px solid rgba(122,90,42,.2);
+  margin:8px 0 4px;
+}
+.luck-line-chart svg{width:100%;height:100%}
+.luck-highlights{
+  background:rgba(90,80,60,.08);
+  border-left:3px solid #8a9a7a;
+  padding:10px 12px;margin-top:8px;
+}
+.luck-highlights-title{
+  font-family:var(--ff-serif);font-size:10px;
+  color:#5a3a1a;font-weight:600;margin-bottom:6px;
+}
+.luck-highlights li{
+  font-family:var(--ff-serif);font-size:10px;
+  color:#3a2a1a;line-height:1.9;margin-left:12px;
+}
+
+/* 综合建议 */
+.rec-item{
+  display:flex;gap:10px;margin-bottom:14px;
+  padding-bottom:14px;border-bottom:1px solid rgba(122,90,42,.15);
+}
+.rec-item:last-of-type{border-bottom:none;margin-bottom:0}
+.rec-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.rec-content{}
+.rec-title{
+  font-family:'Bellefair',serif;font-size:12px;
+  color:#3a2a1a;margin-bottom:4px;font-style:italic;
+}
+.rec-text{
+  font-family:var(--ff-serif);font-size:11px;
+  color:rgba(60,40,20,.7);line-height:1.8;
+}
+
+/* 终极礼包 */
+.kit-box{
+  background:rgba(155,164,143,.15);
+  border:1px solid rgba(122,90,42,.3);
+  padding:14px;text-align:center;margin-top:4px;
+}
+.kit-title{
+  font-family:'Bellefair',serif;font-size:13px;
+  color:#5a3a1a;margin-bottom:8px;
+}
+.kit-items{
+  font-family:var(--ff-serif);font-size:10px;
+  color:rgba(60,40,20,.65);line-height:2;margin-bottom:12px;
+}
+.kit-btn{
+  background:#5a3a1a;border:none;cursor:pointer;
+  padding:11px 20px;
+  font-family:var(--ff-serif);font-size:9px;
+  letter-spacing:2px;text-transform:uppercase;
+  color:#fffbf2;
+}
+
+/* 九宫格小工具 */
+.bgc{border:1px solid rgba(90,58,26,.25);padding:4px 2px;text-align:center;min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:rgba(255,251,242,.5)}
+.bgp{font-family:var(--ff-jp);font-size:7px;color:rgba(90,58,26,.45)}
+.bgch{font-family:'Noto Serif SC',serif;font-size:10px;color:#2a1a0a;line-height:1.4}
+.bgt{font-family:var(--ff-serif);font-size:7px;color:#aa5a4a}
+
+/* ───────────────────────────
+   PAGE 6: RELATIONSHIP (合盘)
+──────────────────────────── */
+#page-relationship{background:#0d0d0d}
+#page-relationship-input{background:#1d1d1d}
+#page-relationship-input .page-body{
+  padding:61px 18px 98px;
+  background:#1d1d1d;
+}
+.relm-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:24px;
+}
+.relm-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--ff-serif);
+  font-size:20px;
+  line-height:1;
+  letter-spacing:3px;
+  color:#f8f4ee;
+}
+.relm-logo-mark{
+  font-family:var(--ff-serif);
+  font-size:24px;
+  line-height:1;
+}
+.relm-menu{
+  width:28px;
+  height:20px;
+  background:none;
+  border:none;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:0;
+  cursor:pointer;
+}
+.relm-menu span{
+  display:block;
+  height:1px;
+  background:rgba(245,242,235,.75);
+}
+.relm-title{
+  margin-top:43px;
+  text-align:center;
+  font-family:var(--ff-serif);
+  font-size:34px;
+  line-height:1;
+  letter-spacing:6px;
+  color:#f6f1ec;
+}
+.relm-tabs{
+  margin-top:45px;
+  margin-left:-5px;
+  margin-right:-5px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:7px;
+}
+#page-relationship-input .relm-tab{
+  min-width:0;
+  height:81px;
+  padding:10px 3px 8px;
+  background:transparent;
+  border:1px solid rgba(246,241,236,.18);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  font-family:var(--ff-serif);
+  color:rgba(246,241,236,.42);
+  cursor:pointer;
+  transition:border-color .2s,color .2s,background .2s;
+}
+#page-relationship-input .relm-tab.active{
+  border-color:#c6a8b8;
+  background:rgba(198,168,184,.06);
+  color:#f4e7ee;
+}
+.relm-tab-icon{
+  height:18px;
+  margin-bottom:8px;
+  font-size:17px;
+  line-height:1;
+  color:rgba(157,165,147,.7);
+}
+.relm-tab.active .relm-tab-icon{color:#d7b9ca}
+.relm-tab-name{
+  font-size:12px;
+  line-height:1.1;
+  letter-spacing:.4px;
+  margin-bottom:7px;
+}
+.relm-tab-sub{
+  font-size:8px;
+  line-height:1.1;
+  letter-spacing:.2px;
+  color:rgba(246,241,236,.24);
+  white-space:nowrap;
+}
+.relm-card{
+  position:relative;
+  width:calc(100% + 3px);
+  max-width:none;
+  margin-left:-3px;
+  margin-right:0;
+  height:181px;
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+  overflow:hidden;
+}
+.relm-card-self{
+  margin-top:39px;
+  background-image:url('auracle-relationship-self-card.webp');
+}
+.relm-card-other{
+  background-image:url('auracle-relationship-other-card.webp');
+}
+.relm-input{
+  position:absolute;
+  height:28px;
+  background:transparent;
+  border:0;
+  outline:0;
+  opacity:.01;
+  font-family:var(--ff-serif);
+  font-size:15px;
+}
+.relm-self-name{left:45%;right:9%;top:75px}
+.relm-self-date{left:45%;right:12%;top:110px}
+.relm-self-place{left:45%;right:9%;top:146px}
+.relm-other-name{left:4%;right:46%;top:75px}
+.relm-other-date{left:4%;right:54%;top:110px}
+.relm-other-place{left:4%;right:46%;top:146px}
+.relm-divider{
+  margin:31px -2px 30px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  color:#cdb0c0;
+}
+.relm-divider::before,
+.relm-divider::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:rgba(246,241,236,.15);
+}
+.relm-divider span{
+  font-family:var(--ff-serif);
+  font-size:16px;
+  letter-spacing:2px;
+  line-height:1;
+}
+.relm-calc{
+  width:calc(100% + 10px);
+  height:55px;
+  margin-left:-5px;
+  margin-right:-5px;
+  margin-top:32px;
+  border:1px solid rgba(246,241,236,.16);
+  background:#bbc5ab;
+  color:#fffaf3;
+  font-family:var(--ff-serif);
+  font-size:15px;
+  line-height:1;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,.16);
+}
+.relm-calc:active{opacity:.88}
+#page-relationship-input .nav-bar{
+  height:68px;
+  background:#151515;
+  border-top:1px solid rgba(246,241,236,.08);
+  padding:12px 20px 0;
+}
+#page-relationship-input .nav-btn{gap:4px;padding:0 6px}
+#page-relationship-input .nav-btn svg{width:22px;height:22px}
+#page-relationship-input .nav-btn span{font-size:10px}
+
+/* ───────────────────────────
+   PAGE 7: INSTANT ORACLE
+──────────────────────────── */
+#page-oracle{background:var(--bg)}
+#page-oracle .page-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.35;
+}
+
+.oracle-center{
+  display:flex;flex-direction:column;
+  align-items:center;
+  padding:24px 24px 32px;
+  width:100%;
+  gap:0;
+}
+.oracle-circle{
+  width:min(80vw,280px);
+  height:min(80vw,280px);
+  border-radius:50%;
+  background:rgba(255,250,239,.92);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  margin-bottom:24px;
+}
+.oracle-box{
+  border:1.5px solid var(--brown);
+  width:58%;height:58%;
+  background:rgba(31,31,31,.95);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.oracle-box::before{
+  content:'';
+  position:absolute;inset:-6px;
+  border:1px solid rgba(31,31,31,.6);
+  pointer-events:none;
+}
+.oracle-question{
+  font-family:var(--ff-serif);font-size:14px;
+  color:#fffbf2;line-height:1.6;text-align:center;
+  padding:0 10px;
+}
+
+.oracle-divider{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:20px;
+}
+.oracle-divider .line{
+  width:40px;height:1px;
+  background:rgba(255,251,242,.25);
+}
+.oracle-divider .diamond{
+  font-size:10px;color:rgba(255,251,242,.3);
+}
+
+.oracle-input-wrap{
+  width:100%;
+  background:rgba(31,31,31,.6);
+  border:1px solid rgba(208,194,194,.3);
+  padding:14px 16px;margin-bottom:16px;
+}
+.oracle-input{
+  width:100%;background:none;border:none;outline:none;
+  font-family:var(--ff-serif);font-size:14px;
+  color:#fffbf2;letter-spacing:.4px;
+  resize:none;min-height:72px;
+}
+.oracle-input::placeholder{color:rgba(255,251,242,.35)}
+
+.oracle-btn{
+  background:var(--rose);
+  border:none;cursor:pointer;
+  width:100%;padding:15px;
+  font-family:var(--ff-serif);font-size:10px;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--warm);
+  box-shadow:inset -2px -3px 4px rgba(0,0,0,.25);
+  transition:opacity .2s;
+}
+.oracle-btn:active{opacity:.85}
+
+/* ───────────────────────────
+   PAGE: QIMEN NUMBER PICK
+──────────────────────────── */
+#page-oracle-number{
+  background:#1d1d1b;
+}
+#page-oracle-number .page-body{
+  padding:calc(var(--header-h) + 12px) 20px 26px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 8%,rgba(255,251,242,.06),transparent 35%),
+    linear-gradient(180deg,#1c1d1a 0%,#131413 100%);
+}
+.qimen-pick-wrap{
+  position:relative;
+  min-height:auto;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+}
+.qimen-floral{
+  position:absolute;
+  top:38px;
+  bottom:22px;
+  width:118px;
+  opacity:.76;
+  pointer-events:none;
+}
+.qimen-floral.left{left:-78px}
+.qimen-floral.right{right:-78px;transform:scaleX(-1)}
+.qimen-floral::before,
+.qimen-floral::after{
+  content:'';
+  position:absolute;
+  border:2px solid rgba(173,190,159,.55);
+  border-left-color:transparent;
+  border-bottom-color:transparent;
+  border-radius:50%;
+  transform:rotate(-24deg);
+}
+.qimen-floral::before{
+  width:190px;height:260px;
+  top:48px;left:0;
+}
+.qimen-floral::after{
+  width:160px;height:230px;
+  bottom:48px;left:8px;
+  border-color:rgba(211,178,184,.55);
+  border-left-color:transparent;
+  border-bottom-color:transparent;
+}
+.qimen-leaf{
+  position:absolute;
+  width:54px;height:26px;
+  border-radius:80% 0 80% 0;
+  background:rgba(174,192,164,.62);
+  transform-origin:0 50%;
+  filter:drop-shadow(0 1px 0 rgba(255,251,242,.14));
+}
+.qimen-leaf.l1{top:42px;left:48px;transform:rotate(34deg)}
+.qimen-leaf.l2{top:92px;left:80px;transform:rotate(92deg);background:rgba(221,186,192,.64)}
+.qimen-leaf.l3{top:150px;left:36px;transform:rotate(-14deg)}
+.qimen-leaf.l4{top:232px;left:78px;transform:rotate(64deg)}
+.qimen-leaf.l5{bottom:116px;left:54px;transform:rotate(22deg);background:rgba(221,186,192,.58)}
+.qimen-leaf.l6{bottom:58px;left:18px;transform:rotate(-32deg)}
+.qimen-pick-card{
+  position:relative;
+  z-index:1;
+  width:min(84%,322px);
+  border-radius:13px;
+  background:
+    radial-gradient(circle at 50% 18%,rgba(255,255,255,.78),transparent 30%),
+    linear-gradient(135deg,#fffdf4 0%,#f6f1e5 48%,#fffaf0 100%);
+  box-shadow:0 16px 38px rgba(0,0,0,.36);
+  padding:8px;
+}
+.qimen-pick-inner{
+  border:1.3px solid #4e3b2f;
+  border-radius:11px;
+  padding:32px 20px 24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.qimen-pick-title{
+  font-family:var(--ff-serif);
+  font-size:24px;
+  line-height:1.26;
+  letter-spacing:3.4px;
+  color:#6b7b5f;
+  text-align:center;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+.qimen-pick-subtitle{
+  font-family:'Noto Serif SC',serif;
+  font-size:15px;
+  letter-spacing:4px;
+  color:#bc8a8f;
+  margin-bottom:22px;
+}
+.qimen-pick-rule{
+  display:flex;
+  align-items:center;
+  width:80%;
+  gap:8px;
+  margin-bottom:20px;
+  color:#c7a0a4;
+  font-size:13px;
+}
+.qimen-pick-rule::before,
+.qimen-pick-rule::after{
+  content:'';
+  height:1px;
+  flex:1;
+  background:linear-gradient(90deg,transparent,rgba(120,90,60,.2),transparent);
+}
+.qimen-pick-prompt{
+  font-family:var(--ff-serif);
+  font-size:16px;
+  line-height:1.42;
+  color:#6b6f66;
+  text-align:center;
+  margin-bottom:27px;
+}
+.qimen-grid{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+.qimen-number{
+  aspect-ratio:1;
+  border:1px solid rgba(111,112,86,.25);
+  border-radius:6px;
+  background:
+    radial-gradient(circle at 35% 25%,rgba(255,255,255,.55),transparent 45%),
+    linear-gradient(145deg,#f5f4e9 0%,#e9e7d9 100%);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.75),0 2px 6px rgba(110,90,70,.08);
+  font-family:var(--ff-serif);
+  font-size:28px;
+  line-height:1;
+  color:#596d4d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:none;
+  cursor:pointer;
+  transition:transform .12s,box-shadow .12s;
+}
+.qimen-number:active{
+  transform:scale(.97);
+  box-shadow:inset 0 2px 8px rgba(100,80,60,.18);
+}
+
+.back-btn{
+  background:none;border:none;cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+  color:rgba(255,251,242,.7);padding:0;
+  font-family:var(--ff-serif);font-size:12px;
+  letter-spacing:1px;
+}
+.back-btn svg{stroke:rgba(255,251,242,.7);flex-shrink:0}
+.back-btn:active{opacity:.6}
+
+/* ───────────────────────────
+   PAGE: SHOP
+──────────────────────────── */
+#page-shop{background:#0d0d0d}
+#page-shop .page-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:url('https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b');
+  background-size:cover;background-position:center;
+  opacity:.6;
+}
+.shop-header-wrap{
+  position:relative;padding:24px 20px 0;text-align:center;
+}
+.shop-header-rule{
+  display:flex;align-items:center;gap:10px;margin-bottom:10px;
+}
+.shop-header-rule .line{flex:1;height:1px;background:rgba(255,251,242,.15)}
+.shop-header-rule span{
+  font-family:var(--ff-jp);font-size:11px;
+  color:rgba(255,251,242,.3);letter-spacing:3px;white-space:nowrap;
+}
+.shop-title{
+  font-family:'Bellefair',serif;font-size:32px;
+  color:#fffbf2;letter-spacing:3px;margin-bottom:4px;
+}
+.shop-subtitle{
+  font-family:var(--ff-jp);font-size:11px;
+  color:rgba(255,251,242,.35);letter-spacing:3px;margin-bottom:20px;
+}
+.shop-tabs{
+  display:flex;gap:0;padding:0 20px;
+  margin-bottom:0;overflow-x:auto;
+}
+.shop-tabs::-webkit-scrollbar{display:none}
+.shop-tab{
+  flex:1;padding:10px 6px 9px;
+  font-family:var(--ff-serif);font-size:11px;
+  letter-spacing:1.2px;color:rgba(255,251,242,.35);
+  background:none;border:none;cursor:pointer;
+  border-bottom:1px solid rgba(255,251,242,.1);
+  transition:all .2s;white-space:nowrap;
+}
+.shop-tab.active{color:#fffbf2;border-bottom:1.5px solid #d1b6c6;}
+.shop-divider{height:1px;background:rgba(122,118,109,.2);margin:0 0 24px;}
+.shop-featured{
+  margin:0 16px 24px;
+  background:rgba(28,20,10,.92);
+  border:1px solid rgba(180,140,80,.35);
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:transform .15s;
+}
+.shop-featured:active{transform:scale(.99)}
+.shop-featured::after{
+  content:'';position:absolute;
+  top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;
+  background:rgba(209,182,198,.04);pointer-events:none;
+}
+.shop-featured-inner{
+  padding:22px;display:flex;gap:20px;align-items:center;
+}
+.shop-featured-glyph{
+  flex-shrink:0;width:76px;height:76px;
+  border:1px solid rgba(180,140,80,.4);
+  display:flex;align-items:center;justify-content:center;font-size:36px;
+}
+.shop-featured-text{flex:1}
+.shop-featured-label{
+  font-family:var(--ff-jp);font-size:9px;
+  color:#d1b6c6;letter-spacing:3px;margin-bottom:8px;
+}
+.shop-featured-name{
+  font-family:'Bellefair',serif;font-size:21px;
+  color:#fffbf2;line-height:1.2;margin-bottom:8px;letter-spacing:.5px;
+}
+.shop-featured-desc{
+  font-family:var(--ff-serif);font-size:11px;
+  color:rgba(255,251,242,.45);line-height:1.8;margin-bottom:14px;
+}
+.shop-featured-footer{display:flex;align-items:center;justify-content:space-between;}
+.shop-featured-price{font-family:'Bellefair',serif;font-size:24px;color:#c8a96e;}
+.shop-featured-cta{
+  font-family:var(--ff-serif);font-size:10px;
+  letter-spacing:1.5px;color:rgba(255,251,242,.35);
+}
+.shop-section-label{
+  display:flex;align-items:center;gap:10px;padding:0 16px 16px;
+}
+.shop-section-label .line{flex:1;height:1px;background:rgba(255,251,242,.1)}
+.shop-section-label span{
+  font-family:var(--ff-jp);font-size:10px;
+  color:rgba(255,251,242,.3);letter-spacing:2px;white-space:nowrap;
+}
+.shop-grid{
+  padding:0 16px 28px;
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.shop-card{
+  background:var(--cream2);
+  border:1px solid rgba(120,90,40,.45);
+  position:relative;cursor:pointer;
+  transition:transform .15s;
+  display:flex;flex-direction:column;
+}
+.shop-card:active{transform:scale(.97)}
+.shop-card-img{
+  width:100%;aspect-ratio:1;
+  background:rgba(195,180,150,.22);
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid rgba(120,90,40,.18);
+  position:relative;overflow:hidden;
+}
+.shop-card-glyph{
+  font-size:44px;line-height:1;opacity:.55;
+  font-family:'Noto Serif SC','Noto Sans JP',serif;color:#3a2a1a;
+}
+.shop-card-badge{
+  position:absolute;top:0;left:0;
+  background:var(--rose);
+  font-family:var(--ff-serif);font-size:8px;
+  letter-spacing:1.2px;color:#fffbf2;padding:4px 8px;
+}
+.shop-card-body{padding:10px 11px 13px;flex:1;display:flex;flex-direction:column}
+.shop-card-cat{
+  font-family:var(--ff-jp);font-size:9px;
+  color:var(--sage3);letter-spacing:1.2px;margin-bottom:5px;
+}
+.shop-card-name{
+  font-family:'Bellefair',serif;font-size:14px;
+  color:#2a1a0a;line-height:1.35;margin-bottom:8px;flex:1;
+}
+.shop-card-price{
+  font-family:'Bellefair',serif;font-size:15px;
+  color:#7a5020;margin-top:auto;
+}
+.shop-card-price s{
+  font-size:11px;color:rgba(122,80,32,.4);
+  margin-left:4px;font-family:var(--ff-serif);
+}
+
+
+.rel-input-tab{
+  flex-shrink:0;
+  padding:8px 20px;
+  font-family:'Bellefair',serif;font-size:15px;
+  color:rgba(255,251,242,.45);
+  background:none;
+  border:1px solid rgba(255,251,242,.2);
+  cursor:pointer;
+  scroll-snap-align:start;
+  transition:all .2s;
+  letter-spacing:.5px;
+}
+.rel-input-tab.active{
+  color:#fffbf2;
+  border-color:rgba(255,251,242,.7);
+  background:rgba(255,251,242,.08);
+}
+#relTypeSlider::-webkit-scrollbar{display:none}
+
+.rel-slide-card{
+  flex-shrink:0;
+  width:88px;height:88px;
+  scroll-snap-align:center;
+  border:1px solid rgba(209,182,198,.3);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+  cursor:pointer;transition:all .2s;
+  background:rgba(255,251,242,.05);
+}
+.rel-slide-card.active{
+  border-color:#d1b6c6;
+  background:rgba(209,182,198,.15);
+  transform:scale(1.05);
+}
+.rel-slide-icon{font-size:22px;line-height:1}
+.rel-slide-name{
+  font-family:'Bellefair',serif;font-size:11px;
+  color:rgba(255,251,242,.55);letter-spacing:.5px;
+}
+.rel-slide-card.active .rel-slide-name{color:#fffbf2}
+#relTypeSlider::-webkit-scrollbar{display:none}
+
+.rel-type-btn{
+  background:none;border:none;cursor:pointer;
+  font-family:'Bellefair',serif;font-size:16px;
+  color:rgba(255,251,242,.45);letter-spacing:2px;
+  padding:6px 0;transition:color .2s;
+}
+.rel-type-btn.active{color:#fffbf2;}
+
+.pricing-module{background:#f5f0e6;border:1px solid rgba(180,140,60,.3);margin-bottom:14px;overflow:hidden}
+.pricing-bundle{background:#f5f0e6;border:1px solid rgba(180,140,60,.4);margin-bottom:14px;overflow:hidden}
+.pricing-head{padding:16px 18px 14px;border-bottom:1px solid rgba(120,90,30,.15)}
+.pricing-bundle-head{padding:16px 18px 14px;border-bottom:1px solid rgba(120,90,30,.15);background:#ece5d0}
+.pricing-cat{font-size:9px;color:rgba(100,70,20,.55);letter-spacing:2px;font-family:var(--ff-jp);margin-bottom:5px}
+.pricing-title{font-size:20px;color:#1e1208;font-family:'Bellefair',serif;font-weight:400;margin-bottom:4px}
+.pricing-desc{font-size:10px;color:rgba(80,55,20,.55);line-height:1.6;font-family:var(--ff-serif)}
+.pricing-row{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid rgba(120,90,30,.12);cursor:pointer;transition:background .15s}
+.pricing-row:last-child{border-bottom:none}
+.pricing-row:active{background:rgba(220,205,170,.5)}
+.pricing-row-hl{background:#ece5d0}
+.pricing-row-hl:active{background:rgba(210,195,155,.6)}
+.pricing-bundle-row{display:flex;align-items:flex-start;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(120,90,30,.1);cursor:pointer;transition:background .15s}
+.pricing-bundle-row:last-child{border-bottom:none}
+.pricing-bundle-row:active{background:rgba(220,205,170,.5)}
+.pricing-name{font-size:13px;color:#2a1a08;font-family:var(--ff-serif)}
+.pricing-sub{font-size:10px;color:rgba(80,55,20,.5);margin-top:3px;line-height:1.5;font-family:var(--ff-serif)}
+.pricing-price{font-size:15px;color:#7a4a00;white-space:nowrap;font-family:'Bellefair',serif}
+.pricing-best{background:#7a4a00;color:#f5ead0;font-size:8px;padding:3px 7px;letter-spacing:1px;border-radius:1px;white-space:nowrap;font-family:var(--ff-serif)}
+.price-row{display:flex;align-items:center;justify-content:space-between;background:rgba(240,232,210,.9);padding:14px 16px;margin-bottom:8px;cursor:pointer;transition:background .15s;width:100%;box-sizing:border-box}
+.price-row:active{background:rgba(215,200,165,.95)}
+.price-row-tall{align-items:flex-start;padding:16px}
+.price-row-name{font-family:'Noto Serif SC',serif;font-size:14px;color:#2a1a08}
+.price-row-val{font-family:'Bellefair',serif;font-size:16px;color:#8b5a00;white-space:nowrap;margin-left:12px;flex-shrink:0}
+.price-best-tag{position:absolute;right:0;top:50%;transform:translateY(-50%);background:rgba(120,85,20,.8);font-family:var(--ff-serif);font-size:9px;color:#f0e8d0;padding:4px 8px;border-radius:2px 0 0 2px;white-space:nowrap}
+.price-item{display:flex;align-items:center;justify-content:space-between;background:rgba(240,232,210,.92);padding:14px 16px;margin-bottom:8px;cursor:pointer;width:100%;box-sizing:border-box}
+.price-item-name{font-family:'Noto Serif SC',serif;font-size:13px;color:#2a1a08}
+.price-item-val{font-family:'Bellefair',serif;font-size:16px;color:#8b5a00;white-space:nowrap;margin-left:12px}
+.price-best{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:rgba(139,90,0,.75);font-family:var(--ff-serif);font-size:9px;color:#f0e8d0;padding:3px 7px;border-radius:2px}
+
+.mine-menu-item{
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,251,242,.05);
+  border:1px solid rgba(255,251,242,.1);
+  padding:14px 16px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.mine-menu-item:active{background:rgba(255,251,242,.1)}
+.mine-menu-icon{
+  width:36px;height:36px;
+  background:rgba(155,164,143,.35);
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.mine-menu-label{
+  font-family:'Bellefair',serif;font-size:17px;
+  color:rgba(255,251,242,.85);letter-spacing:.3px;
+}
+
+/* ───────────────────────────
+   PAGE 8: MINE (profile placeholder)
+──────────────────────────── */
+#page-mine{background:var(--bg)}
+.mine-content{
+  padding:0 20px;
+  display:flex;flex-direction:column;align-items:center;
+  gap:16px;
+}
+.mine-avatar{
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(119,131,102,.2);
+  border:1px solid var(--sage);
+  display:flex;align-items:center;justify-content:center;
+  margin:16px auto 8px;
+}
+.mine-avatar svg{stroke:var(--sage);width:36px;height:36px}
+.mine-name{
+  font-family:var(--ff-serif);font-size:22px;
+  color:var(--warm);letter-spacing:.8px;
+  text-align:center;
+}
+.mine-sub{
+  font-family:var(--ff-serif);font-size:13px;
+  color:var(--muted);letter-spacing:.6px;
+  text-align:center;margin-top:-8px;
+}
+.mine-menu{
+  width:100%;display:flex;flex-direction:column;gap:2px;
+  margin-top:8px;
+}
+.mine-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 4px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  cursor:pointer;
+}
+.mine-item:active{opacity:.7}
+.mine-item span{
+  font-family:var(--ff-serif);font-size:16px;
+  color:rgba(255,255,255,.7);letter-spacing:.4px;
+}
+.mine-item svg{stroke:rgba(255,255,255,.3);width:16px;height:16px}
+
+#page-login .page-bg{z-index:0}
+#page-login .page-body{
+  position:relative;
+  z-index:1;
+}
+.login-section{width:100%;margin-top:8px}
+.login-title{
+  font-family:var(--ff-serif);font-size:28px;
+  color:var(--sage);letter-spacing:3px;text-align:center;
+  margin-bottom:24px;
+}
+.login-card{
+  background:#fffbf2 !important;
+  background-color:#fffbf2 !important;
+  border:1px solid #e8dfcf;
+  opacity:1;
+  padding:28px 24px;
+  box-shadow:5px 5px 5px rgba(70,60,50,.22);
+}
+.login-sub{
+  font-family:var(--ff-serif);font-size:24px;
+  color:var(--rose);letter-spacing:.5px;
+  text-align:center;margin-bottom:20px;
+}
+.login-field{
+  border-bottom:1px solid var(--sage2);
+  padding-bottom:6px;margin-bottom:18px;
+}
+.login-field span{
+  font-family:var(--ff-serif);font-size:16px;
+  color:var(--sage2);display:block;
+}
+.login-check{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;
+}
+.login-check input{width:16px;height:16px;accent-color:var(--sage)}
+.login-check span{
+  font-family:var(--ff-serif);font-size:18px;color:var(--sage3);
+}
+.login-forgot{
+  text-align:center;margin-bottom:20px;
+}
+.login-forgot span{
+  font-family:var(--ff-serif);font-size:18px;
+  color:var(--sage3);text-decoration:underline;cursor:pointer;
+}
+.login-btn{
+  width:100%;padding:22px 0;
+  background:var(--rose);
+  border:none;cursor:pointer;border-radius:40px;
+  font-family:var(--ff-serif);font-size:26px;
+  letter-spacing:.5px;color:#fff;
+  box-shadow:inset -4px -4px 4px rgba(0,0,0,.25);
+  transition:opacity .2s;
+  margin-bottom:12px;
+}
+.login-btn:active{opacity:.85}
+.login-create{
+  text-align:center;
+  font-family:var(--ff-serif);font-size:18px;
+  color:var(--sage3);text-decoration:underline;cursor:pointer;
+}
+
+/* ───────────────────────────
+   Transitions
+──────────────────────────── */
+.fade-scale{
+  transform:scale(.98);transition:opacity .3s,transform .3s;
+}
+.page.active.fade-scale{transform:scale(1)}
+
+/* overflow: auto for pages without body wrapper */
+#page-home .page-body{padding-top:calc(var(--header-h) + 72px + 16px)}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ══════════════════════════
+     PAGE 1: SPLASH
+══════════════════════════ -->
+<div class="page active" id="page-splash">
+  <div class="splash-bg"></div>
+  <!-- 水墨竹叶装饰 SVG -->
+  <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.22" viewBox="0 0 440 957" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#c8b8a0" fill="none" stroke-linecap="round">
+      <path d="M30,400 Q80,350 60,280 Q100,320 90,400" stroke-width="2.5" opacity=".7"></path>
+      <path d="M50,440 Q-20,380 10,300" stroke-width="1.5" opacity=".5"></path>
+      <path d="M20,500 Q90,460 110,380 Q140,420 120,500" stroke-width="2" opacity=".6"></path>
+      <path d="M0,550 Q70,510 80,430" stroke-width="1.8" opacity=".45"></path>
+      <path d="M60,600 Q130,550 150,470 Q170,510 155,600" stroke-width="2.2" opacity=".55"></path>
+      <path d="M380,350 Q430,300 410,220 Q450,260 440,350" stroke-width="2.5" opacity=".6" transform="scaleX(-1) translate(-440,0)"></path>
+      <path d="M400,450 Q460,400 450,320" stroke-width="1.5" opacity=".4" transform="scaleX(-1) translate(-440,0)"></path>
+      <path d="M360,550 Q440,500 460,420 Q480,460 465,550" stroke-width="2" opacity=".5" transform="scaleX(-1) translate(-440,0)"></path>
+      <!-- 枝干 -->
+      <path d="M-10,600 Q50,500 40,380 Q70,420 80,300 Q100,350 95,250" stroke-width="3" opacity=".35"></path>
+      <path d="M450,650 Q400,540 420,420 Q390,460 380,340" stroke-width="3" opacity=".3"></path>
+    </g>
+  </svg>
+  <div class="splash-grad"></div>
+  <div class="splash-content">
+    <div class="splash-top">
+      <div class="tick-marks"><span></span><span></span><span></span></div>
+      A World of Mystery
+      <div class="tick-marks"><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="splash-img-wrap">
+      <div class="splash-img-outer"></div>
+      <div class="splash-img-inner">
+        <!-- 八卦 Logo SVG - 忠实还原设计稿 -->
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#1a1917;gap:16px;padding:20px">
+          <svg viewBox="0 0 200 200" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clippath id="oct">
+                <polygon points="60,10 140,10 190,60 190,140 140,190 60,190 10,140 10,60"></polygon>
+              </clippath>
+            </defs>
+            <!-- 八角形外框 -->
+            <polygon points="60,10 140,10 190,60 190,140 140,190 60,190 10,140 10,60" fill="none" stroke="rgba(208,182,168,0.9)" stroke-width="1.5"></polygon>
+            <polygon points="64,16 136,16 184,64 184,136 136,184 64,184 16,136 16,64" fill="none" stroke="rgba(208,182,168,0.4)" stroke-width="0.8"></polygon>
+            <!-- 八卦线条 - 上 -->
+            <line x1="72" y1="26" x2="90" y2="26" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="110" y1="26" x2="128" y2="26" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="72" y1="32" x2="128" y2="32" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="72" y1="38" x2="90" y2="38" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="110" y1="38" x2="128" y2="38" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <!-- 八卦线条 - 下 -->
+            <line x1="72" y1="162" x2="90" y2="162" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="110" y1="162" x2="128" y2="162" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="72" y1="168" x2="128" y2="168" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="72" y1="174" x2="90" y2="174" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="110" y1="174" x2="128" y2="174" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <!-- 八卦线条 - 左 -->
+            <line x1="26" y1="72" x2="26" y2="90" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="26" y1="110" x2="26" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="32" y1="72" x2="32" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="38" y1="72" x2="38" y2="90" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="38" y1="110" x2="38" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <!-- 八卦线条 - 右 -->
+            <line x1="162" y1="72" x2="162" y2="90" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="162" y1="110" x2="162" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="168" y1="72" x2="168" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="174" y1="72" x2="174" y2="90" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <line x1="174" y1="110" x2="174" y2="128" stroke="rgba(208,182,168,0.85)" stroke-width="2.5"></line>
+            <!-- 中心圆 -->
+            <circle cx="100" cy="100" r="48" fill="none" stroke="rgba(208,182,168,0.7)" stroke-width="1.2"></circle>
+            <circle cx="100" cy="100" r="38" fill="none" stroke="rgba(208,182,168,0.4)" stroke-width="0.8"></circle>
+            <!-- 中心星形 -->
+            <polygon points="100,68 106,90 128,90 112,104 118,126 100,114 82,126 88,104 72,90 94,90" fill="none" stroke="rgba(208,182,168,0.85)" stroke-width="1.2"></polygon>
+            <circle cx="100" cy="100" r="8" fill="none" stroke="rgba(208,182,168,0.8)" stroke-width="1.5"></circle>
+            <circle cx="100" cy="100" r="3" fill="rgba(208,182,168,0.9)"></circle>
+          </svg>
+          <div style="font-family:&#39;Bellefair&#39;,serif;font-size:28px;color:rgba(208,182,168,0.9);letter-spacing:3px">Auracle</div>
+        </div>
+      </div>
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+    </div>
+
+    <div class="splash-text">
+      <div class="ornament-divider">
+        <div class="line"></div>
+        <div class="diamond">◇</div>
+        <div class="line rev"></div>
+      </div>
+      <div class="splash-title">The Tapestry<br>of Fate.</div>
+      <div class="splash-sub">Where every thread of destiny<br>weaves a new legend.</div>
+      <div class="ornament-divider" style="margin-top:14px">
+        <div class="line"></div>
+        <div class="diamond">◇</div>
+        <div class="line rev"></div>
+      </div>
+    </div>
+
+    <div class="splash-cta-wrap">
+      <button class="splash-cta" onclick="goTo(&#39;login&#39;)">Click to Start</button>
+      <div class="splash-journey">✦ Begin your journey ✦</div>
+      <div style="display:flex;gap:0;margin-top:20px;border:1px solid rgba(208,182,168,.35);overflow:hidden">
+        <button id="lang-zh" onclick="setLang(&#39;zh&#39;)" style="flex:1;padding:10px 0;background:rgba(208,182,168,.18);border:none;cursor:pointer;font-family:&#39;Noto Serif SC&#39;,serif;font-size:13px;color:rgba(208,182,168,.9);letter-spacing:1px;border-right:1px solid rgba(208,182,168,.25);transition:background .2s">中文</button>
+        <button id="lang-en" onclick="setLang(&#39;en&#39;)" style="flex:1;padding:10px 0;background:none;border:none;cursor:pointer;font-family:&#39;Bellefair&#39;,serif;font-size:13px;color:rgba(208,182,168,.5);letter-spacing:1px;transition:background .2s">English</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     PAGE: LOGIN
+══════════════════════════ -->
+<div class="page" id="page-login">
+  <div class="page-bg" style="position:absolute;inset:0;pointer-events:none;background-image:url(&#39;https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b&#39;);background-size:cover;opacity:.4;"></div>
+  <div class="header">
+    <button class="back-btn" onclick="goTo(&#39;splash&#39;)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"></path></svg>
+      Back
+    </button>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body" style="display:flex;align-items:center;justify-content:center;padding:calc(var(--header-h) + 20px) 20px 40px">
+    <div style="width:100%">
+      <div class="mine-content">
+        <div class="login-section">
+          <div class="login-title">WELCOME</div>
+          <div class="login-card">
+            <div class="login-sub">User Login</div>
+            <div class="login-field">
+              <input type="email" placeholder="Your Email" style="width:100%;background:none;border:none;outline:none;font-family:var(--ff-serif);font-size:16px;color:var(--sage2);padding:4px 0">
+            </div>
+            <div class="login-field" style="margin-bottom:12px">
+              <input type="password" placeholder="Password" style="width:100%;background:none;border:none;outline:none;font-family:var(--ff-serif);font-size:16px;color:var(--sage2);padding:4px 0">
+            </div>
+            <div class="login-check">
+              <input type="checkbox" id="loginRemember">
+              <label for="loginRemember" style="display:flex;align-items:center;gap:6px;cursor:pointer">
+                <span style="font-family:var(--ff-serif);font-size:16px;color:var(--sage3)">Remember Me</span>
+              </label>
+            </div>
+            <div class="login-forgot"><span>Forget Password?</span></div>
+            <button class="login-btn" onclick="doLogin()">LOG IN</button>
+            <div class="login-create" onclick="doLogin()">Create Account</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 2: HOME
+══════════════════════════ -->
+<div class="page" id="page-home">
+  <div class="page-bg" style="background-image:url(&#39;https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b&#39;);background-size:cover;background-position:center;opacity:.72;"></div>
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="page-body">
+    <div class="daily-card-wrap">
+      <div class="daily-card">
+        <div class="daily-card-inner">
+          <div class="daily-date" id="homeDailyDate">JUN 26, 2026</div>
+          <div class="daily-ganzhi" id="homeDailyGanzhi" data-i18n-hide="zh">丙午年<br>己未月<br>辛未日</div>
+          <div class="daily-divider"></div>
+          <div class="daily-headline">I am the architect<br>of my own universe.</div>
+          <div class="daily-body" style="margin-top:10px">
+            I flow with the<br>stillness<br>charity
+          </div>
+          <div class="daily-stamp-wrap" style="margin:16px 0">
+            <div class="daily-stamp"><span>吉</span></div>
+          </div>
+          <div class="daily-divider"></div>
+          <div class="daily-yi-ji">
+            <div class="yi-ji-item yi">
+              <div class="yi-ji-label"><span style="font-family:var(--ff-jp)">宜 </span><b>Embrace</b></div>
+              <div class="yi-ji-value">Action</div>
+            </div>
+            <div class="yi-ji-item ji">
+              <div class="yi-ji-label"><span style="font-family:var(--ff-jp)">忌 </span><b>Release</b></div>
+              <div class="yi-ji-value">Overthinking</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="navTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn active" onclick="navTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 3: DAILY CHECK-IN
+══════════════════════════ -->
+<div class="page" id="page-checkin">
+  <div class="page-bg"></div>
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body">
+    <div class="daily-card-wrap">
+      <div class="daily-card">
+        <div class="daily-card-inner">
+          <div class="daily-date" id="dailyDate">JUN 26, 2026</div>
+          <div class="daily-ganzhi" id="dailyGanzhi" data-i18n-hide="zh">丙午年<br>己未月<br>辛未日</div>
+          <div class="daily-divider"></div>
+          <div class="daily-headline">I am the architect<br>of my own universe.</div>
+          <div class="daily-body" style="margin-top:10px">
+            I flow with the<br>stillness<br>charity
+          </div>
+          <div class="daily-stamp-wrap" style="margin:16px 0">
+            <div class="daily-stamp"><span>吉</span></div>
+          </div>
+          <div class="daily-divider"></div>
+          <div class="daily-yi-ji">
+            <div class="yi-ji-item yi">
+              <div class="yi-ji-label"><span style="font-family:var(--ff-jp)">宜 </span><b>Embrace</b></div>
+              <div class="yi-ji-value">Action</div>
+            </div>
+            <div class="yi-ji-item ji">
+              <div class="yi-ji-label"><span style="font-family:var(--ff-jp)">忌 </span><b>Release</b></div>
+              <div class="yi-ji-value">Overthinking</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn active" onclick="navCheckinTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navCheckinTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navCheckinTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navCheckinTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 4: LIFE SCRIPT (Test)
+══════════════════════════ -->
+<div class="page" id="page-test">
+  <div class="page-bg"></div>
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body">
+    <div id="test-chapters">
+      <div class="test-ornament" aria-hidden="true"></div>
+      <div class="section-label">
+        <span>Your Journey</span>
+        <span>3 Chapters</span>
+      </div>
+      <div class="chapter-list">
+        <div class="chapter-card c1" onclick="showTestForm()">
+          <div class="chapter-card-bg"></div>
+          <div class="chapter-card-inner">
+            <div class="chapter-label">Chapter I: Script</div>
+            <div class="chapter-title">Who am I?<br>Where am I heading?</div>
+            <div class="chapter-sub">"Life Script Analysis"</div>
+            <div class="chapter-link">Destiny Blueprint →</div>
+            <div class="chapter-num">1</div>
+          </div>
+        </div>
+        <div class="chapter-card c2" onclick="goTo(&#39;oracle&#39;)">
+          <div class="chapter-card-bg"></div>
+          <div class="chapter-card-inner">
+            <div class="chapter-label">Chapter II: Moment</div>
+            <div class="chapter-title">Moments are Eternal.<br>Decisions are Sacred.</div>
+            <div class="chapter-sub">"Instant Oracle"</div>
+            <div class="chapter-link">Ask the Now →</div>
+            <div class="chapter-num">2</div>
+          </div>
+        </div>
+        <div class="chapter-card c3" onclick="goTo(&#39;relationship-input&#39;)">
+          <div class="chapter-card-bg"></div>
+          <div class="chapter-card-inner">
+            <div class="chapter-label">Chapter III: Relations</div>
+            <div class="chapter-title">The Intersection of<br>Two Souls.</div>
+            <div class="chapter-sub">"Relationship Synastry"</div>
+            <div class="chapter-link">Match Resonance →</div>
+            <div class="chapter-num">3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="test-form" style="display:none">
+    <div class="form-card">
+      <button class="close-btn" onclick="hideTestForm()">×</button>
+      <div class="form-card-inner">
+        <div class="form-title">Life Script Analysis</div>
+        <div class="gender-row">
+          <button class="gender-btn selected" onclick="selectGender(this,&#39;female&#39;)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="8" r="5"></circle><line x1="12" y1="13" x2="12" y2="21"></line><line x1="9" y1="18" x2="15" y2="18"></line></svg>
+            Female
+          </button>
+          <button class="gender-btn" onclick="selectGender(this,&#39;male&#39;)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="10" cy="14" r="5"></circle><line x1="14.5" y1="9.5" x2="21" y2="3"></line><polyline points="16 3 21 3 21 8"></polyline></svg>
+            Male
+          </button>
+        </div>
+        <div class="form-field">
+          <label>Your Name</label>
+          <input type="text" placeholder="Enter your name">
+        </div>
+        <div class="field-row">
+          <div class="form-field">
+            <label>Date of Birth</label>
+            <input type="date" style="color:var(--sage2)">
+          </div>
+          <div class="form-field">
+            <label>Time of Birth</label>
+            <input type="time" style="color:var(--sage2)">
+          </div>
+        </div>
+        <div class="place-field">
+          <span>Place of Birth</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <button class="submit-btn" onclick="goTo(&#39;calibration&#39;)">ANALYZE MY ENERGY</button>
+      </div>
+    </div>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn active" onclick="navTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE 5: CALIBRATION
+══════════════════════════ -->
+<div class="page" id="page-calibration">
+  <div class="page-bg"></div>
+  <div class="header">
+    <button class="back-btn" onclick="goTo(&#39;test&#39;)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"></path></svg>
+      Back
+    </button>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body" style="padding-bottom:80px">
+
+    <!-- ① 八字表格 -->
+    <div class="result-card">
+      <div class="result-card-inner">
+        <div class="result-title">Bazi Basic Reading</div>
+        <div style="font-family:var(--ff-jp);font-size:11px;color:#7a5a3a;text-align:center;letter-spacing:2px;margin-bottom:6px" data-i18n="bazi.subtitle">八字基本解读结果</div>
+        <div class="result-title-rule"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+        <div class="bazi-info">Lunar: 11th hour month 11th, 2001, Wei Hour<br>Solar: 2001.11.23 13:04</div>
+        <table class="bazi-table">
+          <tbody><tr><th>流年</th><th>年柱</th><th>月柱</th><th>日柱</th><th>时柱</th></tr>
+          <tr><td class="role">主星</td><td>比肩</td><td>比肩</td><td>元男</td><td>偏财</td></tr>
+          <tr>
+            <td class="role">天干</td>
+            <td class="tg">辛</td><td class="tg">辛</td><td class="tg">辛</td><td class="tg">乙</td>
+          </tr>
+          <tr>
+            <td class="role">地支</td>
+            <td class="eb">巳</td><td class="eb">丑</td><td class="eb">卯</td><td class="eb">未</td>
+          </tr>
+          <tr>
+            <td class="role">藏干</td>
+            <td class="hid">丙土<br>庚金<br>戊金</td>
+            <td class="hid">己土<br>癸水<br>辛金</td>
+            <td class="hid">之木</td>
+            <td class="hid">己土<br>乙木<br>丁火</td>
+          </tr>
+          <tr>
+            <td class="role">副星</td>
+            <td>偏财<br>比肩<br>偏印</td>
+            <td>偏印<br>食神<br>比肩</td>
+            <td>偏财</td>
+            <td>偏印<br>七杀<br>偏财</td>
+          </tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <!-- ② Core Element Profile -->
+    <div class="result-card">
+      <div class="result-card-inner">
+        <div class="cep-title">Core Element Profile — Your Personal Blueprint</div>
+        <div class="cep-cn" data-i18n="bazi.cep.cn">日主属性 — 个人基础配置</div>
+        <div class="cep-box">
+          <div class="cep-text">Your essential life energy is embodied by Xin Metal (Yin Metal). It is like a dazzling diamond shaped by relentless trials, or a finely honed blade concealed in velvet. Outwardly, you carry yourself with grace, elegance, and impeccable manners. Behind this gentle mask, you possess absolute clarity of mind, unshakable principles, and an unyielding, steely resolve.</div>
+          <div class="cep-tags">
+            <div class="cep-tag">◈ Ultimate Decisiveness</div>
+            <div class="cep-tag">◈ Top-tier Execution</div>
+            <div class="cep-tag">◈ Precise Goal Orientation</div>
+          </div>
+          <div class="cep-celebs">
+            <div class="cep-celeb">
+              <div class="cep-celeb-icon">💎</div>
+              <div class="cep-celeb-name">John F. Kennedy</div>
+              <div class="cep-celeb-sub">Masterful Debater &amp; Sustainable Will</div>
+            </div>
+            <div class="cep-celeb">
+              <div class="cep-celeb-icon">✦</div>
+              <div class="cep-celeb-name">Marilyn Monroe</div>
+              <div class="cep-celeb-sub">Radiate Power &amp; Unparalleled Charisma</div>
+            </div>
+            <div class="cep-celeb">
+              <div class="cep-celeb-icon">🎬</div>
+              <div class="cep-celeb-name">Angelina Jolie</div>
+              <div class="cep-celeb-sub">Commanding &amp; Captivating Presence</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ Core Magnetic Field -->
+    <div class="result-card">
+      <div class="result-card-inner">
+        <div class="cep-title">Core Magnetic Field</div>
+        <div class="cep-cn" data-i18n="bazi.cmf.cn">核心磁场 — 个人命局特色</div>
+        <div class="cmf-grid" style="grid-template-columns:1fr">
+          <div class="cmf-card">
+            <div class="cmf-card-title">⚡ Absolute Advantage</div>
+            <div class="cmf-card-text">You possess overwhelming resilience and a dominant sense of purpose. Born to lead and make decisions, this aura commands great authority among peers.</div>
+          </div>
+          <div class="cmf-card">
+            <div class="cmf-card-title">⚡ Core Leverage</div>
+            <div class="cmf-card-text">Due to the overwhelming strength of Metal energy, your life system more needs Fire to elevate your social standing and Water to lubricate your relationships.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ④ 人生四柱 -->
+    <div class="result-card">
+      <div class="result-card-inner">
+        <div class="cep-title">The Four Pillars of Life</div>
+        <div class="cep-cn" data-i18n="bazi.pillars.cn">🔥 人生四柱：财富、健康、事业、感情</div>
+        <div class="four-pillars-grid" style="grid-template-columns:1fr">
+          <div class="fp-card">
+            <div class="fp-card-title">🔥 Career Sector</div>
+            <div class="fp-lock" id="lock-career"><div style="font-size:18px;opacity:.5">🔒</div><button class="fp-lock-btn" onclick="openPricing(&#39;bazi&#39;)">Unlock Full Analysis</button></div>
+          </div>
+          <div class="fp-card">
+            <div class="fp-card-title">🌸 Relationship Sector</div>
+            <div class="fp-lock" id="lock-relationship"><div style="font-size:18px;opacity:.5">🔒</div><button class="fp-lock-btn" onclick="openPricing(&#39;bazi&#39;)">Unlock Full Analysis</button></div>
+          </div>
+          <div class="fp-card">
+            <div class="fp-card-title">💰 Wealth Sector</div>
+            <div class="fp-lock" id="lock-wealth"><div style="font-size:18px;opacity:.5">🔒</div><button class="fp-lock-btn" onclick="openPricing(&#39;bazi&#39;)">Unlock Full Analysis</button></div>
+          </div>
+          <div class="fp-card">
+            <div class="fp-card-title">🌿 Health Sector</div>
+            <div class="fp-lock" id="lock-health"><div style="font-size:18px;opacity:.5">🔒</div><button class="fp-lock-btn" onclick="openPricing(&#39;bazi&#39;)">Unlock Full Analysis</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑤ 大运 -->
+    <div class="result-card">
+      <div class="result-card-inner">
+        <div class="cep-title">Major Luck Cycles &amp; Annual Fortune</div>
+        <div class="cep-cn" data-i18n="bazi.luck.cn">🔥 大运流年</div>
+        <div style="position:relative;overflow:hidden;min-height:180px">
+          <!-- 模糊内容背景 -->
+          <div style="filter:blur(4px);pointer-events:none;user-select:none">
+            <div class="luck-chart-wrap">
+              <div class="luck-chart-title">10-Year Fortune Cycle Overview</div>
+              <div class="luck-pie">
+                <div class="luck-pie-visual"></div>
+                <div class="luck-pie-legend">
+                  <div class="luck-legend-item">
+                    <div class="luck-legend-dot" style="background:#8a9a7a"></div>
+                    <div class="luck-legend-text">2026-2036 Core Dominance (40%) · Wealth (2%) · Relationship (2%)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="luck-chart-wrap">
+              <div class="luck-chart-title">10-Year Annual Fortune Line Chart</div>
+              <div class="luck-line-chart">
+                <svg viewBox="0 0 300 60" preserveAspectRatio="none">
+                  <polyline points="0,50 40,40 80,30 120,20 160,25 200,15 240,20 280,10 300,12" fill="none" stroke="#8a9a7a" stroke-width="1.5"></polyline>
+                  <polyline points="0,55 40,50 80,45 120,42 160,48 200,40 240,45 280,38 300,42" fill="none" stroke="#aa7a7a" stroke-width="1" stroke-dasharray="3,2"></polyline>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <!-- 蒙版 -->
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(245,240,230,.65)">
+            <div style="font-size:28px">🔮</div>
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:18px;color:#3a2a1a;letter-spacing:1px">即将推出</div>
+            <div style="font-family:var(--ff-serif);font-size:11px;color:rgba(60,40,20,.5);font-style:italic;letter-spacing:1px">敬请期待 · Coming Soon</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑥ 综合建议 -->
+    <div class="result-card">
+      <div class="result-card-inner">
+        <div class="cep-title">Comprehensive Recommendations</div>
+        <div class="cep-cn" data-i18n="bazi.rec.cn">综合建议</div>
+        <div style="font-family:var(--ff-serif);font-size:11px;color:rgba(60,40,20,.6);text-align:center;margin-bottom:14px;font-style:italic">Your birth chart is the script; your choices shape the ending.</div>
+        <div class="rec-item">
+          <div class="rec-icon">🌿</div>
+          <div class="rec-content">
+            <div class="rec-title">Strategic Focus: "Temper Fire Without, Nourish Water Within"</div>
+            <div class="rec-text">Externally — Fully embrace the talks, systems, and challenges within institutional environments. Internally — Deliberately cultivate Water-aligned energy to build a "strong rear base" with zero internal friction.</div>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon">🪙</div>
+          <div class="rec-content">
+            <div class="rec-title">Wealth Discipline: "Keep Fortune Hidden, Build Tangible Assets"</div>
+            <div class="rec-text">Internalize the mindset of "getting rich quietly". Reject unnecessary status spending and inflated loans. Convert cash flow into high-quality fixed assets.</div>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon">⚡</div>
+          <div class="rec-content">
+            <div class="rec-title">Energy Management: Build Your Custom High-Vibe Magnetic Field</div>
+            <div class="rec-text">Proactively supplement your Fire and Water elements — this is the highest-return investment in your life.</div>
+          </div>
+        </div>
+        <div class="kit-box">
+          <div class="kit-title">🎁 Ultimate Luck Activation Kit</div>
+          <div class="kit-items">Custom Fire &amp; Water Dual-Effect Energy Plan<br>High-vibe Fire Element Career Set · Career Advancement Tonic · Relationship Harmony Crystal</div>
+          <button class="kit-btn" onclick="goTo(&#39;shop&#39;)">Get Your Activation Kit →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn active" onclick="navTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+<!-- ══════════════════════════
+     PAGE 6: RELATIONSHIP
+══════════════════════════ -->
+<!-- ══════════════════════════
+     PAGE: RELATIONSHIP INPUT
+══════════════════════════ -->
+<div class="page" id="page-relationship-input">
+  <div class="page-body">
+    <div class="relm-top">
+      <div class="relm-logo"><span class="relm-logo-mark">✦</span><span>Auracle</span></div>
+      <button class="relm-menu" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+
+    <div class="relm-title">Relationship</div>
+
+    <div class="relm-tabs">
+      <button class="rel-input-tab relm-tab active" onclick="selectRelInputTab(this,&#39;Family&#39;)">
+        <span class="relm-tab-icon">◆</span>
+        <span class="relm-tab-name">Family</span>
+        <span class="relm-tab-sub">Blood &amp; Kin</span>
+      </button>
+      <button class="rel-input-tab relm-tab" onclick="selectRelInputTab(this,&#39;Friendship&#39;)">
+        <span class="relm-tab-icon">✦</span>
+        <span class="relm-tab-name">Friendship</span>
+        <span class="relm-tab-sub">Trust &amp; Bond</span>
+      </button>
+      <button class="rel-input-tab relm-tab" onclick="selectRelInputTab(this,&#39;Romance&#39;)">
+        <span class="relm-tab-icon">♡</span>
+        <span class="relm-tab-name">Romance</span>
+        <span class="relm-tab-sub">Love &amp; Soul</span>
+      </button>
+      <button class="rel-input-tab relm-tab" onclick="selectRelInputTab(this,&#39;Career&#39;)">
+        <span class="relm-tab-icon">◇</span>
+        <span class="relm-tab-name">Career</span>
+        <span class="relm-tab-sub">Work &amp; Path</span>
+      </button>
+      <button class="rel-input-tab relm-tab" onclick="selectRelInputTab(this,&#39;Stranger&#39;)">
+        <span class="relm-tab-icon">○</span>
+        <span class="relm-tab-name">Stranger</span>
+        <span class="relm-tab-sub">Fate &amp; Chance</span>
+      </button>
+    </div>
+
+    <div class="relm-card relm-card-self">
+      <input class="relm-input relm-self-name" type="text" aria-label="Your Name">
+      <input class="relm-input relm-self-date" type="text" aria-label="Date of Birth">
+      <input class="relm-input relm-self-place" type="text" aria-label="Place of Birth">
+    </div>
+
+    <div class="relm-divider"><span id="relInputLabel">Family</span></div>
+
+    <div class="relm-card relm-card-other">
+      <input class="relm-input relm-other-name" type="text" aria-label="Other Name">
+      <input class="relm-input relm-other-date" type="text" aria-label="Other Date of Birth">
+      <input class="relm-input relm-other-place" type="text" aria-label="Other Place of Birth">
+    </div>
+
+    <button class="relm-calc" onclick="goTo(&#39;relationship&#39;)">Calculate Resonance</button>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn active" onclick="navTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+<!-- ══════════════════════════
+     PAGE: RELATIONSHIP RESULT
+══════════════════════════ -->
+<div class="page" id="page-relationship">
+  <div class="page-bg" style="position:absolute;inset:0;pointer-events:none;background-image:url(&#39;https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b&#39;);background-size:cover;opacity:.5;"></div>
+  <div class="header">
+    <button class="back-btn" onclick="goTo(&#39;test&#39;)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"></path></svg>
+      Back
+    </button>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body" style="padding-bottom:80px">
+
+    <!-- ① 标题 -->
+    <div class="result-card">
+      <div class="result-card-inner" style="text-align:center">
+        <div style="font-family:&#39;Bellefair&#39;,serif;font-size:16px;letter-spacing:3px;color:#3a2a1a;text-transform:uppercase;margin-bottom:4px">Qisi Siyu Astrology Analysis</div>
+        <div style="font-family:var(--ff-jp);font-size:12px;color:#aa7a5a;letter-spacing:2px;margin-bottom:4px">合盘分析 · 七政四余</div>
+        <div style="font-family:&#39;Bellefair&#39;,serif;font-size:12px;color:rgba(60,40,20,.5);font-style:italic">The Intersection of Two Souls.</div>
+      </div>
+    </div>
+
+    <!-- ② Relationship Structure Analysis -->
+    <div class="result-card">
+      <div class="result-card-inner">
+        <div class="cep-title">Relationship Structure Analysis</div>
+        <div class="cep-cn" data-i18n="rel.structure.cn">关系结构分析</div>
+
+        <!-- 分数 + 引言 并排 -->
+        <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:10px;margin-bottom:14px">
+          <div style="background:rgba(155,164,143,.15);border:1px solid rgba(122,90,42,.2);padding:12px;text-align:center">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:48px;color:#5a3a1a;line-height:1">78</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:#7a5a3a;letter-spacing:1px;margin-top:4px">Total Relationship Score</div>
+            <div style="font-family:var(--ff-serif);font-size:8px;color:rgba(60,40,20,.45);margin-top:4px;line-height:1.6">6-Year, Dimensional solar duration data</div>
+          </div>
+          <div style="background:rgba(240,233,220,.5);border:1px solid rgba(122,90,42,.2);padding:12px;display:flex;align-items:center">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:12px;color:#3a2a1a;font-style:italic;line-height:1.8">"A fated mirror of love and conflict, soulmates who walk through hardship to sweetness."</div>
+          </div>
+        </div>
+
+        <!-- 5维雷达 -->
+        <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;margin-bottom:8px">Relationship Radar Chart · 5-Dimensional Profile</div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:4px">
+          <div style="text-align:center;border:1px solid rgba(122,90,42,.15);padding:8px 2px;background:rgba(255,251,242,.4)">
+            <div style="font-size:11px;color:#7a5a3a;margin-bottom:3px">★★★★★</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:#3a2a1a;font-weight:600">Synergy</div>
+            <div style="font-family:var(--ff-serif);font-size:8px;color:rgba(60,40,20,.5)">Universal Match Force</div>
+          </div>
+          <div style="text-align:center;border:1px solid rgba(122,90,42,.15);padding:8px 2px;background:rgba(255,251,242,.4)">
+            <div style="font-size:11px;color:#7a5a3a;margin-bottom:3px">★★★★☆</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:#3a2a1a;font-weight:600">Mutual Support</div>
+            <div style="font-family:var(--ff-serif);font-size:8px;color:rgba(60,40,20,.5)">Harmony Today Force</div>
+          </div>
+          <div style="text-align:center;border:1px solid rgba(122,90,42,.15);padding:8px 2px;background:rgba(255,251,242,.4)">
+            <div style="font-size:11px;color:#7a5a3a;margin-bottom:3px">★★☆☆☆</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:#3a2a1a;font-weight:600">Longevity</div>
+            <div style="font-family:var(--ff-serif);font-size:8px;color:rgba(60,40,20,.5)">A pattern of restful Native Division</div>
+          </div>
+          <div style="text-align:center;border:1px solid rgba(122,90,42,.15);padding:8px 2px;background:rgba(255,251,242,.4)">
+            <div style="font-size:11px;color:#7a5a3a;margin-bottom:3px">★☆☆☆☆</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:#3a2a1a;font-weight:600">Financial Alignment</div>
+            <div style="font-family:var(--ff-serif);font-size:8px;color:rgba(60,40,20,.5)">The Past Composition</div>
+          </div>
+          <div style="text-align:center;border:1px solid rgba(122,90,42,.15);padding:8px 2px;background:rgba(255,251,242,.4)">
+            <div style="font-size:11px;color:#7a5a3a;margin-bottom:3px">★★☆☆☆</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:#3a2a1a;font-weight:600">Communication</div>
+            <div style="font-family:var(--ff-serif);font-size:8px;color:rgba(60,40,20,.5)">Influenced by Rules</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ Personal Profile -->
+    <div class="result-card">
+      <div class="result-card-inner">
+        <div class="cep-title">Personal Profile</div>
+        <div class="cep-cn" data-i18n="rel.profile.cn">个人画像</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
+          <div style="background:rgba(240,233,220,.5);border:1px solid rgba(122,90,42,.2);padding:10px">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:12px;color:#3a2a1a;margin-bottom:8px">Partner A (Male) Profile</div>
+            <div style="font-family:var(--ff-serif);font-size:10px;color:#3a2a1a;line-height:1.9">
+              <strong>Degree Analysis:</strong> Ruling Planet: Sun; Natal Degree: Man Sun<br>
+              <strong>Core Personality:</strong> The Sun signifies strong willpower. He appears outgoing yet carries a reserved, cool inner nature.<br>
+              <strong>Love Perspective:</strong> Yearns for intense, extreme love; emotionally late-maturing toward long-term commitment.
+            </div>
+          </div>
+          <div style="background:rgba(240,233,220,.5);border:1px solid rgba(122,90,42,.2);padding:10px">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:12px;color:#3a2a1a;margin-bottom:8px">Partner B (Female) Profile</div>
+            <div style="font-family:var(--ff-serif);font-size:10px;color:#3a2a1a;line-height:1.9">
+              <strong>Degree Analysis:</strong> Ruling Planet: Moon; Natal Degree: Bi Moon<br>
+              <strong>Core Personality:</strong> Deeply sensitive and delicate, she often suppresses her true emotional needs.<br>
+              <strong>Love Perspective:</strong> Possesses a "moth to flame" tendency in love, prone to emotional entanglement and inner conflict.
+            </div>
+          </div>
+        </div>
+
+        <!-- Synastry In-Depth -->
+        <div style="font-family:&#39;Bellefair&#39;,serif;font-size:13px;color:#3a2a1a;margin-bottom:10px">Synastry In-Depth Analysis</div>
+        <div style="border-left:3px solid #8a9a7a;padding-left:10px;margin-bottom:10px">
+          <div style="font-family:var(--ff-serif);font-size:10px;color:#5a7a5a;font-weight:600;margin-bottom:4px">◆ Energy Foundation &amp; Interaction Points</div>
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:1.9">
+            <em>Naja Match:</em> Partner A controls Partner B, indicating Partner A takes a leading role in the relationship.<br>
+            <em>Deep Connection:</em> Partner B's Moon falls precisely into Partner A's Natal Palace, making Partner A feel deeply understood.
+          </div>
+        </div>
+        <div style="border-left:3px solid #aa7a5a;padding-left:10px">
+          <div style="font-family:var(--ff-serif);font-size:10px;color:#7a5a3a;font-weight:600;margin-bottom:4px">◆ Spiritual Blessings &amp; Risk Alerts</div>
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:1.9">
+            <em>Naja Match:</em> Both charts share a mutual activation of Tian Gui (Heavenly Noble) and Hong Luan (Red Bird), fostering a natural, magnetic romantic attraction. Tian Gui brings gentle guidance and fortunes synchronizes, while Hong Luan amplifies heartfelt chemistry.<br>
+            <em>Deep Connection:</em> Both have Ketu in the Natal Palace, triggering an intense Rahu-Ketu Clash. This creates karmic tension: obsessive longing and idealization alternate with emotional detachment, leading to volatile highs and lows that demand conscious balance and open communication.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ④ Relationship Trend Analysis -->
+    <div class="result-card rel-result-locked">
+      <div class="result-card-inner">
+        <div class="cep-title">Relationship Trend Analysis</div>
+        <div class="cep-cn" data-i18n="rel.trend.cn">关系走势分析</div>
+        <!-- 折线图 -->
+        <div style="background:rgba(255,251,242,.4);border:1px solid rgba(122,90,42,.2);padding:10px;margin-bottom:12px">
+          <div style="font-family:var(--ff-serif);font-size:9px;color:#7a5a3a;text-align:right;margin-bottom:4px">— 关系健康指数趋势线</div>
+          <div style="height:80px;position:relative;border-bottom:1px solid rgba(122,90,42,.2);border-left:1px solid rgba(122,90,42,.2)">
+            <svg width="100%" height="100%" viewBox="0 0 300 80" preserveAspectRatio="none">
+              <polyline points="0,60 30,55 60,65 90,70 120,50 150,35 180,55 210,40 240,25 270,30 300,20" fill="none" stroke="#8a9a7a" stroke-width="1.5"></polyline>
+              <circle cx="150" cy="35" r="3" fill="#aa7a7a"></circle>
+              <circle cx="240" cy="25" r="3" fill="#8a9a7a"></circle>
+            </svg>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-family:var(--ff-serif);font-size:8px;color:rgba(60,40,20,.4);margin-top:4px">
+            <span>2025.05</span><span>2025.09</span><span>2026.01</span><span>2026.06</span><span>2027.05</span>
+          </div>
+        </div>
+
+        <!-- 时间段分析 -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:rgba(240,233,220,.4);border-left:3px solid #aa7a7a;padding:10px">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:11px;color:#3a2a1a;margin-bottom:4px">May 2026 – The Extreme Cold Defense Period (40–45 points)</div>
+            <div style="font-family:var(--ff-serif);font-size:10px;color:#3a2a1a;line-height:1.8">After the breakup, both people are in a proud, defensive phase. Like wearing the cold mask of Ketu, they hide their true feelings behind indifference. Any attempt to reconnect is met with silence or distance. This is an emotional deep freeze before healing can begin.</div>
+          </div>
+          <div style="background:rgba(240,233,220,.4);border-left:3px solid #aa7a7a;padding:10px">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:11px;color:#3a2a1a;margin-bottom:4px">June – August 2026 – Emotional Stirring &amp; High-Frequency Tug-of-War (45 → 75 points)</div>
+            <div style="font-family:var(--ff-serif);font-size:10px;color:#3a2a1a;line-height:1.8">Summer brings peak fiery energy, amplifying the restless obsessive energy of Rahu in the relationship sector. Suppressed feelings turn into longing, jealousy, and unresolved passion. August directly exposes the relationship axis, forcing intense confrontations. Expect emotional highs, impulsive actions, and exhausting turbulence.</div>
+          </div>
+          <div style="background:rgba(240,233,220,.4);border-left:3px solid #8a9a7a;padding:10px">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:11px;color:#3a2a1a;margin-bottom:4px">September – October 2026 – Reflection &amp; Reassessment (75 → 60 points)</div>
+            <div style="font-family:var(--ff-serif);font-size:10px;color:#3a2a1a;line-height:1.8">After the chaotic summer, emotions cool down. Both parties enter a period of rational reflection. The score drops as intensity fades. Each person re-examines old patterns and sees the relationship more clearly — its flaws, its value, and its cost.</div>
+          </div>
+          <div style="background:rgba(240,233,220,.4);border-left:3px solid #8a9a7a;padding:10px">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:11px;color:#3a2a1a;margin-bottom:4px">November 2026 – January 2027 – Slow Thaw &amp; Nostalgic Return (65 → 75 points)</div>
+            <div style="font-family:var(--ff-serif);font-size:10px;color:#3a2a1a;line-height:1.8">As the year ends, Jupiter and Mercury energies turn inward. Competition softens, replaced by shared memories and old friendship. Trust is rebuilt slowly through small, consistent kindnesses. The score rises steadily, bringing the first real hope of reconciliation.</div>
+          </div>
+          <div style="background:rgba(155,164,143,.15);border-left:3px solid #5a7a5a;padding:10px">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:11px;color:#3a2a1a;margin-bottom:4px">February 2027 – Breakthrough Window (85 points)</div>
+            <div style="font-family:var(--ff-serif);font-size:10px;color:#3a2a1a;line-height:1.8">In the first lunar month (Tiger month), the "Palace of Marriage" (relationship axis) is activated again. This is a critical window to redefine the relationship. A heartfelt confession, decisive meeting, or long-awaited apology is very likely. The score jumps to 85 — the emotional deadlock can finally be broken.</div>
+          </div>
+          <div style="background:rgba(155,164,143,.15);border-left:3px solid #5a7a5a;padding:10px">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:11px;color:#3a2a1a;margin-bottom:4px">March – April 2027 – Building a New Foundation (82–86 points)</div>
+            <div style="font-family:var(--ff-serif);font-size:10px;color:#3a2a1a;line-height:1.8">The relationship enters a stable, constructive phase. The chaotic, draining "karmic entanglement" is left behind. What emerges is a partnership based on respect, clear boundaries, and genuine care. Both individuals are ready to build something healthier — whether a renewed romance or a mature, lasting friendship.</div>
+          </div>
+        </div>
+      </div>
+      <div class="rel-soon-mask"><span>敬请期待</span></div>
+    </div>
+
+    <!-- ⑤ Comprehensive Recommendations -->
+    <div class="result-card rel-result-locked">
+      <div class="result-card-inner">
+        <div class="cep-title">Comprehensive Recommendations</div>
+        <div class="cep-cn" data-i18n="rel.rec.cn">能量建议</div>
+
+        <div style="font-family:&#39;Bellefair&#39;,serif;font-size:12px;color:#3a2a1a;margin-bottom:10px">1. Crystals: Focus on "Softening Defenses" &amp; "Smooth Communication"</div>
+
+        <div class="rec-item">
+          <div class="rec-icon">🔵</div>
+          <div class="rec-content">
+            <div class="rec-title">Aquamarine – A Tool For Breaking The Ice</div>
+            <div class="rec-text">Corresponds to the throat chakra. In the Five Elements, it belongs to Water. It helps resolve the clashing energies of Mutual, assists in letting down one's guard, and allows one to express true needs in a gentle way.</div>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon">🌙</div>
+          <div class="rec-content">
+            <div class="rec-title">Aquamarine – Soothing Emotions, "Roman Warmth"</div>
+            <div class="rec-text">Corresponds to the energy of the "Ta Yin" (the lunar asterism). Effectively relieves anxiety, insomnia, and emotional highs and lows during the breakup and no-contact period.</div>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-icon">🟤</div>
+          <div class="rec-content">
+            <div class="rec-title">Smoky Quartz – Absorbs Negative Energy &amp; Grounds You in Reality</div>
+            <div class="rec-text">Corresponds to the root chakra. Its main function is grounding. It helps filter out excessive pessimism and refocuses your energy on real-life matters.</div>
+          </div>
+        </div>
+
+        <div style="font-family:&#39;Bellefair&#39;,serif;font-size:12px;color:#3a2a1a;margin:14px 0 10px">2. Other Accessories: Focus on "Calming the Mind &amp; Spirit"</div>
+        <div style="background:rgba(155,164,143,.1);border:1px solid rgba(122,90,42,.2);padding:12px">
+          <div style="font-family:&#39;Bellefair&#39;,serif;font-size:11px;color:#3a2a1a;margin-bottom:6px;font-style:italic">Agarwood / Old Mountain Sandalwood Bracelet</div>
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:1.9">Wooden bracelets carry a naturally steady and grounded energy. Since ancient times, they have been the first choice for calming the mind, stabilizing the spirit, and reducing agitation. Suitable for wearing during no-contact periods. When you feel restless or agitated, turning these beads in your hand can help you internally regain your equanimity.</div>
+        </div>
+
+      </div>
+      <div class="rel-soon-mask"><span>敬请期待</span></div>
+    </div>
+
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="navTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn active" onclick="navTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+<!-- ══════════════════════════
+     PAGE: ORACLE (输入页)
+══════════════════════════ -->
+<div class="page" id="page-oracle">
+  <div class="page-bg"></div>
+  <div class="header">
+    <button class="back-btn" onclick="goTo(&#39;test&#39;)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"></path></svg>
+      Back
+    </button>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body">
+    <div class="oracle-center">
+      <div class="oracle-circle">
+        <div class="oracle-box">
+          <div class="oracle-question" id="oracleQuestion">Is this<br>the right path<br>for me?</div>
+        </div>
+      </div>
+      <div class="oracle-divider">
+        <div class="line"></div>
+        <div class="diamond">✦</div>
+        <div class="line"></div>
+      </div>
+      <div class="oracle-input-wrap">
+        <textarea class="oracle-input" placeholder="Inscribe your question here…" oninput="updateOracleQuestion(this.value)"></textarea>
+      </div>
+      <button class="oracle-btn" onclick="goTo(&#39;oracle-number&#39;)">Consult Algorithms</button>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="navTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn active" onclick="navTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE: ORACLE NUMBER PICK
+══════════════════════════ -->
+<div class="page" id="page-oracle-number">
+  <div class="header">
+    <button class="back-btn" onclick="goTo(&#39;oracle&#39;)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"></path></svg>
+      Back
+    </button>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body">
+    <div class="qimen-pick-wrap">
+      <div class="qimen-floral left" aria-hidden="true">
+        <i class="qimen-leaf l1"></i><i class="qimen-leaf l2"></i><i class="qimen-leaf l3"></i>
+        <i class="qimen-leaf l4"></i><i class="qimen-leaf l5"></i><i class="qimen-leaf l6"></i>
+      </div>
+      <div class="qimen-floral right" aria-hidden="true">
+        <i class="qimen-leaf l1"></i><i class="qimen-leaf l2"></i><i class="qimen-leaf l3"></i>
+        <i class="qimen-leaf l4"></i><i class="qimen-leaf l5"></i><i class="qimen-leaf l6"></i>
+      </div>
+      <div class="qimen-pick-card">
+        <div class="qimen-pick-inner">
+          <div class="qimen-pick-title">Qimen Dunjia<br>Analysis</div>
+          <div class="qimen-pick-subtitle">一事一问 · 奇门遁甲</div>
+          <div class="qimen-pick-rule">⌁◇⌁</div>
+          <div class="qimen-pick-prompt">Please choose a number<br>with the strongest response</div>
+          <div class="qimen-grid">
+            <button class="qimen-number" onclick="goTo(&#39;oracle-result&#39;)">4</button>
+            <button class="qimen-number" onclick="goTo(&#39;oracle-result&#39;)">9</button>
+            <button class="qimen-number" onclick="goTo(&#39;oracle-result&#39;)">2</button>
+            <button class="qimen-number" onclick="goTo(&#39;oracle-result&#39;)">3</button>
+            <button class="qimen-number" onclick="goTo(&#39;oracle-result&#39;)">5</button>
+            <button class="qimen-number" onclick="goTo(&#39;oracle-result&#39;)">7</button>
+            <button class="qimen-number" onclick="goTo(&#39;oracle-result&#39;)">8</button>
+            <button class="qimen-number" onclick="goTo(&#39;oracle-result&#39;)">1</button>
+            <button class="qimen-number" onclick="goTo(&#39;oracle-result&#39;)">6</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     PAGE: ORACLE RESULT
+══════════════════════════ -->
+<div class="page" id="page-oracle-result">
+  <div class="page-bg" style="position:absolute;inset:0;pointer-events:none;background-image:url(&#39;https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b&#39;);background-size:cover;opacity:.55;"></div>
+  <div class="header">
+    <button class="back-btn" onclick="goTo(&#39;oracle&#39;)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"></path></svg>
+      Back
+    </button>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body" style="padding-bottom:80px">
+
+    <!-- ① 标题 + 九宫格 + Summary -->
+    <div class="result-card">
+      <div class="result-card-inner">
+        <div class="result-title" style="font-size:18px;letter-spacing:2px">Qimen Dunjia Analysis</div>
+        <div style="font-family:var(--ff-jp);font-size:11px;color:#aa7a5a;text-align:center;letter-spacing:2px;margin-bottom:4px" data-i18n="oracle.subtitle">一事一问 · 奇门遁甲</div>
+        <div style="font-family:&#39;Bellefair&#39;,serif;font-size:11px;color:rgba(60,40,20,.5);text-align:center;font-style:italic;margin-bottom:14px">Moments are Eternal. Decisions are Sacred.</div>
+
+        <!-- 九宫格 上下排列 -->
+        <div style="margin-bottom:14px">
+          <!-- 九宫格 -->
+          <div style="margin-bottom:12px">
+            <!-- 上方标注 -->
+            <div style="display:flex;justify-content:space-between;align-items:center;font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#7a5a3a;margin-bottom:3px;padding:0 2px">
+              <span>丁</span><div style="text-align:center;line-height:1.3"><div>己</div><div>壬</div></div><span>乙</span>
+            </div>
+            <!-- 主网格含左右标注 -->
+            <div style="display:flex;align-items:stretch;gap:3px">
+              <!-- 左侧标注 -->
+              <div style="display:flex;flex-direction:column;justify-content:space-around;font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#7a5a3a;padding:2px 0;width:14px;text-align:center">
+                <span>马</span><span>庚</span><span>辛</span>
+              </div>
+              <!-- 3x3格子 -->
+              <div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:3px">
+
+                <div style="background:rgba(238,234,222,.9);border-radius:5px;padding:5px 6px;min-height:70px;display:flex;flex-direction:column;justify-content:space-between">
+                  <div style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">地</div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">丁</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">英</span></div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">庚</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#aa5a4a">死</span></div>
+                </div>
+
+                <div style="background:rgba(238,234,222,.9);border-radius:5px;padding:5px 6px;min-height:70px;display:flex;flex-direction:column;justify-content:space-between">
+                  <div style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">玄</div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">己壬</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">茵</span></div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">丁</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#aa5a4a">惊</span></div>
+                </div>
+
+                <div style="background:rgba(238,234,222,.9);border-radius:5px;padding:5px 6px;min-height:70px;display:flex;flex-direction:column;justify-content:space-between">
+                  <div style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">白</div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">乙</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">柱</span></div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">己壬</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#5a7a5a">开</span></div>
+                </div>
+
+                <div style="background:rgba(238,234,222,.9);border-radius:5px;padding:5px 6px;min-height:70px;display:flex;flex-direction:column;justify-content:space-between">
+                  <div style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">天</div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">庚</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">辅</span></div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">辛</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#aa5a4a">景</span></div>
+                </div>
+
+                <div style="background:rgba(210,208,196,.85);border-radius:5px;padding:5px 6px;min-height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">
+                  <svg width="32" height="32" viewBox="0 0 36 36"><circle cx="18" cy="18" r="17" fill="none" stroke="#888" stroke-width=".8"></circle><path d="M18 1 A17 17 0 0 1 18 35 A8.5 8.5 0 0 1 18 18 A8.5 8.5 0 0 0 18 1Z" fill="#aaa"></path><circle cx="18" cy="9.5" r="4.5" fill="#aaa"></circle><circle cx="18" cy="26.5" r="4.5" fill="#eee"></circle><circle cx="18" cy="9.5" r="1.5" fill="#eee"></circle><circle cx="18" cy="26.5" r="1.5" fill="#aaa"></circle></svg>
+                  <span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:9px;color:#5a5a5a">寄坤</span>
+                </div>
+
+                <div style="background:rgba(238,234,222,.9);border-radius:5px;padding:5px 6px;min-height:70px;display:flex;flex-direction:column;justify-content:space-between">
+                  <div style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">六</div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">戊</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">心</span></div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">乙</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">休</span></div>
+                </div>
+
+                <div style="background:rgba(238,234,222,.9);border-radius:5px;padding:5px 6px;min-height:70px;display:flex;flex-direction:column;justify-content:space-between">
+                  <div style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">符</div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">辛</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">冲</span></div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">丙</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">杜</span></div>
+                </div>
+
+                <div style="background:rgba(238,234,222,.9);border-radius:5px;padding:5px 6px;min-height:70px;display:flex;flex-direction:column;justify-content:space-between">
+                  <div style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">蛇</div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">丙</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">任</span></div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">癸</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#aa5a4a">伤</span></div>
+                </div>
+
+                <div style="background:rgba(238,234,222,.9);border-radius:5px;padding:5px 6px;min-height:70px;display:flex;flex-direction:column;justify-content:space-between">
+                  <div style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">阴</div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">癸</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">蓬</span></div>
+                  <div style="display:flex;justify-content:space-between"><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#3a2a1a">戊</span><span style="font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#5a7a5a">生</span></div>
+                </div>
+
+              </div>
+              <!-- 右侧标注 -->
+              <div style="display:flex;flex-direction:column;justify-content:space-around;font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#7a5a3a;padding:2px 0;width:14px;text-align:center">
+                <span>马</span><span>戊</span><span>癸</span>
+              </div>
+            </div>
+            <!-- 下方标注 -->
+            <div style="display:flex;justify-content:space-between;align-items:center;font-family:&#39;Noto Serif SC&#39;,serif;font-size:11px;color:#7a5a3a;margin-top:3px;padding:0 2px">
+              <span>辛</span><span>丙</span><span>马</span>
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <div style="background:rgba(240,233,220,.5);border:1px solid rgba(90,58,26,.2);padding:14px">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:14px;color:#3a2a1a;margin-bottom:6px">Summary · Overview</div>
+            <div style="font-family:var(--ff-serif);color:rgba(60,40,20,.5);margin-bottom:8px;font-style:italic;font-size:11px">Your Custom Qimen Chart Reading: Analysis of Overall Stock Trends</div>
+            <div style="font-family:var(--ff-serif);font-size:12px;color:#3a2a1a;line-height:1.9">Hello! I have cast your Qimen chart and conducted an in-depth analysis regarding your question. From the current chart (dominated by the Kun Palace), the market is in a relatively stagnant state. Rest assured there are clear turning points and breakthrough paths hidden in the chart.</div>
+          </div>
+        </div>
+
+        <!-- Current Situation 展开 -->
+        <div style="font-family:var(--ff-serif);font-size:10px;color:#7a5a3a;font-weight:600;margin:10px 0 4px">Current Situation:</div>
+        <div style="font-family:var(--ff-serif);font-size:12px;color:#3a2a1a;line-height:1.9">The chart shows the patterns of Ri Qi: Ru Wang (Sun Qi: Trapped in Net) and Si-Men (Death Gate) in command: this means your funds are temporarily trapped in an invisible net, and the overall market lacks upward momentum. This is not an issue with your operations, but rather the broader market is in a "bubble-squeezing" or "prolonged bottoming" stagnation phase.</div>
+      </div>
+    </div>
+
+    <!-- ② In-depth Analysis 锁定 -->
+    <div class="result-card">
+      <div class="result-card-inner">
+        <div style="font-family:&#39;Bellefair&#39;,serif;font-size:15px;color:#3a2a1a;margin-bottom:4px">In-depth Analysis 🔒</div>
+        <div style="height:1px;background:rgba(122,90,42,.2);margin-bottom:12px"></div>
+        <div style="position:relative;overflow:hidden;min-height:160px;z-index:1">
+          <!-- 模糊文字背景 -->
+          <div id="oracle-blurred-text" style="font-family:var(--ff-serif);font-size:11px;color:rgba(60,40,20,.25);line-height:2;filter:blur(3px);user-select:none;pointer-events:none;padding-bottom:8px">
+            The Tianxin Star brings exceptional support. Your core value proposition is strong and well-timed. The market cycle is shifting. Hidden opportunities exist within the current structure that most observers cannot perceive. The next activation window opens sooner than expected.
+          </div>
+          <!-- 锁定覆盖层 -->
+          <div id="oracle-lock-overlay" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(245,240,230,.6)">
+            <div style="font-size:28px">🔐</div>
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:12px;color:rgba(60,40,20,.6);text-align:center;font-style:italic;line-height:1.7;padding:0 12px">Unlock the full in-depth reading<br>to access complete trends and response strategies.</div>
+            <button onclick="openPricing(&#39;oracle&#39;)" style="background:#5a3a1a;border:none;cursor:pointer;padding:11px 28px;font-family:var(--ff-serif);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#fffbf2">PAY TO UNLOCK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ Core Solution -->
+    <div class="result-card">
+      <div class="result-card-inner">
+        <div style="font-family:&#39;Bellefair&#39;,serif;font-size:15px;color:#3a2a1a;margin-bottom:4px">Core Solution · Customized Turnaround Guidance 🔒</div>
+        <div style="height:1px;background:rgba(122,90,42,.2);margin-bottom:12px"></div>
+
+        <!-- 总引言 -->
+        <div style="background:rgba(155,164,143,.12);border-left:3px solid #8a9a7a;padding:10px 12px;margin-bottom:14px">
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:1.9;font-style:italic">Faced with the current stagnant grid, going with the flow is the best strategy. Do not act impulsively against the trend. Instead, calmly plan your positions to navigate the cycle steadily and await the bloom.</div>
+        </div>
+
+        <!-- I. Trading Mindset -->
+        <div style="font-family:&#39;Bellefair&#39;,serif;font-size:13px;color:#3a2a1a;margin-bottom:10px">I. Trading Mindset Guidance</div>
+        <div style="border-left:2px solid rgba(90,58,26,.25);padding-left:10px;margin-bottom:12px">
+          <div style="font-family:var(--ff-serif);font-size:10px;color:#7a5a3a;font-style:italic;margin-bottom:4px">Rational Review &amp; Concentrate Firepower</div>
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:1.9">Use the market's resting phase to conduct a "portfolio checkup." Resolutely divest weak stocks that rely solely on hype without real earnings support. Concentrate your capital on the core high-quality assets you favor, aligning with the rational energy of the Tianxin Star.</div>
+        </div>
+        <div style="border-left:2px solid rgba(90,58,26,.25);padding-left:10px;margin-bottom:14px">
+          <div style="font-family:var(--ff-serif);font-size:10px;color:#7a5a3a;font-style:italic;margin-bottom:4px">Observe More, Act Less, Avoid Overtrading</div>
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:1.9">During the influence of the Death Gate, the best action is "no action." Temporarily step back from frequent market watching, redirect your focus to work and life, and use time to create space, awaiting the market's rebound.</div>
+        </div>
+
+        <div style="text-align:center;color:rgba(90,58,26,.3);font-size:10px;margin:8px 0">✦</div>
+
+        <!-- II. Key Timing -->
+        <div style="font-family:&#39;Bellefair&#39;,serif;font-size:13px;color:#3a2a1a;margin-bottom:8px">II. Key Timing · Profit Windows</div>
+        <div style="font-family:var(--ff-serif);font-size:11px;color:rgba(60,40,20,.6);margin-bottom:10px">Based on the chart's energy flow, two critical time windows are defined. Seizing these nodes will help you align with profit cycles.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+          <div style="border:1px solid rgba(122,90,42,.25);padding:10px;background:rgba(255,251,242,.4)">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:11px;color:#3a2a1a;margin-bottom:6px">First Turning Point</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:#7a5a3a;margin-bottom:2px">July–August 2025 (Gregorian)</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:rgba(60,40,20,.5);margin-bottom:6px">Lunar Months: Wei &amp; Shen</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:#3a2a1a;line-height:1.8">The "Net" energy loosens, market pressure eases, and positions are expected to see relief and a minor rebound. This marks the initial phase of recovery.</div>
+          </div>
+          <div style="border:1px solid rgba(122,90,42,.25);padding:10px;background:rgba(255,251,242,.4)">
+            <div style="font-family:&#39;Bellefair&#39;,serif;font-size:11px;color:#3a2a1a;margin-bottom:6px">Profit-Taking Period</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:#7a5a3a;margin-bottom:2px">January–February 2027 (Gregorian)</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:rgba(60,40,20,.5);margin-bottom:6px">Lunar Months: Chou &amp; Yin</div>
+            <div style="font-family:var(--ff-serif);font-size:9px;color:#3a2a1a;line-height:1.8">The Life Gate energy fills in fully, and the value you've held gradually materializes. This is the optimal period to lock in gains.</div>
+          </div>
+        </div>
+
+        <div style="text-align:center;color:rgba(90,58,26,.3);font-size:10px;margin:8px 0">✦</div>
+
+        <!-- III. Energy Balancing -->
+        <div style="font-family:&#39;Bellefair&#39;,serif;font-size:13px;color:#3a2a1a;margin-bottom:8px">III. Custom Energy Balancing Plan</div>
+        <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:1.9;margin-bottom:12px">Neutralize the stagnant energy of the Death Gate, boost financial decisiveness, and strengthen your wealth magnetic field by harmonizing Five Elements energy through placement and accessories.</div>
+
+        <div style="font-family:var(--ff-serif);font-size:11px;color:#5a3a1a;font-weight:600;margin-bottom:6px">1. Desk Energy Placement: Southwest Corner</div>
+        <div style="font-family:var(--ff-serif);font-size:11px;color:rgba(60,40,20,.6);margin-bottom:6px">In Qimen Feng Shui, your wealth core lies in the southwest corner, where Earth energy is currently excessive and stagnant.</div>
+        <div style="padding-left:12px;margin-bottom:10px">
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:2">• Place pure copper gourds or Five Emperor Coins in the southwest corner of your desk.</div>
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:2">• Use Metal to drain excess Earth, dissolve the stagnant energy of the Death Gate, and activate the Tianxin Metal Star energy.</div>
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:2">• Clarify financial thinking and reduce emotional decisions.</div>
+        </div>
+
+        <div style="font-family:var(--ff-serif);font-size:11px;color:#5a3a1a;font-weight:600;margin-bottom:6px">2. Custom Energy Crystal Recommendations</div>
+        <div style="padding-left:12px;margin-bottom:14px">
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:2">• <strong>Rutilated Quartz / Titanium Quartz:</strong><br>Aligns with the Metal energy of the Tianxin Star. Governs wealth and leadership. Resolves hesitation and inner conflict, strengthening market intuition.</div>
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:2;margin-top:6px">• <strong>Use MCitrine:</strong><br>Nourishes the Earth energy of the Kun Palace, transforming stagnant Earth into productive Earth that generates Metal. Calms the mind, attracts wealth, and safeguards blessings — to drain excess Earth, dissolve the stagnant energy of the Death Gate, and activate the Tianxin Metal Star energy.</div>
+        </div>
+
+        <!-- Summary 总结框 -->
+        <div style="background:rgba(155,164,143,.12);border:1px solid rgba(122,90,42,.2);padding:14px">
+          <div style="font-family:var(--ff-serif);font-size:9px;letter-spacing:2px;color:#7a5a3a;margin-bottom:8px">✦ SUMMARY</div>
+          <div style="font-family:var(--ff-serif);font-size:11px;color:#3a2a1a;line-height:1.9;font-style:italic">"Patience will reveal the moon through the clouds." This is merely a phase of consolidation and preparation. Your core assets remain fundamentally sound and face no major risks. Simply stay calm, optimize your holdings, avoid impulsive trades, and patiently await the second-half tailwind and year-end profit-taking period.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="navTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn active" onclick="navTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+<!-- ══════════════════════════
+     PAGE: SHOP DETAIL
+══════════════════════════ -->
+<div class="page" id="page-shop-detail">
+  <div class="page-bg" style="position:absolute;inset:0;pointer-events:none;background-image:url(&#39;https://www.figma.com/api/mcp/asset/133a4355-f1ec-493f-a965-93aac3838e0b&#39;);background-size:cover;opacity:.55;"></div>
+  <div class="header">
+    <button class="back-btn" onclick="goTo(&#39;shop&#39;)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"></path></svg>
+      Back
+    </button>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body" style="display:flex;align-items:center;justify-content:center;min-height:70vh">
+    <div style="text-align:center;padding:40px 32px">
+      <div style="font-size:48px;margin-bottom:20px">🔮</div>
+      <div style="font-family:&#39;Bellefair&#39;,serif;font-size:26px;color:#fffbf2;letter-spacing:2px;margin-bottom:12px">即将推出</div>
+      <div style="font-family:var(--ff-jp);font-size:13px;color:rgba(255,251,242,.45);letter-spacing:3px;margin-bottom:28px">Coming Soon</div>
+      <div style="width:40px;height:1px;background:rgba(255,251,242,.2);margin:0 auto 20px"></div>
+      <div style="font-family:&#39;Bellefair&#39;,serif;font-size:13px;color:rgba(255,251,242,.4);font-style:italic;line-height:1.8">敬请期待<br>We are preparing something sacred for you.</div>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="navTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn active" onclick="navTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════
+     PAGE: PRICING
+══════════════════════════ -->
+<div class="page" id="page-pricing" style="background:#161210">
+  <div class="header" style="background:rgba(22,18,16,.95);border-bottom:1px solid rgba(180,140,60,.15)">
+    <button class="back-btn" onclick="closePricing()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"></path></svg>
+      Back
+    </button>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body" style="padding:calc(var(--header-h) + 20px) 16px 80px;background:#161210">
+
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-size:9px;color:rgba(200,168,100,.5);letter-spacing:3px;font-family:var(--ff-jp);margin-bottom:6px" data-i18n="pricing.subtitle">Auracle · 解锁完整分析</div>
+      <div style="font-family:&#39;Bellefair&#39;,serif;font-size:18px;color:#e8dcc0;letter-spacing:1px" data-i18n="pricing.title">单项与打包</div>
+    </div>
+
+    <!-- 模块1：八字 -->
+    <div class="pricing-module">
+      <div class="pricing-head">
+        <div class="pricing-cat" data-i18n="pricing.bazi.cat">八字人生系统</div>
+        <div class="pricing-title" data-i18n="pricing.bazi.title">人生完整解读</div>
+        <div class="pricing-desc" data-i18n="pricing.bazi.desc">单项购买，按需解锁</div>
+      </div>
+      <div class="pricing-row" onclick="selectPrice()">
+        <span class="pricing-name" data-i18n="pricing.bazi.item1">人生四柱</span>
+        <span class="pricing-price">¥8.99</span>
+      </div>
+      <div class="pricing-row" onclick="selectPrice()">
+        <span class="pricing-name" data-i18n="pricing.bazi.item2">大运流年</span>
+        <span class="pricing-price">¥8.99</span>
+      </div>
+      <div class="pricing-row pricing-row-hl" onclick="selectPrice()">
+        <div>
+          <div class="pricing-name">打包</div>
+          <div class="pricing-sub">所有模块 · 财富 健康 事业 爱情 · 10年大运</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:12px">
+          <span class="pricing-price">¥19.99</span>
+          <span class="pricing-best">推荐</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 模块2：奇门 -->
+    <div class="pricing-module">
+      <div class="pricing-head">
+        <div class="pricing-cat">一事一问 · 奇门遁甲</div>
+        <div class="pricing-title">具体问题推演</div>
+        <div class="pricing-desc">你最担心的事情，对应宇宙时间给出最可能的解答</div>
+      </div>
+      <div class="pricing-row" onclick="selectPrice()">
+        <span class="pricing-name" data-i18n="pricing.oracle.item1">1次提问打包</span>
+        <span class="pricing-price">¥9.99</span>
+      </div>
+      <div class="pricing-row" onclick="selectPrice()">
+        <span class="pricing-name" data-i18n="pricing.oracle.item2">3次提问打包</span>
+        <span class="pricing-price">¥25.99</span>
+      </div>
+      <div class="pricing-row pricing-row-hl" onclick="selectPrice()">
+        <span class="pricing-name" data-i18n="pricing.oracle.item3">5次提问打包</span>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <span class="pricing-price">¥39.99</span>
+          <span class="pricing-best">最划算</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 模块3：七政四余 -->
+    <div class="pricing-module">
+      <div class="pricing-head">
+        <div class="pricing-cat">合盘分析 · 七政四余</div>
+        <div class="pricing-title">关系走向分析</div>
+        <div class="pricing-desc">你们关系的现状？未来如何发展？</div>
+      </div>
+      <div class="pricing-row" onclick="selectPrice()">
+        <span class="pricing-name" data-i18n="pricing.rel.item1">1段关系打包</span>
+        <span class="pricing-price">¥12.99</span>
+      </div>
+      <div class="pricing-row" onclick="selectPrice()">
+        <span class="pricing-name" data-i18n="pricing.rel.item2">3段关系打包</span>
+        <span class="pricing-price">¥25.99</span>
+      </div>
+      <div class="pricing-row pricing-row-hl" onclick="selectPrice()">
+        <span class="pricing-name" data-i18n="pricing.rel.item3">5段关系打包</span>
+        <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+          <span class="pricing-price">¥35.99</span>
+          <span class="pricing-best">最划算</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 全量总包 -->
+    <div class="pricing-bundle">
+      <div class="pricing-bundle-head">
+        <div class="pricing-cat" style="color:rgba(100,70,20,.6)">全量总包 · 优先推荐</div>
+        <div class="pricing-title">一次解锁核心解析</div>
+      </div>
+      <div class="pricing-bundle-row" onclick="selectPrice()">
+        <div style="font-family:var(--ff-serif);font-size:12px;color:#2a1a08;line-height:1.7;flex:1" data-i18n="pricing.bundle.item1">人生八字 + 一事一问3个问题完整解析 + 3段合盘关系完整分析</div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;margin-left:12px">
+          <span class="pricing-price">¥59.99</span>
+          <span class="pricing-best">最划算</span>
+        </div>
+      </div>
+      <div class="pricing-bundle-row" onclick="selectPrice()">
+        <div style="font-family:var(--ff-serif);font-size:12px;color:#2a1a08;line-height:1.7;flex:1" data-i18n="pricing.bundle.item2">人生八字 + 一事一问5个问题完整解析 + 5段合盘关系完整分析</div>
+        <span class="pricing-price" style="flex-shrink:0;margin-left:12px">¥79.99</span>
+      </div>
+    </div>
+
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="navTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+<!-- ══════════════════════════
+     PAGE 8: MINE
+══════════════════════════ -->
+<div class="page" id="page-mine" style="background:var(--bg)">
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body" style="padding:calc(var(--header-h) + 20px) 20px 80px">
+
+    <!-- 顶部账户信息 -->
+    <div style="margin-bottom:28px">
+      <div style="font-family:&#39;Bellefair&#39;,serif;font-size:32px;color:var(--warm);letter-spacing:1px;margin-bottom:6px">Accounts</div>
+      <div style="font-family:var(--ff-serif);font-size:14px;color:rgba(255,251,242,.4);letter-spacing:.3px">E-mail: <span style="color:rgba(255,251,242,.6)">user@auracle.ai</span></div>
+    </div>
+
+    <!-- 菜单列表 -->
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px">
+
+      <!-- Contact Us -->
+      <div class="mine-menu-item" onclick="toggleMineSection(&#39;contact&#39;)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mine-menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 7l10 7 10-7"></path></svg>
+          </div>
+          <span class="mine-menu-label">Contact Us</span>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,251,242,.3)" stroke-width="1.5" id="contact-arrow"><path d="M9 18l6-6-6-6"></path></svg>
+      </div>
+
+      <!-- Contact Us 展开内容 -->
+      <div id="mine-contact-section" style="display:none;background:var(--cream2);border:1px solid rgba(122,90,42,.3);overflow:hidden">
+        <!-- Email -->
+        <div style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid rgba(122,90,42,.15)">
+          <div style="width:36px;height:36px;background:rgba(155,164,143,.3);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a7a5a" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 7l10 7 10-7"></path></svg>
+          </div>
+          <div style="flex:1">
+            <div style="font-family:var(--ff-serif);font-size:12px;color:rgba(60,40,20,.5);margin-bottom:3px">Email</div>
+            <div style="font-family:var(--ff-serif);font-size:14px;color:#2a1a08;font-weight:500">contact@auracle.ai</div>
+          </div>
+        </div>
+        <!-- Platform Links -->
+        <div style="padding:14px 16px;border-bottom:1px solid rgba(122,90,42,.15)">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
+            <div style="width:36px;height:36px;background:rgba(155,164,143,.3);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a7a5a" stroke-width="1.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </div>
+            <div style="font-family:var(--ff-serif);font-size:14px;color:#2a1a08">Platform Links</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(122,90,42,.08)">
+            <span style="font-family:var(--ff-serif);font-size:13px;color:rgba(60,40,20,.6)">Douyin</span>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-family:var(--ff-serif);font-size:13px;color:#2a1a08">@小玄Auracle</span>
+              <span style="color:rgba(60,40,20,.4);font-size:14px">↗</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0">
+            <span style="font-family:var(--ff-serif);font-size:13px;color:rgba(60,40,20,.6)">Xiaohongshu</span>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-family:var(--ff-serif);font-size:13px;color:#2a1a08">@小玄Auracle</span>
+              <span style="color:rgba(60,40,20,.4);font-size:14px">↗</span>
+            </div>
+          </div>
+        </div>
+        <!-- Invite Link -->
+        <div style="display:flex;align-items:center;gap:14px;padding:16px">
+          <div style="width:36px;height:36px;background:rgba(155,164,143,.3);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5a7a5a" stroke-width="1.5"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          </div>
+          <div style="flex:1">
+            <div style="font-family:var(--ff-serif);font-size:12px;color:rgba(60,40,20,.5);margin-bottom:3px">Invite Link</div>
+            <div style="font-family:var(--ff-serif);font-size:13px;color:#2a1a08">auracle.ai/invite</div>
+          </div>
+          <button onclick="copyInviteLink()" style="background:none;border:1px solid rgba(122,90,42,.35);padding:6px 14px;font-family:var(--ff-serif);font-size:11px;color:#5a3a1a;cursor:pointer;border-radius:20px;white-space:nowrap">Copy Link</button>
+        </div>
+      </div>
+
+      <!-- Switch Language -->
+      <div class="mine-menu-item" onclick="toggleMineSection(&#39;language&#39;)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mine-menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+          </div>
+          <span class="mine-menu-label">Switch Language</span>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,251,242,.3)" stroke-width="1.5" id="language-arrow"><path d="M9 18l6-6-6-6"></path></svg>
+      </div>
+
+      <!-- Switch Language 展开 -->
+      <div id="mine-language-section" style="display:none;background:var(--cream2);border:1px solid rgba(122,90,42,.3)">
+        <div style="display:flex;gap:0">
+          <button onclick="setLang(&#39;zh&#39;)" style="flex:1;padding:14px;background:none;border:none;border-right:1px solid rgba(122,90,42,.2);cursor:pointer;font-family:&#39;Noto Serif SC&#39;,serif;font-size:15px;color:#3a2a1a">中文</button>
+          <button onclick="setLang(&#39;en&#39;)" style="flex:1;padding:14px;background:none;border:none;cursor:pointer;font-family:&#39;Bellefair&#39;,serif;font-size:15px;color:#3a2a1a">English</button>
+        </div>
+      </div>
+
+      <!-- Account & Security -->
+      <div class="mine-menu-item">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mine-menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </div>
+          <span class="mine-menu-label">Account &amp; Security</span>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,251,242,.3)" stroke-width="1.5"><path d="M9 18l6-6-6-6"></path></svg>
+      </div>
+
+      <!-- Log Out -->
+      <div class="mine-menu-item" onclick="goTo(&#39;login&#39;)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mine-menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          </div>
+          <span class="mine-menu-label" style="color:rgba(255,100,80,.8)">Log Out</span>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,251,242,.3)" stroke-width="1.5"><path d="M9 18l6-6-6-6"></path></svg>
+      </div>
+
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="navTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn active" onclick="navTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+<!-- ══════════════════════════
+     PAGE 9: SHOP (placeholder)
+══════════════════════════ -->
+<div class="page" id="page-shop">
+  <div class="page-bg"></div>
+  <div class="header">
+    <div class="logo">✦ Auracle</div>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="page-body">
+    <div class="shop-header-wrap">
+      <div class="shop-header-rule">
+        <div class="line"></div>
+        <span>秘術の道具</span>
+        <div class="line"></div>
+      </div>
+      <div class="shop-title">Esoteric Store</div>
+      <div class="shop-subtitle" data-i18n="shop.subtitle">Sacred objects for your journey</div>
+    </div>
+    <div class="shop-tabs">
+      <button class="shop-tab active" onclick="selectShopTab(this)">All</button>
+      <button class="shop-tab" onclick="selectShopTab(this)">Readings</button>
+      <button class="shop-tab" onclick="selectShopTab(this)">Ritual</button>
+      <button class="shop-tab" onclick="selectShopTab(this)">Talisman</button>
+    </div>
+    <div class="shop-divider"></div>
+
+    <!-- Featured -->
+    <div class="shop-featured" onclick="goTo(&#39;shop-detail&#39;)">
+      <div class="shop-featured-inner">
+        <div class="shop-featured-glyph">
+<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- 紫水晶洞 -->
+  <ellipse cx="30" cy="42" rx="22" ry="12" fill="#4a2060" opacity=".9"></ellipse>
+  <path d="M10 42 Q8 20 20 12 L25 28 L30 8 L35 30 L40 14 L44 28 L50 42 Z" fill="#7b3fa0"></path>
+  <path d="M20 12 L25 28 L30 8 L35 30 L40 14 L44 28" fill="none" stroke="#c89fe0" stroke-width="0.8" opacity=".6"></path>
+  <ellipse cx="30" cy="42" rx="16" ry="8" fill="#2a1040" opacity=".8"></ellipse>
+  <!-- 晶体反光 -->
+  <path d="M25 28 L30 8 L28 22Z" fill="#e0b0ff" opacity=".5"></path>
+  <path d="M35 30 L40 14 L38 26Z" fill="#d090f0" opacity=".4"></path>
+</svg>
+</div>
+        <div class="shop-featured-text">
+          <div class="shop-featured-label">✦ FEATURED · 本月推荐</div>
+          <div class="shop-featured-name">紫水晶洞<br>Amethyst Cave</div>
+          <div class="shop-featured-desc">天然巴西紫水晶洞 · 净化空间能量 · 助眠安神 · 提升直觉与灵性感知。</div>
+          <div class="shop-featured-footer">
+            <div class="shop-featured-price">$188</div>
+            <div class="shop-featured-cta">EXPLORE →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section label -->
+    <div class="shop-section-label">
+      <div class="line"></div>
+      <span>ALL OFFERINGS</span>
+      <div class="line"></div>
+    </div>
+
+    <!-- Grid -->
+    <div class="shop-grid">
+      <div class="shop-card" onclick="goTo(&#39;shop-detail&#39;)">
+        <div class="shop-card-img">
+          <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <!-- 黄水晶手链 圆形排列 -->
+            <circle cx="40" cy="40" r="26" fill="none" stroke="#d4a800" stroke-width="1.5" stroke-dasharray="3,2" opacity=".4"></circle>
+            <circle cx="40" cy="14" r="6" fill="#f5c842" opacity=".95"></circle>
+            <circle cx="57" cy="22" r="6" fill="#f0b820" opacity=".9"></circle>
+            <circle cx="64" cy="40" r="6" fill="#f5c842" opacity=".95"></circle>
+            <circle cx="57" cy="58" r="6" fill="#e8a800" opacity=".85"></circle>
+            <circle cx="40" cy="66" r="6" fill="#f5c842" opacity=".95"></circle>
+            <circle cx="23" cy="58" r="6" fill="#f0b820" opacity=".9"></circle>
+            <circle cx="16" cy="40" r="6" fill="#f5c842" opacity=".95"></circle>
+            <circle cx="23" cy="22" r="6" fill="#e8a800" opacity=".85"></circle>
+            <!-- 高光 -->
+            <circle cx="38" cy="12" r="2" fill="white" opacity=".5"></circle>
+            <circle cx="55" cy="20" r="2" fill="white" opacity=".4"></circle>
+          </svg>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">CRYSTAL</div>
+          <div class="shop-card-name">黄水晶手链</div>
+          <div class="shop-card-price">$48</div>
+        </div>
+      </div>
+      <div class="shop-card" onclick="goTo(&#39;shop-detail&#39;)">
+        <div class="shop-card-img">
+          <div class="shop-card-badge">HOT</div>
+          <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="26" fill="none" stroke="#7b3fa0" stroke-width="1.5" stroke-dasharray="3,2" opacity=".4"></circle>
+            <circle cx="40" cy="14" r="6" fill="#9b59c0" opacity=".95"></circle>
+            <circle cx="57" cy="22" r="6" fill="#7b3fa0" opacity=".9"></circle>
+            <circle cx="64" cy="40" r="6" fill="#b070d0" opacity=".95"></circle>
+            <circle cx="57" cy="58" r="6" fill="#8040a8" opacity=".85"></circle>
+            <circle cx="40" cy="66" r="6" fill="#9b59c0" opacity=".95"></circle>
+            <circle cx="23" cy="58" r="6" fill="#7b3fa0" opacity=".9"></circle>
+            <circle cx="16" cy="40" r="6" fill="#b070d0" opacity=".95"></circle>
+            <circle cx="23" cy="22" r="6" fill="#8040a8" opacity=".85"></circle>
+            <circle cx="38" cy="12" r="2" fill="white" opacity=".5"></circle>
+            <circle cx="62" cy="38" r="2" fill="white" opacity=".4"></circle>
+          </svg>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">CRYSTAL</div>
+          <div class="shop-card-name">紫水晶手链</div>
+          <div class="shop-card-price">$58</div>
+        </div>
+      </div>
+      <div class="shop-card" onclick="goTo(&#39;shop-detail&#39;)">
+        <div class="shop-card-img">
+          <div class="shop-card-badge">NEW</div>
+          <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="26" fill="none" stroke="#6b3a1f" stroke-width="1.5" stroke-dasharray="3,2" opacity=".4"></circle>
+            <circle cx="40" cy="14" r="6" fill="#8b4513" opacity=".95"></circle>
+            <circle cx="57" cy="22" r="6" fill="#7a3a10" opacity=".9"></circle>
+            <circle cx="64" cy="40" r="6" fill="#9b5520" opacity=".95"></circle>
+            <circle cx="57" cy="58" r="6" fill="#7a3a10" opacity=".85"></circle>
+            <circle cx="40" cy="66" r="6" fill="#8b4513" opacity=".95"></circle>
+            <circle cx="23" cy="58" r="6" fill="#9b5520" opacity=".9"></circle>
+            <circle cx="16" cy="40" r="6" fill="#8b4513" opacity=".95"></circle>
+            <circle cx="23" cy="22" r="6" fill="#7a3a10" opacity=".85"></circle>
+            <!-- 木纹 -->
+            <circle cx="40" cy="14" r="6" fill="none" stroke="#c8845a" stroke-width=".5" opacity=".4"></circle>
+            <circle cx="64" cy="40" r="6" fill="none" stroke="#c8845a" stroke-width=".5" opacity=".4"></circle>
+            <circle cx="38" cy="12" r="2" fill="#d4956a" opacity=".4"></circle>
+          </svg>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">BRACELET</div>
+          <div class="shop-card-name">檀木手串</div>
+          <div class="shop-card-price">$38</div>
+        </div>
+      </div>
+      <div class="shop-card" onclick="goTo(&#39;shop-detail&#39;)">
+        <div class="shop-card-img">
+          <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <!-- 白水晶球 -->
+            <circle cx="40" cy="42" r="26" fill="url(#crystalGrad)"></circle>
+            <defs>
+              <radialgradient id="crystalGrad" cx="35%" cy="35%">
+                <stop offset="0%" stop-color="#ffffff"></stop>
+                <stop offset="40%" stop-color="#e8f0ff"></stop>
+                <stop offset="100%" stop-color="#b0c8e0"></stop>
+              </radialgradient>
+            </defs>
+            <ellipse cx="34" cy="34" rx="8" ry="6" fill="white" opacity=".6" transform="rotate(-30 34 34)"></ellipse>
+            <circle cx="32" cy="30" r="3" fill="white" opacity=".8"></circle>
+            <!-- 底座 -->
+            <ellipse cx="40" cy="68" rx="16" ry="4" fill="#8a7a6a" opacity=".5"></ellipse>
+            <rect x="32" y="65" width="16" height="4" rx="2" fill="#a08060" opacity=".6"></rect>
+          </svg>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">CRYSTAL</div>
+          <div class="shop-card-name">白水晶球</div>
+          <div class="shop-card-price">$88 <s>$120</s></div>
+        </div>
+      </div>
+      <div class="shop-card" onclick="goTo(&#39;shop-detail&#39;)">
+        <div class="shop-card-img">
+          <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <!-- 符文卡片 -->
+            <rect x="20" y="12" width="40" height="56" rx="3" fill="#f5f0e8" stroke="#c8a060" stroke-width="1.5"></rect>
+            <rect x="24" y="16" width="32" height="48" rx="2" fill="none" stroke="#d4b070" stroke-width=".8" opacity=".6"></rect>
+            <!-- 符文图案 -->
+            <text x="40" y="36" text-anchor="middle" font-family="serif" font-size="20" fill="#8b4513" opacity=".9">符</text>
+            <line x1="28" y1="44" x2="52" y2="44" stroke="#c8a060" stroke-width=".8" opacity=".5"></line>
+            <text x="40" y="56" text-anchor="middle" font-family="serif" font-size="9" fill="#8b4513" opacity=".6">开运转运</text>
+            <!-- 红绳 -->
+            <line x1="40" y1="12" x2="40" y2="6" stroke="#cc3333" stroke-width="2"></line>
+            <circle cx="40" cy="5" r="2" fill="#cc3333"></circle>
+          </svg>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">TALISMAN</div>
+          <div class="shop-card-name">开运转运符</div>
+          <div class="shop-card-price">$28</div>
+        </div>
+      </div>
+      <div class="shop-card" onclick="goTo(&#39;shop-detail&#39;)">
+        <div class="shop-card-img">
+          <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <!-- 香束 -->
+            <rect x="34" y="28" width="3" height="36" rx="1.5" fill="#8b6040"></rect>
+            <rect x="39" y="24" width="3" height="40" rx="1.5" fill="#7a5030"></rect>
+            <rect x="44" y="28" width="3" height="36" rx="1.5" fill="#8b6040"></rect>
+            <!-- 绑带 -->
+            <rect x="32" y="52" width="17" height="6" rx="3" fill="#c8a060" opacity=".8"></rect>
+            <!-- 烟雾 -->
+            <path d="M35 28 Q33 22 35 16 Q37 10 35 6" fill="none" stroke="#c8c8c8" stroke-width="1.2" opacity=".5"></path>
+            <path d="M40 24 Q38 18 40 12 Q42 6 40 2" fill="none" stroke="#d0d0d0" stroke-width="1.2" opacity=".6"></path>
+            <path d="M45 28 Q47 22 45 16 Q43 10 45 6" fill="none" stroke="#c8c8c8" stroke-width="1.2" opacity=".5"></path>
+            <!-- 燃烧点 -->
+            <circle cx="35" cy="28" r="2" fill="#ff8040" opacity=".8"></circle>
+            <circle cx="40" cy="24" r="2" fill="#ff9050" opacity=".9"></circle>
+            <circle cx="45" cy="28" r="2" fill="#ff8040" opacity=".8"></circle>
+          </svg>
+        </div>
+        <div class="shop-card-body">
+          <div class="shop-card-cat">RITUAL</div>
+          <div class="shop-card-name">沉香净化香束</div>
+          <div class="shop-card-price">$32</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="navTo(&#39;home&#39;,this)" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="7" height="7" rx="1"></rect><rect x="14" y="4" width="7" height="7" rx="1"></rect><rect x="3" y="15" width="7" height="7" rx="1"></rect><rect x="14" y="15" width="7" height="7" rx="1"></rect></svg>
+      <span>Daily Check-in</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;test&#39;,this)" data-page="test">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+      <span>Test</span>
+    </button>
+    <button class="nav-btn active" onclick="navTo(&#39;shop&#39;,this)" data-page="shop">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path></svg>
+      <span>Shop</span>
+    </button>
+    <button class="nav-btn" onclick="navTo(&#39;mine&#39;,this)" data-page="mine">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Mine</span>
+    </button>
+  </nav>
+</div>
+
+</div><!-- #app -->
+
+<script>
+const pageMap={
+  splash:'page-splash',
+  login:'page-login',
+  home:'page-home',
+  checkin:'page-checkin',
+  test:'page-test',
+  calibration:'page-calibration',
+  relationship:'page-relationship',
+  'relationship-input':'page-relationship-input',
+  oracle:'page-oracle',
+  'oracle-number':'page-oracle-number',
+  'oracle-result':'page-oracle-result',
+  mine:'page-mine',
+  pricing:'page-pricing',
+  shop:'page-shop',
+  'shop-detail':'page-shop-detail'
+};
+let pageHistory=[];
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>{
+    p.classList.remove('active');
+  });
+  const el=document.getElementById(id);
+  if(el){
+    el.classList.add('active');
+    const body=el.querySelector('.page-body');
+    if(body)body.scrollTop=0;
+  }
+  // Test 하위 페이지들은 nav에서 Test를 active로 유지
+  const testSubPages=['page-test','page-calibration','page-oracle','page-oracle-number','page-oracle-result','page-relationship'];
+  const activeNav=id==='page-relationship-input'?'home':
+    testSubPages.includes(id)?'test':
+    id==='page-home'||id==='page-checkin'?'home':
+    id==='page-shop'?'shop':
+    id==='page-mine'?'mine':null;
+  if(activeNav){
+    document.querySelectorAll('.nav-btn').forEach(b=>{
+      b.classList.toggle('active', b.dataset.page===activeNav);
+    });
+  }
+}
+
+function goTo(name){
+  const cur=document.querySelector('.page.active');
+  if(cur)pageHistory.push(cur.id);
+  showPage(pageMap[name]||name);
+}
+
+function showTestForm(){
+  document.getElementById('test-chapters').style.display='none';
+  document.getElementById('test-form').style.display='block';
+}
+function hideTestForm(){
+  document.getElementById('test-form').style.display='none';
+  document.getElementById('test-chapters').style.display='block';
+}
+function goBack(){
+  const prev=pageHistory.pop();
+  if(prev)showPage(prev);
+  else showPage('page-home');
+}
+
+function navTo(name,btn){
+  const pageId=pageMap[name];
+  const targetPage=document.getElementById(pageId);
+  if(!targetPage)return;
+  const allNavBtns=document.querySelectorAll('#'+targetPage.closest('.page')?.id+' .nav-btn, .page.active .nav-btn');
+  const activePage=document.querySelector('.page.active');
+  if(activePage){
+    activePage.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  }
+  pageHistory=[];
+  showPage(pageId);
+  if(name==='home')showPage('page-home');
+  else if(name==='test'){goTo('test');hideTestForm();}
+  else if(name==='shop')goTo('shop');
+  else if(name==='mine')goTo('mine');
+}
+
+function navCheckinTo(name,btn){
+  pageHistory=[];
+  const pageId=pageMap[name]||(name==='home'?'page-checkin':pageMap[name]);
+  if(name==='home'){showPage('page-checkin');return;}
+  showPage(pageMap[name]);
+}
+
+function selectGender(btn,g){
+  document.querySelectorAll('#page-test .gender-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function selectYear(btn){
+  document.querySelectorAll('#yearGrid .year-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const sub=document.getElementById('calibSubmit');
+  if(sub){sub.classList.add('ready')}
+}
+
+function selectRelTab(tab){
+  document.querySelectorAll('#relTabs .rel-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  const secLabel=document.getElementById('relSectionLabel');
+  if(secLabel){
+    const nameEl=tab.querySelector('.rel-tab-name');
+    secLabel.textContent=nameEl?nameEl.textContent:tab.textContent;
+  }
+}
+
+function selectShopTab(tab){
+  document.querySelectorAll('.shop-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+}
+
+function toggleMineSection(name){
+  const section = document.getElementById('mine-'+name+'-section');
+  const arrow = document.getElementById(name+'-arrow');
+  if(!section) return;
+  const isOpen = section.style.display !== 'none';
+  section.style.display = isOpen ? 'none' : 'block';
+  if(arrow) arrow.style.transform = isOpen ? '' : 'rotate(90deg)';
+}
+function copyInviteLink(){
+  navigator.clipboard.writeText('auracle.ai/invite').catch(()=>{});
+  const btn = event.target;
+  const orig = btn.textContent;
+  btn.textContent = 'Copied!';
+  setTimeout(()=>{ btn.textContent = orig; }, 1500);
+}
+
+// ── 登录逻辑 ──
+function doLogin(){
+  goTo('home');
+}
+
+// ── 语言切换 ──
+let currentLang = 'zh';
+function setLang(lang){
+  currentLang = lang;
+  const zh = document.getElementById('lang-zh');
+  const en = document.getElementById('lang-en');
+  if(lang === 'zh'){
+    zh.style.background = 'rgba(208,182,168,.18)';
+    zh.style.color = 'rgba(208,182,168,.9)';
+    en.style.background = 'none';
+    en.style.color = 'rgba(208,182,168,.5)';
+  } else {
+    en.style.background = 'rgba(208,182,168,.18)';
+    en.style.color = 'rgba(208,182,168,.9)';
+    zh.style.background = 'none';
+    zh.style.color = 'rgba(208,182,168,.5)';
+  }
+}
+
+// ── 价格表逻辑 ──
+let pricingSource = 'bazi';
+function openPricing(source){
+  pricingSource = source || 'bazi';
+  goTo('pricing');
+}
+function closePricing(){
+  if(pricingSource === 'oracle') goTo('oracle-result');
+  else goTo('calibration');
+}
+let baziUnlocked = false;
+let oracleUnlocked = false;
+
+function selectPrice(){
+  if(pricingSource === 'oracle'){
+    oracleUnlocked = true;
+    goTo('oracle-result');
+    // 移除奇门蒙版
+    setTimeout(()=>{
+      const overlay = document.getElementById('oracle-lock-overlay');
+      const blurred = document.getElementById('oracle-blurred-text');
+      if(overlay) overlay.style.display='none';
+      if(blurred){
+        blurred.style.filter='none';
+        blurred.style.color='#3a2a1a';
+        blurred.style.userSelect='auto';
+        blurred.style.pointerEvents='auto';
+      }
+      // 移除标题的🔒
+      document.querySelectorAll('#page-oracle-result .result-card-inner').forEach(el=>{
+        el.querySelectorAll('[style]').forEach(e=>{
+          if(e.textContent.includes('In-depth Analysis 🔒')){
+            e.textContent = 'In-depth Analysis';
+          }
+        });
+      });
+    }, 100);
+  } else {
+    baziUnlocked = true;
+    goTo('calibration');
+    // 移除八字四柱蒙版
+    setTimeout(()=>{
+      ['lock-career','lock-relationship','lock-wealth','lock-health'].forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.innerHTML = '<div style="font-family:var(--ff-serif);font-size:11px;color:#5a3a1a;line-height:1.9;padding:8px">完整分析已解锁 ✓</div>';
+      });
+    }, 100);
+  }
+}
+
+function selectRelInputTab(btn, label){
+  document.querySelectorAll('.rel-input-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const el = document.getElementById('relInputLabel');
+  if(el) el.textContent = label;
+}
+
+function selectRelSlide(card){
+  document.querySelectorAll('.rel-slide-card').forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
+}
+
+function selectRelType(btn){
+  document.querySelectorAll('.rel-type-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function updateOracleQuestion(val){
+  const el=document.getElementById('oracleQuestion');
+  if(!el)return;
+  const text=val.trim();
+  if(text){
+    el.innerHTML=text.replace(/\n/g,'<br>');
+  } else {
+    el.innerHTML='Is this<br>the right path<br>for me?';
+  }
+}
+
+// Init: splash is already active via HTML class
+// ── Daily Check-in 动态日期 ──
+(function(){
+  const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const d=new Date();
+  const dateStr=months[d.getMonth()]+' '+String(d.getDate()).padStart(2,'0')+', '+d.getFullYear();
+  const el=document.getElementById('dailyDate');
+  if(el)el.textContent=dateStr;
+  const el2=document.getElementById('homeDailyDate');
+  if(el2)el2.textContent=dateStr;
+
+  // 干支计算
+  const tiangan=['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+  const dizhi=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+  const y=d.getFullYear();
+  const m=d.getMonth()+1;
+  const day=d.getDate();
+  // 年干支（以2024甲辰为基准）
+  const yBase=2024;
+  const yOff=(y-yBase+400)%10;
+  const ydOff=(y-yBase+400)%12;
+  const yearGz=tiangan[yOff]+dizhi[ydOff]+'年';
+  // 月干支（简化）
+  const mTian=['壬','癸','甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+  const mDi=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+  const mIdx=(m+1)%12;
+  const monthGz=mTian[(m-1+y*12)%10]+mDi[mIdx]+'月';
+  // 日干支（以2024-01-01甲子为基准）
+  const base=new Date(2024,0,1);
+  const diff=Math.floor((d-base)/86400000);
+  const dayGz=tiangan[((diff%10)+10)%10]+dizhi[((diff%12)+12)%12]+'日';
+  const gz=document.getElementById('dailyGanzhi');
+  if(gz)gz.innerHTML=yearGz+'<br>'+monthGz+'<br>'+dayGz;
+  const gz2=document.getElementById('homeDailyGanzhi');
+  if(gz2)gz2.innerHTML=yearGz+'<br>'+monthGz+'<br>'+dayGz;
+})();
+</script>
+
+
+</body></html>
